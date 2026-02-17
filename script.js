@@ -235,6 +235,154 @@ window.addEventListener('scroll', () => {
     searchInput.addEventListener('input', applyFilters);
 })();
 
+// ---- Floating Particles (Canvas) ----
+(function() {
+    const canvas = document.getElementById('particlesCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h, particles = [];
+    const PARTICLE_COUNT = 55;
+
+    function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    class Particle {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * w;
+            this.y = Math.random() * h;
+            this.size = Math.random() * 2.2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.35;
+            this.speedY = (Math.random() - 0.5) * 0.35;
+            this.opacity = Math.random() * 0.5 + 0.15;
+            this.pulse = Math.random() * Math.PI * 2;
+            this.pulseSpeed = Math.random() * 0.015 + 0.005;
+            // Color: teal or purple randomly
+            this.color = Math.random() > 0.5 ? '34,211,197' : '129,140,248';
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.pulse += this.pulseSpeed;
+            if (this.x < -10 || this.x > w + 10 || this.y < -10 || this.y > h + 10) this.reset();
+        }
+        draw() {
+            const glow = Math.sin(this.pulse) * 0.3 + 0.7;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${this.color},${this.opacity * glow})`;
+            ctx.fill();
+            // Subtle glow
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${this.color},${this.opacity * glow * 0.08})`;
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+    // Draw connection lines between nearby particles
+    function drawConnections() {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(34,211,197,${0.06 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => { p.update(); p.draw(); });
+        drawConnections();
+        requestAnimationFrame(animate);
+    }
+    animate();
+})();
+
+// ---- Radial Glow on Cards (mouse tracking) ----
+document.querySelectorAll('.ts-card, .hobby-card, .blog-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+});
+
+// ---- Magnetic Hover on Buttons ----
+document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dx = (e.clientX - cx) * 0.15;
+        const dy = (e.clientY - cy) * 0.15;
+        btn.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+    });
+});
+
+// ---- Tilt Effect on Code Window ----
+(function() {
+    const codeWindow = document.querySelector('.code-window');
+    if (!codeWindow) return;
+    codeWindow.addEventListener('mousemove', e => {
+        const r = codeWindow.getBoundingClientRect();
+        const cx = (e.clientX - r.left) / r.width - 0.5;
+        const cy = (e.clientY - r.top) / r.height - 0.5;
+        codeWindow.style.transform = `perspective(800px) rotateY(${cx * 6}deg) rotateX(${-cy * 6}deg)`;
+    });
+    codeWindow.addEventListener('mouseleave', () => {
+        codeWindow.style.transform = '';
+    });
+    codeWindow.style.transition = 'transform .4s ease';
+})();
+
+// ---- Parallax on Scroll for Orbs ----
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    document.querySelectorAll('.orb').forEach((orb, i) => {
+        const speed = (i + 1) * 0.03;
+        orb.style.transform += ''; // Let CSS animation handle it, just adjust top offset
+    });
+});
+
+// ---- Staggered reveal for Tech Stack & Hobby grids ----
+const ioGridNew = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            const children = e.target.querySelectorAll('.ts-card, .hobby-card');
+            children.forEach((child, i) => {
+                child.style.opacity = '0';
+                child.style.transform = 'translateY(20px)';
+                child.style.transition = `all .5s cubic-bezier(.16,1,.3,1) ${i * 0.06}s`;
+                requestAnimationFrame(() => {
+                    child.style.opacity = '1';
+                    child.style.transform = 'translateY(0)';
+                });
+            });
+            ioGridNew.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.15 });
+document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
+
 // ---- Local Time (Nantes / Europe/Paris) ----
 (function() {
     const timeEl = document.getElementById('localTime');
