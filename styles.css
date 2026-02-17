@@ -253,7 +253,8 @@ img{max-width:100%;display:block}
 
 .cert-logo{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0}
 .cert-logo--ms{background:rgba(255,255,255,.06)}
-.cert-logo--snow{background:rgba(41,181,232,.08)}
+.cert-logo--ms img{width:44px;height:44px;object-fit:contain}
+.cert-badge--fund::before{background:linear-gradient(90deg,#28a745,#5cb85c,#28a745)}
 
 .cert-info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .cert-code{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:1px}
