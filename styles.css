@@ -317,6 +317,26 @@ img{max-width:100%;display:block}
 .bf-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(34,211,197,.08),rgba(129,140,248,.08));opacity:0;transition:opacity .4s}
 .blog-featured:hover .bf-img::after{opacity:1}
 .bf-img-placeholder{display:flex;align-items:center;justify-content:center;color:var(--t3)}
+
+/* Featured Article — Mini Dashboard Visual */
+.bf-dashboard{width:85%;max-width:360px;background:var(--bg);border:1px solid var(--border-h);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.3);position:relative;z-index:1}
+.bf-dash-header{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.bf-dash-dots{display:flex;gap:5px}
+.bf-dash-dots span{width:8px;height:8px;border-radius:50%}
+.bf-dash-dots span:nth-child(1){background:#ff5f57}
+.bf-dash-dots span:nth-child(2){background:#febc2e}
+.bf-dash-dots span:nth-child(3){background:#28c840}
+.bf-dash-title{font-family:var(--mono);font-size:.65rem;color:var(--t3);margin-left:auto}
+.bf-dash-body{padding:18px 16px 14px}
+.bf-dash-chart{display:flex;align-items:flex-end;gap:8px;height:90px;margin-bottom:14px;padding:0 4px}
+.bf-bar{flex:1;border-radius:4px 4px 0 0;height:var(--h,50%);animation:bar-grow .8s var(--ease) backwards;animation-delay:var(--d,0s);opacity:.85}
+.blog-featured:hover .bf-bar{opacity:1}
+@keyframes bar-grow{from{height:0}}
+.bf-dash-kpis{display:flex;gap:10px}
+.bf-kpi{flex:1;padding:8px 10px;background:var(--card);border:1px solid var(--border);border-radius:8px;text-align:center}
+.bf-kpi-val{display:block;font-size:.85rem;font-weight:800;color:var(--accent);font-family:var(--mono)}
+.bf-kpi-lbl{font-size:.6rem;color:var(--t3);letter-spacing:.5px;text-transform:uppercase}
+.bf-dash-pbi-icon{position:absolute;bottom:10px;right:12px;opacity:.3}
 .bf-body{padding:36px;display:flex;flex-direction:column;justify-content:center}
 .bf-meta{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .bf-date{font-size:.75rem;color:var(--t3);font-family:var(--mono)}
