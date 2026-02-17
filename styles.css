@@ -241,6 +241,32 @@ img{max-width:100%;display:block}
 .ts-card span:last-child{font-size:.85rem;font-weight:600;color:var(--t2);transition:color .25s}
 .ts-card:hover span:last-child{color:var(--t1)}
 
+/* ========== THE HUMAN BEHIND IT ========== */
+.human-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.human-col-title{font-size:.72rem;font-weight:700;letter-spacing:3px;color:var(--t3);font-family:var(--mono);margin-bottom:24px;text-transform:uppercase}
+
+/* Hobby cards */
+.hobby-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hobby-card{display:flex;flex-direction:column;gap:8px;padding:24px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:all .35s var(--ease)}
+.hobby-card:hover{background:var(--card-h);border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.15)}
+.hobby-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;margin-bottom:4px}
+.hobby-card strong{font-size:.95rem;font-weight:700;color:var(--t1)}
+.hobby-card span{font-size:.8rem;color:var(--t3)}
+
+/* Philosophy list */
+.philo-list{display:flex;flex-direction:column;gap:28px;margin-bottom:32px}
+.philo-item{display:flex;align-items:flex-start;gap:20px}
+.philo-num{font-size:3rem;font-weight:900;line-height:1;color:var(--bg3);font-family:var(--mono);min-width:60px;transition:color .3s}
+.philo-item:hover .philo-num{color:var(--accent)}
+.philo-item div{display:flex;flex-direction:column;gap:4px;padding-top:6px}
+.philo-item strong{font-size:1.05rem;font-weight:800;color:var(--t1)}
+.philo-item span{font-size:.88rem;color:var(--t2);line-height:1.5}
+
+/* Philosophy quote */
+.philo-quote{padding:24px 28px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);border-left:3px solid var(--accent)}
+.philo-quote p{font-size:1rem;color:var(--t1);line-height:1.6;margin-bottom:8px}
+.philo-quote span{font-size:.82rem;color:var(--t3);font-family:var(--mono)}
+
 /* ========== BLOG ========== */
 /* Blog Hero */
 .blog-hero{text-align:center;margin-bottom:48px}
@@ -432,6 +458,7 @@ img{max-width:100%;display:block}
   .hero-stats{justify-content:center}
   .stat-item{align-items:center}
   .about-grid{grid-template-columns:1fr;gap:36px}
+  .human-grid{grid-template-columns:1fr;gap:40px}
   .ts-grid{grid-template-columns:repeat(2,1fr)}
   .blog-grid{grid-template-columns:1fr}
   .blog-featured{grid-template-columns:1fr}
