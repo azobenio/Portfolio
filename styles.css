@@ -4,17 +4,20 @@
    ============================================================ */
 
 /* ---------- Tokens ---------- */
+/* Soft Dark — blue-grey palette (recommended by UI experts)        */
+/* Avoids pure black (#000) which causes eye strain & halation.     */
+/* Inspired by Linear, Vercel, Raycast dark themes.                 */
 :root{
-  --bg:       #0b0d0f;
-  --bg2:      #10131a;
-  --bg3:      #161a24;
-  --card:     #121620;
-  --card-h:   #181d2a;
-  --border:   rgba(255,255,255,.06);
-  --border-h: rgba(255,255,255,.12);
-  --t1:       #f0f2f5;
-  --t2:       #94a3b8;
-  --t3:       #5a6a80;
+  --bg:       #0f1117;
+  --bg2:      #151821;
+  --bg3:      #1c2030;
+  --card:     #171b26;
+  --card-h:   #1e2333;
+  --border:   rgba(255,255,255,.07);
+  --border-h: rgba(255,255,255,.13);
+  --t1:       #e8ecf2;
+  --t2:       #8b97ad;
+  --t3:       #556479;
   --accent:   #22d3c5;
   --accent2:  #14b8a6;
   --accent-g: linear-gradient(135deg,#22d3c5 0%,#06b6d4 50%,#818cf8 100%);
@@ -112,7 +115,7 @@ img{max-width:100%;display:block}
 
 /* ========== HEADER ========== */
 .header{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 0;transition:all .4s var(--ease)}
-.header.scrolled{background:rgba(11,13,15,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 0}
+.header.scrolled{background:rgba(15,17,23,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 0}
 .header-inner{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
 
 /* Logo */
@@ -151,7 +154,7 @@ img{max-width:100%;display:block}
 .burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
 /* Mobile Nav */
-.mobile-nav{position:fixed;inset:0;z-index:99;background:rgba(11,13,15,.96);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .4s var(--ease)}
+.mobile-nav{position:fixed;inset:0;z-index:99;background:rgba(15,17,23,.96);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .4s var(--ease)}
 .mobile-nav.open{opacity:1;visibility:visible}
 .mobile-nav-links{display:flex;flex-direction:column;align-items:center;gap:28px}
 .mobile-nav-links a{font-size:1.8rem;font-weight:700;color:var(--t1);transform:translateY(16px);opacity:0;transition:all .35s var(--ease)}
@@ -178,7 +181,7 @@ img{max-width:100%;display:block}
 
 /* CTAs */
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:var(--accent);color:#0b0d0f;font-weight:700;font-size:.9rem;border-radius:10px;border:none;cursor:pointer;transition:all .3s var(--ease);box-shadow:0 4px 20px rgba(34,211,197,.2);font-family:var(--font)}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;background:var(--accent);color:#0f1117;font-weight:700;font-size:.9rem;border-radius:10px;border:none;cursor:pointer;transition:all .3s var(--ease);box-shadow:0 4px 20px rgba(34,211,197,.2);font-family:var(--font)}
 .btn-primary:hover{background:#2ee8d8;box-shadow:0 8px 30px rgba(34,211,197,.3);transform:translateY(-2px)}
 .btn-primary svg{transition:transform .3s}
 .btn-primary:hover svg{transform:translate(2px,-2px)}
