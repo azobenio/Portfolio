@@ -243,6 +243,23 @@ img{max-width:100%;display:block}
 .proc-card ul li{font-size:.75rem;color:var(--t3);padding:3px 0;font-family:var(--mono)}
 .proc-card ul li::before{content:'\2192  ';color:var(--accent)}
 
+/* ========== CERTIFICATIONS ========== */
+.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cert-badge{display:flex;align-items:center;gap:14px;padding:20px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:all .35s var(--ease);cursor:pointer;text-decoration:none;position:relative;overflow:hidden}
+.cert-badge::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#f25022,#7fba00,#00a4ef,#ffb900);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.cert-badge:hover{background:var(--card-h);border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.cert-badge:hover::before{transform:scaleX(1)}
+.cert-badge--snow::before{background:linear-gradient(90deg,#29b5e8,#56c7f0,#29b5e8)}
+
+.cert-logo{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0}
+.cert-logo--ms{background:rgba(255,255,255,.06)}
+.cert-logo--snow{background:rgba(41,181,232,.08)}
+
+.cert-info{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cert-code{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:1px}
+.cert-info strong{font-size:.88rem;font-weight:700;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cert-level{font-size:.68rem;color:var(--t3);font-family:var(--mono);letter-spacing:.5px}
+
 /* ========== TECH STACK (sahil.dev style) ========== */
 .ts-category{margin-bottom:48px}
 .ts-cat-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
@@ -492,6 +509,7 @@ img{max-width:100%;display:block}
 
 /* ========== RESPONSIVE ========== */
 @media(max-width:1024px){
+  .cert-grid{grid-template-columns:repeat(2,1fr)}
   .ts-grid{grid-template-columns:repeat(3,1fr)}
   .blog-grid{grid-template-columns:repeat(2,1fr)}
   .blog-featured{grid-template-columns:1fr}
@@ -512,6 +530,7 @@ img{max-width:100%;display:block}
   .stat-item{align-items:center}
   .about-grid{grid-template-columns:1fr;gap:36px}
   .human-grid{grid-template-columns:1fr;gap:40px}
+  .cert-grid{grid-template-columns:1fr}
   .ts-grid{grid-template-columns:repeat(2,1fr)}
   .blog-grid{grid-template-columns:1fr}
   .blog-featured{grid-template-columns:1fr}
