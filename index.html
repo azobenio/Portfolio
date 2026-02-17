@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMS.dev | Data Engineer - Microsoft Fabric & Snowflake</title>
+    <meta name="description" content="Jean Marie Sadio - Data Engineer spécialisé Microsoft Fabric & Snowflake basé à Nantes, France.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <!-- Cursor Stalker -->
+    <div class="cursor-stalker" id="cursorStalker"></div>
+    <!-- Noise -->
+    <div class="noise"></div>
+    <!-- Deco circles -->
+    <div class="deco-circle deco-1"></div>
+    <div class="deco-circle deco-2"></div>
+    <div class="deco-circle deco-3"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">JMS<span class="logo-dim">.dev</span></span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="#about" class="nav-link">À propos</a>
+                <a href="#process" class="nav-link">Processus</a>
+                <a href="#capabilities" class="nav-link">Compétences</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#newsletter" class="nav-link">Newsletter</a>
+            </nav>
+            <div class="header-right">
+                <div class="header-socials">
+                    <a href="https://github.com/azobenio" target="_blank" aria-label="GitHub" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" aria-label="LinkedIn" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="https://x.com/mazihno" target="_blank" aria-label="X" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="mailto:azobensadio@gmail.com" aria-label="Email" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+                </div>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+                    <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="theme-icon moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="#newsletter" class="hire-badge"><span class="hire-dot"></span>NEWSLETTER</a>
+                <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <nav class="mobile-nav-links">
+            <a href="#about">À propos</a>
+            <a href="#process">Processus</a>
+            <a href="#capabilities">Compétences</a>
+            <a href="#blog">Blog</a>
+            <a href="#newsletter">Newsletter</a>
+        </nav>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-layout">
+                <div class="hero-text">
+                    <div class="hero-badge anim-in" style="--d:.1s">
+                        <span class="hire-dot"></span>
+                        Data Engineer &bull; Microsoft Fabric &bull; Snowflake
+                    </div>
+                    <h1 class="hero-title anim-in" style="--d:.2s">
+                        Salut, je suis<br>
+                        <span class="gradient-text">Jean Marie</span><br>
+                        <span class="gradient-text">Sadio</span>
+                    </h1>
+                    <p class="hero-desc anim-in" style="--d:.35s">
+                        Je conçois des <span class="text-accent">architectures de données modernes</span>
+                        et des pipelines performants avec Microsoft Fabric et Snowflake,
+                        pour transformer la donnée brute en valeur business.
+                    </p>
+                    <div class="hero-ctas anim-in" style="--d:.5s">
+                        <a href="#blog" class="btn-primary">Lire mon blog <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                        <a href="#newsletter" class="btn-ghost">S'abonner <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+                    </div>
+                    <div class="hero-stats anim-in" style="--d:.65s">
+                        <div class="stat-item"><span class="stat-num" data-target="3">0</span><span class="stat-suf">+</span><span class="stat-lbl">ANNÉES</span></div>
+                        <div class="stat-sep"></div>
+                        <div class="stat-item"><span class="stat-num" data-target="15">0</span><span class="stat-suf">+</span><span class="stat-lbl">PROJETS</span></div>
+                        <div class="stat-sep"></div>
+                        <div class="stat-item"><span class="stat-num" data-target="10">0</span><span class="stat-suf">+</span><span class="stat-lbl">CLIENTS</span></div>
+                    </div>
+                </div>
+                <div class="hero-visual anim-in" style="--d:.3s">
+                    <div class="avatar-wrap">
+                        <div class="avatar-ring"></div>
+                        <img src="jm.jpg" alt="Jean Marie Sadio" class="avatar-img">
+                    </div>
+                    <div class="hero-loc">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Nantes, France 🇫🇷
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-cue"><span>Scroll</span><div class="scroll-bar"><div class="scroll-fill"></div></div></div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> À PROPOS</div>
+            <div class="about-grid">
+                <div class="about-left anim-scroll">
+                    <h2 class="section-heading">Transformer la donnée brute en<br><span class="text-accent">intelligence décisionnelle.</span></h2>
+                    <p class="body-text">Data Engineer passionné, je me spécialise dans la conception d'architectures de données cloud avec <strong>Microsoft Fabric</strong> et <strong>Snowflake</strong>. Mon objectif : créer des pipelines de données fiables, scalables et performants qui transforment la donnée en levier stratégique.</p>
+                    <p class="body-text">Mon parcours a commencé par une fascination pour le potentiel caché dans les données. Chaque dataset raconte une histoire — mon rôle est de construire l'infrastructure qui permet de la lire et de la comprendre.</p>
+                    <p class="body-text">Aujourd'hui, j'aide les entreprises à moderniser leur stack data, en allant de l'ingestion à la visualisation, avec des solutions robustes et bien orchestrées.</p>
+                </div>
+                <div class="about-right anim-scroll">
+                    <div class="code-window">
+                        <div class="code-bar"><span class="code-dot" style="background:#ff5f57"></span><span class="code-dot" style="background:#febc2e"></span><span class="code-dot" style="background:#28c840"></span><span class="code-bar-title">profile.yaml</span></div>
+                        <pre class="code-body"><code><span class="ck">data_engineer</span>:
+  <span class="cp">name</span>: <span class="cs">"Jean Marie Sadio"</span>
+  <span class="cp">title</span>: <span class="cs">"Data Engineer"</span>
+  <span class="cp">location</span>: <span class="cs">"Nantes, France 🇫🇷"</span>
+  <span class="cp">company</span>: <span class="cs">"Devoteam"</span>
+  <span class="cp">stack</span>:
+    - <span class="cs">"Microsoft Fabric"</span>
+    - <span class="cs">"Snowflake"</span>
+    - <span class="cs">"Azure Data Factory"</span>
+    - <span class="cs">"dbt"</span>
+    - <span class="cs">"Python"</span>
+    - <span class="cs">"SQL"</span>
+    - <span class="cs">"Power BI"</span>
+  <span class="cp">certifications</span>:
+    - <span class="cs">"DP-600 Fabric Analytics"</span>
+    - <span class="cs">"SnowPro Core"</span>
+  <span class="cp">languages</span>: [<span class="cs">"FR"</span>, <span class="cs">"EN"</span>]
+  <span class="cp">coffee_driven</span>: <span class="cb">true</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="section section-alt" id="process">
+        <div class="container">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> PROCESSUS D'INGÉNIERIE</div>
+            <h2 class="section-heading anim-scroll">De la donnée brute à<br><span class="text-accent">l'insight actionnable</span></h2>
+            <div class="process-row">
+                <div class="proc-card anim-scroll"><div class="proc-num">01</div><h3>Découverte</h3><p>Audit des sources de données, cartographie des flux et définition des besoins analytiques.</p><ul><li>Data Assessment</li><li>Cartographie des flux</li><li>Cadrage projet</li></ul></div>
+                <div class="proc-card anim-scroll"><div class="proc-num">02</div><h3>Architecture</h3><p>Conception du modèle de données, choix des patterns (Medallion, Star Schema) et design des pipelines.</p><ul><li>Data Modeling</li><li>Pipeline Design</li><li>Lakehouse Architecture</li></ul></div>
+                <div class="proc-card anim-scroll"><div class="proc-num">03</div><h3>Build</h3><p>Développement des pipelines ETL/ELT, transformations dbt, orchestration et tests de qualité.</p><ul><li>ETL/ELT Pipelines</li><li>dbt Transformations</li><li>Data Quality Tests</li></ul></div>
+                <div class="proc-card anim-scroll"><div class="proc-num">04</div><h3>Déploiement</h3><p>CI/CD des pipelines data, monitoring, alerting et optimisation des performances.</p><ul><li>CI/CD Data Pipelines</li><li>Monitoring & Alerting</li><li>Cost Optimization</li></ul></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CAPABILITIES ===== -->
+    <section class="section" id="capabilities">
+        <div class="container">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> COMPÉTENCES</div>
+            <h2 class="section-heading anim-scroll">Ce que je <span class="text-accent">maîtrise</span></h2>
+            <div class="cap-grid">
+                <div class="cap-card anim-scroll"><div class="cap-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h3>Microsoft Fabric</h3><p>Plateforme analytics unifiée : Lakehouse, Warehouse, Data Pipelines, Power BI et Real-Time Analytics.</p><div class="cap-tags"><span>Lakehouse</span><span>Data Factory</span><span>Spark</span><span>Power BI</span></div></div>
+                <div class="cap-card anim-scroll"><div class="cap-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div><h3>Snowflake</h3><p>Cloud Data Platform : data warehousing, data sharing, Snowpark, streams & tasks et optimisation des coûts.</p><div class="cap-tags"><span>Snowpark</span><span>Streams</span><span>Tasks</span><span>Data Sharing</span></div></div>
+                <div class="cap-card anim-scroll"><div class="cap-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div><h3>Pipelines ETL/ELT</h3><p>Conception et orchestration de pipelines data robustes avec Azure Data Factory, Airflow et dbt.</p><div class="cap-tags"><span>Azure Data Factory</span><span>dbt</span><span>Airflow</span><span>SSIS</span></div></div>
+                <div class="cap-card anim-scroll"><div class="cap-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><h3>Data Modeling</h3><p>Modélisation dimensionnelle (Star, Snowflake Schema), Medallion Architecture et Data Vault.</p><div class="cap-tags"><span>Star Schema</span><span>Medallion</span><span>Data Vault</span><span>Kimball</span></div></div>
+                <div class="cap-card anim-scroll"><div class="cap-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>BI & Visualisation</h3><p>Création de rapports et dashboards interactifs avec Power BI, modèles sémantiques et DAX avancé.</p><div class="cap-tags"><span>Power BI</span><span>DAX</span><span>Semantic Models</span><span>Paginated Reports</span></div></div>
+                <div class="cap-card anim-scroll"><div class="cap-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.5 19H9a7 7 0 110-14h9.5C21 5 23 7 23 9.5S21 14 18.5 14H9a2.5 2.5 0 010-5h9.5"/></svg></div><h3>Cloud & DevOps Data</h3><p>Azure, CI/CD pour pipelines data, Infrastructure as Code, Git et automatisation des déploiements.</p><div class="cap-tags"><span>Azure</span><span>Terraform</span><span>Git</span><span>CI/CD</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BLOG (sahil.dev style) ===== -->
+    <section class="section section-alt" id="blog">
+        <div class="container">
+            <!-- Blog Hero -->
+            <div class="blog-hero anim-scroll">
+                <div class="section-tag"><span class="tag-line"></span> ARTICLES</div>
+                <h2 class="blog-hero-title">THE <span class="gradient-text">BLOG.</span></h2>
+                <p class="blog-hero-desc">Mes dernières publications sur Microsoft Fabric, Snowflake, Power BI et le Data Engineering.</p>
+                <div class="blog-hero-stats">
+                    <div class="bhs"><span class="bhs-num">9+</span><span class="bhs-lbl">ARTICLES</span></div>
+                    <div class="bhs"><span class="bhs-num">5k+</span><span class="bhs-lbl">READERS</span></div>
+                    <div class="bhs"><span class="bhs-num">Weekly</span><span class="bhs-lbl">UPDATES</span></div>
+                </div>
+            </div>
+            <!-- Search + Filters -->
+            <div class="blog-controls anim-scroll">
+                <div class="blog-search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" id="blogSearch" placeholder="Rechercher un article...">
+                    <span class="search-count" id="searchCount">9 articles</span>
+                </div>
+                <div class="blog-filters" id="blogFilters">
+                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn" data-filter="fabric">Fabric</button>
+                    <button class="filter-btn" data-filter="powerbi">Power BI</button>
+                    <button class="filter-btn" data-filter="snowflake">Snowflake</button>
+                    <button class="filter-btn" data-filter="azure">Azure</button>
+                    <button class="filter-btn" data-filter="ai">AI</button>
+                    <button class="filter-btn" data-filter="ml">ML</button>
+                </div>
+            </div>
+            <!-- Featured Article -->
+            <article class="blog-featured anim-scroll" data-cats="powerbi">
+                <div class="bf-img"><div class="bf-img-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8" opacity=".25"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div></div>
+                <div class="bf-body">
+                    <div class="bf-meta"><span class="blog-category">Power BI</span><span class="bf-date">Sept 2025</span></div>
+                    <h3 class="bf-title">Power BI September 2025 Update : Schema Evolution & Data Refresh</h3>
+                    <p class="bf-desc">Le modèle s'adapte intelligemment aux changements de source — colonnes ajoutées, renommées ou supprimées. Schema Evolution et Data Refresh in Desktop changent la donne pour les Data Engineers.</p>
+                    <div class="blog-tags"><span>#PowerBI</span><span>#SchemaEvolution</span><span>#DataRefresh</span></div>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire sur LinkedIn <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </div>
+            </article>
+            <!-- Blog Grid -->
+            <div class="blog-grid">
+                <article class="blog-card anim-scroll" data-cats="fabric">
+                    <div class="blog-card-top"><span class="bf-date">Juil 2025</span><span class="blog-category">Fabric</span></div>
+                    <h3 class="blog-title">DAX Query View : Écrire et tester du DAX directement dans le navigateur</h3>
+                    <p class="blog-excerpt">DAX Query View arrive dans Power BI Service / Fabric. Écrire, exécuter et tester des requêtes DAX dans le navigateur avec Copilot intégré.</p>
+                    <div class="blog-tags"><span>#MicrosoftFabric</span><span>#DAX</span><span>#Copilot</span></div>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+                <article class="blog-card anim-scroll" data-cats="powerbi">
+                    <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Power BI</span></div>
+                    <h3 class="blog-title">TMDL View : Gérer vos modèles sémantiques par le code</h3>
+                    <p class="blog-excerpt">Le Tabular Model Definition Language View arrive dans Power BI Desktop — scripter et modifier vos modèles sémantiques directement en code.</p>
+                    <div class="blog-tags"><span>#PowerBI</span><span>#TMDL</span><span>#SemanticModel</span></div>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+                <article class="blog-card anim-scroll" data-cats="fabric">
+                    <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Fabric</span></div>
+                    <h3 class="blog-title">OneLake Security : Modèle de sécurité unifié dans Fabric</h3>
+                    <p class="blog-excerpt">OneLake Security est fondamental dans Fabric. Enforcer des règles de sécurité directement sur les tables stockées dans OneLake.</p>
+                    <div class="blog-tags"><span>#MicrosoftFabric</span><span>#OneLake</span><span>#DataGovernance</span></div>
+                    <a href="https://fr.linkedin.com/posts/jean-marie-sadio_microsoftfabric-powerbi-datagovernance-activity-7318175638987698176-9JuM" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+                <article class="blog-card anim-scroll" data-cats="azure">
+                    <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Azure</span></div>
+                    <h3 class="blog-title">Azure Data Studio : Fin de vie — et maintenant ?</h3>
+                    <p class="blog-excerpt">Microsoft a officiellement déprécié Azure Data Studio. Quelles alternatives pour votre workflow de Data Engineer ?</p>
+                    <div class="blog-tags"><span>#Azure</span><span>#AzureDataStudio</span><span>#Deprecation</span></div>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+                <article class="blog-card anim-scroll" data-cats="ai">
+                    <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">AI</span></div>
+                    <h3 class="blog-title">Agent-To-Agent (A2A) avec Azure AI Foundry</h3>
+                    <p class="blog-excerpt">Développement d'agents IA avec Azure AI Foundry : concepts, cas d'usage et guide pratique pour créer des architectures A2A.</p>
+                    <div class="blog-tags"><span>#AzureAI</span><span>#A2A</span><span>#AIFoundry</span></div>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+                <article class="blog-card anim-scroll" data-cats="snowflake">
+                    <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Snowflake</span></div>
+                    <h3 class="blog-title">Devoteam nommé Snowflake Partner of the Year France</h3>
+                    <p class="blog-excerpt">Devoteam reconnu comme Snowflake Partner of the Year en France. Une belle reconnaissance de notre expertise Snowflake Data Cloud.</p>
+                    <div class="blog-tags"><span>#Snowflake</span><span>#Devoteam</span><span>#PartnerOfTheYear</span></div>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+                <article class="blog-card anim-scroll" data-cats="fabric azure">
+                    <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Fabric</span></div>
+                    <h3 class="blog-title">Cross-Tenant Data Integration : ADLS Gen2 vers Fabric</h3>
+                    <p class="blog-excerpt">Comment copier des données d'un container Azure Data Lake Storage Gen2 cross-tenant et les intégrer dans Microsoft Fabric.</p>
+                    <div class="blog-tags"><span>#Azure</span><span>#ADLS</span><span>#MicrosoftFabric</span></div>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+                <article class="blog-card anim-scroll" data-cats="ml">
+                    <div class="blog-card-top"><span class="bf-date">Oct 2022</span><span class="blog-category">ML</span></div>
+                    <h3 class="blog-title">Elbow Method & K-Means : Choisir le bon nombre de clusters</h3>
+                    <p class="blog-excerpt">K-Means et la méthode du coude avec KElbowVisualizer de Yellowbrick pour un clustering optimal.</p>
+                    <div class="blog-tags"><span>#MachineLearning</span><span>#KMeans</span><span>#Data</span></div>
+                    <a href="https://at.linkedin.com/posts/jean-marie-sadio_elbow-method-k-means-is-a-simple-unsupervised-activity-6983077048424505344-aR1n" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="section" id="newsletter">
+        <div class="container">
+            <div class="nl-layout">
+                <!-- Left: Content -->
+                <div class="nl-content anim-scroll">
+                    <div class="section-tag"><span class="tag-line"></span> NEWSLETTER</div>
+                    <h2 class="nl-title">Restez à la pointe du<br><span class="gradient-text" style="font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-1.5px">Data Engineering.</span></h2>
+                    <p class="body-text">Chaque semaine, je partage des articles, des retours d'expérience et des bonnes pratiques sur <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong>, <strong>Power BI</strong> et le monde de la Data.</p>
+                    <div class="nl-perks">
+                        <div class="nl-perk">
+                            <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                            <div><strong>Deep dives techniques</strong><span>Fabric, Snowflake, dbt, Azure</span></div>
+                        </div>
+                        <div class="nl-perk">
+                            <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                            <div><strong>Veille hebdomadaire</strong><span>Les updates qui comptent</span></div>
+                        </div>
+                        <div class="nl-perk">
+                            <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                            <div><strong>Tips & bonnes pratiques</strong><span>Patterns, optimisations, retours terrain</span></div>
+                        </div>
+                    </div>
+                    <div class="nl-social-proof">
+                        <div class="nl-avatars">
+                            <div class="nl-avatar-dot" style="background:#22d3c5"></div>
+                            <div class="nl-avatar-dot" style="background:#06b6d4;margin-left:-6px"></div>
+                            <div class="nl-avatar-dot" style="background:#818cf8;margin-left:-6px"></div>
+                        </div>
+                        <span>Rejoignez les passionnés de Data Engineering</span>
+                    </div>
+                </div>
+                <!-- Right: Subscribe Card -->
+                <div class="nl-card anim-scroll">
+                    <div class="nl-card-glow"></div>
+                    <div class="nl-card-inner">
+                        <div class="nl-card-icon">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                        </div>
+                        <h3>S'abonner gratuitement</h3>
+                        <p>Recevez chaque nouvel article directement dans votre boîte mail. Pas de spam, que du contenu Data.</p>
+                        <!-- MAILCHIMP: Remplacer l'action ci-dessous par votre URL Mailchimp embed form -->
+                        <!-- Ex: https://XXXXX.us1.list-manage.com/subscribe/post?u=XXXX&id=XXXX -->
+                        <form class="nl-form" id="newsletterForm" action="YOUR_MAILCHIMP_URL" method="POST" target="_blank">
+                            <div class="form-group"><label>Prénom</label><input type="text" name="FNAME" placeholder="Votre prénom" required></div>
+                            <div class="form-group"><label>Email</label><input type="email" name="EMAIL" placeholder="votre@email.com" required></div>
+                            <div class="nl-topics">
+                                <span class="nl-topic-label">Centres d'intérêt :</span>
+                                <div class="nl-topic-btns">
+                                    <label class="nl-chip"><input type="checkbox" checked> Fabric</label>
+                                    <label class="nl-chip"><input type="checkbox" checked> Snowflake</label>
+                                    <label class="nl-chip"><input type="checkbox" checked> Power BI</label>
+                                    <label class="nl-chip"><input type="checkbox"> Azure</label>
+                                    <label class="nl-chip"><input type="checkbox"> AI / ML</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary btn-full">S'abonner à la newsletter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+                        </form>
+                        <p class="nl-disclaimer">🔒 Vos données restent privées. Désabonnement en un clic.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER (sahil.dev style) ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">JMS<span class="logo-dim">.dev</span></span></a>
+                    <p>Data Engineer spécialisé Microsoft Fabric & Snowflake. Transformer la donnée en valeur.</p>
+                    <div class="footer-loc">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Nantes, France
+                    </div>
+                    <div class="footer-time" id="footerTime">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        <span id="localTime">--:--</span> heure locale
+                    </div>
+                    <div class="footer-socials">
+                        <a href="https://github.com/azobenio" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                        <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                        <a href="https://x.com/mazihno" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-col"><h4>Navigation</h4><a href="#hero">Accueil</a><a href="#about">À propos</a><a href="#blog">Blog</a><a href="#newsletter">Newsletter</a></div>
+                <div class="footer-col"><h4>Ressources</h4><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">CV / Résumé</a><a href="https://www.linkedin.com/in/jean-marie-sadio/details/certifications/" target="_blank">Certifications</a><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">LinkedIn</a></div>
+                <div class="footer-col">
+                    <h4>Améliorer le site</h4>
+                    <a href="mailto:azobensadio@gmail.com" class="report-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                        Suggérer une idée
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 JMS.dev &mdash; Jean Marie Sadio</span>
+                <div class="footer-bottom-links">
+                    <a href="#">Confidentialité</a>
+                    <a href="#">Conditions</a>
+                </div>
+                <span>Fait avec <span class="heart">♥</span> et beaucoup de ☕</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
