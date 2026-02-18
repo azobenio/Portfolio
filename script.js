@@ -484,14 +484,7 @@ if (nlForm) {
 }
 
 // ---- Newsletter Chip Toggle ----
-document.querySelectorAll('.nl-chip').forEach(chip => {
-    chip.addEventListener('click', e => {
-        if (e.target.tagName !== 'INPUT') {
-            const cb = chip.querySelector('input[type="checkbox"]');
-            if (cb) cb.checked = !cb.checked;
-        }
-    });
-});
+// Le toggle est géré nativement par le <label> HTML — pas besoin de JS
 
 // ---- Parallax deco circles ---- [disabled: window.scrollY = 0 with body overflow:hidden]
 // window.addEventListener('scroll', () => {
