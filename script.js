@@ -362,11 +362,11 @@ document.querySelectorAll('.cap-card').forEach(c => {
     });
 });
 
-// ---- Header scroll ---- [replaced by fp-scroll manager]
-// const header = document.getElementById('header');
-// window.addEventListener('scroll', () => {
-//     header.classList.toggle('scrolled', window.scrollY > 50);
-// });
+// ---- Header scroll ----
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+});
 
 // ---- Burger / Mobile Nav ----
 const burger = document.getElementById('burger');
@@ -384,24 +384,24 @@ document.querySelectorAll('.mobile-nav-links a').forEach(a => {
     });
 });
 
-// ---- Scroll Reveal (Intersection Observer) ---- [replaced by fp-scroll manager, root:wrapper]
-// const io = new IntersectionObserver(entries => {
-//     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-// }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-// document.querySelectorAll('.anim-scroll').forEach(el => io.observe(el));
+// ---- Scroll Reveal (Intersection Observer) ----
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.anim-scroll').forEach(el => io.observe(el));
 
-// Staggered children inside grids [replaced by fp-scroll manager, root:wrapper]
-// const ioGrid = new IntersectionObserver(entries => {
-//     entries.forEach(e => {
-//         if (e.isIntersecting) {
-//             e.target.querySelectorAll('.anim-scroll').forEach((child, i) => {
-//                 child.style.transitionDelay = `${i * 0.08}s`;
-//                 child.classList.add('visible');
-//             });
-//         }
-//     });
-// }, { threshold: 0.1 });
-// document.querySelectorAll('.process-row, .cap-grid, .blog-grid, .social-row').forEach(g => ioGrid.observe(g));
+// Staggered children inside grids
+const ioGrid = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.querySelectorAll('.anim-scroll').forEach((child, i) => {
+                child.style.transitionDelay = `${i * 0.08}s`;
+                child.classList.add('visible');
+            });
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.process-row, .cap-grid, .blog-grid, .social-row').forEach(g => ioGrid.observe(g));
 
 // ---- Animated Counters ----
 function countUp(el, target) {
@@ -413,37 +413,36 @@ function countUp(el, target) {
         el.textContent = Math.floor(cur);
     }, 40);
 }
-// [replaced by fp-scroll manager, root:wrapper]
-// const ioStats = new IntersectionObserver(entries => {
-//     entries.forEach(e => {
-//         if (e.isIntersecting) {
-//             e.target.querySelectorAll('.stat-num').forEach(n => countUp(n, +n.dataset.target));
-//             ioStats.unobserve(e.target);
-//         }
-//     });
-// }, { threshold: 0.35 });
-// const statsEl = document.querySelector('.hero-stats');
-// if (statsEl) ioStats.observe(statsEl);
+const ioStats = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.querySelectorAll('.stat-num').forEach(n => countUp(n, +n.dataset.target));
+            ioStats.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.35 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) ioStats.observe(statsEl);
 
-// ---- Smooth scroll ---- [replaced by fp-scroll manager patchAnchorLinks()]
-// document.querySelectorAll('a[href^="#"]').forEach(a => {
-//     a.addEventListener('click', e => {
-//         e.preventDefault();
-//         const t = document.querySelector(a.getAttribute('href'));
-//         if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
-//     });
-// });
+// ---- Smooth scroll ----
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+    });
+});
 
-// ---- Active nav link ---- [replaced by fp-scroll manager updateActiveNavLink()]
-// const sections = document.querySelectorAll('.section, .hero');
-// const navLinks = document.querySelectorAll('.nav-link');
-// window.addEventListener('scroll', () => {
-//     let cur = '';
-//     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
-//     navLinks.forEach(l => {
-//         l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
-//     });
-// });
+// ---- Active nav link ----
+const sections = document.querySelectorAll('.section, .hero');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
+    navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+    });
+});
 
 // ---- Newsletter Form (Mailchimp) ----
 const nlForm = document.getElementById('newsletterForm');
@@ -486,13 +485,13 @@ if (nlForm) {
 // ---- Newsletter Chip Toggle ----
 // Le toggle est géré nativement par le <label> HTML — pas besoin de JS
 
-// ---- Parallax deco circles ---- [disabled: window.scrollY = 0 with body overflow:hidden]
-// window.addEventListener('scroll', () => {
-//     const y = window.scrollY;
-//     document.querySelectorAll('.deco-circle').forEach((c, i) => {
-//         c.style.transform = `translateY(${y * (i + 1) * 0.02}px)`;
-//     });
-// });
+// ---- Parallax deco circles ----
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    document.querySelectorAll('.deco-circle').forEach((c, i) => {
+        c.style.transform = `translateY(${y * (i + 1) * 0.02}px)`;
+    });
+});
 
 // ---- Blog Search & Filter ----
 (function() {
@@ -674,34 +673,25 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
     codeWindow.style.transition = 'transform .4s ease';
 })();
 
-// ---- Parallax on Scroll for Orbs ---- [disabled: window.scrollY = 0 with body overflow:hidden]
-// window.addEventListener('scroll', () => {
-//     const y = window.scrollY;
-//     document.querySelectorAll('.orb').forEach((orb, i) => {
-//         const speed = (i + 1) * 0.03;
-//         orb.style.transform += ''; // Let CSS animation handle it, just adjust top offset
-//     });
-// });
-
-// ---- Staggered reveal for Tech Stack & Hobby grids ---- [replaced by fp-scroll manager, root:wrapper]
-// const ioGridNew = new IntersectionObserver(entries => {
-//     entries.forEach(e => {
-//         if (e.isIntersecting) {
-//             const children = e.target.querySelectorAll('.ts-card, .hobby-card');
-//             children.forEach((child, i) => {
-//                 child.style.opacity = '0';
-//                 child.style.transform = 'translateY(20px)';
-//                 child.style.transition = `all .5s cubic-bezier(.16,1,.3,1) ${i * 0.06}s`;
-//                 requestAnimationFrame(() => {
-//                     child.style.opacity = '1';
-//                     child.style.transform = 'translateY(0)';
-//                 });
-//             });
-//             ioGridNew.unobserve(e.target);
-//         }
-//     });
-// }, { threshold: 0.15 });
-// document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
+// ---- Staggered reveal for Tech Stack & Hobby grids ----
+const ioGridNew = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            const children = e.target.querySelectorAll('.ts-card, .hobby-card');
+            children.forEach((child, i) => {
+                child.style.opacity = '0';
+                child.style.transform = 'translateY(20px)';
+                child.style.transition = `all .5s cubic-bezier(.16,1,.3,1) ${i * 0.06}s`;
+                requestAnimationFrame(() => {
+                    child.style.opacity = '1';
+                    child.style.transform = 'translateY(0)';
+                });
+            });
+            ioGridNew.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.15 });
+document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
 
 // ---- Local Time (Nantes / Europe/Paris) ----
 (function() {
@@ -718,275 +708,3 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
     setInterval(updateTime, 1000);
 })();
 
-// ========================================
-// FULL-PAGE SCROLL MANAGER v3
-// Sections courtes : 1 scroll = 1 section
-// Sections tall    : scroll interne d'abord, changement en bout de section
-// ========================================
-(function() {
-    'use strict';
-
-    const TALL_IDS       = ['certifications', 'techstack', 'blog', 'newsletter'];
-    const COOLDOWN       = 800;   // ms entre deux goTo()
-    const HEADER_OFFSET  = 80;
-    const isMobile       = () => window.innerWidth <= 767;
-
-    let wrapper, slider, allSections, dots;
-    let currentIndex   = 0;
-    let isAnimating    = false;
-    let lastGoTime     = 0;
-
-    // ---- Helpers ----
-
-    function isTall(sec) { return TALL_IDS.includes(sec.id); }
-
-    // true si la section tall a encore du scroll interne dans la direction donnée
-    function canScrollInside(sec, goingDown) {
-        if (!isTall(sec)) return false;
-        if (goingDown) return sec.scrollTop + sec.clientHeight < sec.scrollHeight - 2;
-        else           return sec.scrollTop > 2;
-    }
-
-    // ---- goTo : translater le SLIDER (pas le wrapper) ----
-    function goTo(index) {
-        if (index < 0 || index >= allSections.length) return;
-        if (isAnimating) return;
-        const now = Date.now();
-        if (now - lastGoTime < COOLDOWN) return;
-
-        isAnimating  = true;
-        lastGoTime   = now;
-        currentIndex = index;
-
-        // Le slider se translate vers le haut pour révéler la section index
-        slider.style.transform = `translateY(-${index * 100}vh)`;
-
-        updateActiveDot(index);
-        updateActiveNavLink();
-        updateHeaderScrolled();
-
-        setTimeout(() => { isAnimating = false; }, COOLDOWN);
-    }
-
-    // ---- Wheel ----
-    function onWheel(e) {
-        if (isMobile()) return;
-        e.preventDefault();
-
-        const delta = e.deltaY;
-        if (Math.abs(delta) < 5) return;
-        const goingDown = delta > 0;
-
-        const sec = allSections[currentIndex];
-
-        // Si la section tall peut encore scroller en interne → laisser faire
-        if (canScrollInside(sec, goingDown)) {
-            sec.scrollTop += delta;
-            return;
-        }
-
-        // Sinon → changer de section
-        if (goingDown) goTo(currentIndex + 1);
-        else           goTo(currentIndex - 1);
-    }
-
-    // ---- Touch ----
-    let touchStartY = 0;
-    function onTouchStart(e) { touchStartY = e.touches[0].clientY; }
-    function onTouchEnd(e) {
-        if (isMobile()) return;
-        const diff = touchStartY - e.changedTouches[0].clientY;
-        if (Math.abs(diff) < 40) return;
-        const goingDown = diff > 0;
-        const sec = allSections[currentIndex];
-        if (!canScrollInside(sec, goingDown)) {
-            if (goingDown) goTo(currentIndex + 1);
-            else           goTo(currentIndex - 1);
-        }
-    }
-
-    // ---- Clavier ----
-    function onKeyDown(e) {
-        if (isMobile()) return;
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-        if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); goTo(currentIndex + 1); }
-        if (e.key === 'ArrowUp'   || e.key === 'PageUp')   { e.preventDefault(); goTo(currentIndex - 1); }
-    }
-
-    // ---- Dots ----
-    function buildDots() {
-        const nav = document.getElementById('fpDots');
-        if (!nav) return;
-        nav.innerHTML = '';
-        allSections.forEach((sec, i) => {
-            const btn = document.createElement('button');
-            btn.className = 'fp-dot' + (i === 0 ? ' active' : '');
-            btn.setAttribute('data-label', sec.dataset.sectionLabel || sec.id);
-            btn.setAttribute('aria-label', 'Aller à : ' + (sec.dataset.sectionLabel || sec.id));
-            btn.addEventListener('click', () => { isAnimating = false; goTo(i); });
-            nav.appendChild(btn);
-        });
-        dots = nav.querySelectorAll('.fp-dot');
-    }
-
-    // ---- Boutons Next ----
-    function buildNextButtons() {
-        allSections.forEach((sec, i) => {
-            if (!isTall(sec)) return;
-            if (sec.querySelector('.fp-next')) return;
-            const btn = document.createElement('button');
-            btn.className = 'fp-next visible';
-            btn.setAttribute('aria-label', 'Section suivante');
-            btn.innerHTML = `SUIVANT <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>`;
-            btn.addEventListener('click', () => { isAnimating = false; goTo(i + 1); });
-            sec.appendChild(btn);
-        });
-    }
-
-    // ---- UI ----
-    function updateActiveDot(i) {
-        if (!dots) return;
-        dots.forEach((d, j) => d.classList.toggle('active', j === i));
-    }
-    function updateActiveNavLink() {
-        const id = allSections[currentIndex] ? allSections[currentIndex].id : '';
-        document.querySelectorAll('.nav-link').forEach(l =>
-            l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-    }
-    function updateHeaderScrolled() {
-        const h = document.getElementById('header');
-        if (h) h.classList.toggle('scrolled', currentIndex > 0);
-    }
-
-    // ---- Liens ancres ----
-    function patchAnchorLinks() {
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                const href = a.getAttribute('href');
-                if (href === '#') return;
-                const target = document.querySelector(href);
-                if (!target) return;
-                e.preventDefault();
-                if (isMobile()) {
-                    window.scrollTo({ top: target.offsetTop - HEADER_OFFSET, behavior: 'smooth' });
-                } else {
-                    const idx = allSections.indexOf(target);
-                    if (idx !== -1) { isAnimating = false; goTo(idx); }
-                }
-                const burger    = document.getElementById('burger');
-                const mobileNav = document.getElementById('mobileNav');
-                if (burger && mobileNav && mobileNav.classList.contains('open')) {
-                    burger.classList.remove('open');
-                    mobileNav.classList.remove('open');
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-    }
-
-    // ---- IntersectionObservers ----
-    function setupIntersectionObservers() {
-        // Sur desktop, root = null suffit car les sections sont visibles dans le viewport
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.anim-scroll').forEach(el => io.observe(el));
-
-        const ioGrid = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.querySelectorAll('.anim-scroll').forEach((child, i) => {
-                        child.style.transitionDelay = `${i * 0.08}s`;
-                        child.classList.add('visible');
-                    });
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.process-row, .cap-grid, .blog-grid, .social-row').forEach(g => ioGrid.observe(g));
-
-        const statsEl = document.querySelector('.hero-stats');
-        if (statsEl) {
-            const ioStats = new IntersectionObserver(entries => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) {
-                        e.target.querySelectorAll('.stat-num').forEach(n => countUp(n, +n.dataset.target));
-                        ioStats.unobserve(e.target);
-                    }
-                });
-            }, { threshold: 0.35 });
-            ioStats.observe(statsEl);
-        }
-
-        const ioGridNew = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.querySelectorAll('.ts-card, .hobby-card').forEach((child, i) => {
-                        child.style.opacity = '0';
-                        child.style.transform = 'translateY(20px)';
-                        child.style.transition = `all .5s cubic-bezier(.16,1,.3,1) ${i * 0.06}s`;
-                        requestAnimationFrame(() => {
-                            child.style.opacity = '1';
-                            child.style.transform = 'translateY(0)';
-                        });
-                    });
-                    ioGridNew.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.15 });
-        document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
-    }
-
-    // ---- Init ----
-    function init() {
-        wrapper     = document.getElementById('fpWrapper');
-        allSections = Array.from(document.querySelectorAll('.fp-section'));
-        if (!wrapper || !allSections.length) return;
-
-        // Créer le slider intérieur et y déplacer toutes les sections
-        slider = document.createElement('div');
-        slider.className = 'fp-slider';
-        // Insérer le slider dans le wrapper, puis y déplacer les sections
-        wrapper.appendChild(slider);
-        allSections.forEach(sec => {
-            if (isTall(sec)) sec.classList.add('fp-tall');
-            slider.appendChild(sec);
-        });
-
-        buildDots();
-        buildNextButtons();
-        patchAnchorLinks();
-        setupIntersectionObservers();
-
-        // Listeners (sur document pour capturer partout)
-        document.addEventListener('wheel',      onWheel,      { passive: false });
-        document.addEventListener('touchstart', onTouchStart, { passive: true  });
-        document.addEventListener('touchend',   onTouchEnd,   { passive: true  });
-        document.addEventListener('keydown',    onKeyDown);
-
-        // Resize : repositionner sans animation
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                if (!isMobile()) {
-                    const prev = slider.style.transition;
-                    slider.style.transition = 'none';
-                    slider.style.transform  = `translateY(-${currentIndex * 100}vh)`;
-                    requestAnimationFrame(() => { slider.style.transition = prev; });
-                }
-            }, 200);
-        });
-
-        // État initial (index 0, sans animation)
-        slider.style.transform = 'translateY(0)';
-        updateActiveDot(0);
-        updateActiveNavLink();
-        updateHeaderScrolled();
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-})();
