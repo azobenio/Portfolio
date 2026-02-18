@@ -678,31 +678,37 @@ img{max-width:100%;display:block}
 /* 1. Body : ne scrolle plus */
 body { overflow: hidden; height: 100vh; }
 
-/* 2. Scroll wrapper — overflow:hidden géré par JS, scroll-snap retiré */
+/* 2. Scroll wrapper : scroll JS uniquement (overflow:hidden bloque le natif) */
 .fp-wrapper {
     position: fixed;
     inset: 0;
-    overflow: hidden;       /* JS contrôle tout le scroll via scrollTo */
-    scroll-behavior: smooth;
+    overflow: hidden;
     z-index: 1;
 }
-.fp-wrapper::-webkit-scrollbar { width: 5px; }
-.fp-wrapper::-webkit-scrollbar-track { background: var(--bg); }
-.fp-wrapper::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
 
-/* 3. Snap sections */
+/* 3. Sections : chacune occupe exactement 100vh */
 .fp-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    min-height: 100vh;
+    height: 100vh;
     box-sizing: border-box;
     position: relative;
+    overflow: hidden;          /* clip par défaut */
 }
+
+/* 3b. Sections tall : scroll interne activé */
+.fp-section.fp-tall {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg3) transparent;
+}
+.fp-section.fp-tall::-webkit-scrollbar { width: 4px; }
+.fp-section.fp-tall::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
 .footer.fp-section {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow-y: auto;
 }
 
 /* 4. Dot indicator */
@@ -796,13 +802,13 @@ body { overflow: hidden; height: 100vh; }
 .fp-next svg { animation: fp-bounce 1.6s ease-in-out infinite; }
 @keyframes fp-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
 
-/* 6. Mobile : désactiver le snap */
+/* 6. Mobile : scroll libre */
 @media (max-width: 767px) {
     body { overflow: auto; height: auto; }
-    .fp-wrapper { position: static; overflow: visible; scroll-snap-type: none; height: auto; }
-    .fp-section { min-height: unset; scroll-snap-align: none; scroll-snap-stop: unset; }
-    .footer.fp-section { min-height: unset; }
+    .fp-wrapper { position: static; overflow: visible; height: auto; }
+    .fp-section { height: auto; min-height: 100vh; overflow: visible; }
+    .fp-section.fp-tall { overflow: visible; height: auto; }
+    .footer.fp-section { height: auto; min-height: unset; overflow: visible; }
     .fp-dots { display: none; }
-    .fp-next { position: sticky; bottom: 16px; left: auto; transform: none; }
-    .fp-next.visible { transform: none; }
+    .fp-next { display: none; }
 }
