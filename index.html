@@ -1062,11 +1062,31 @@
                             <div class="nl-topics">
                                 <span class="nl-topic-label" data-i18n="nl__interests_label">Centres d'intérêt :</span>
                                 <div class="nl-topic-btns">
-                                    <label class="nl-chip"><input type="checkbox" checked> Fabric</label>
-                                    <label class="nl-chip"><input type="checkbox" checked> Snowflake</label>
-                                    <label class="nl-chip"><input type="checkbox" checked> Power BI</label>
-                                    <label class="nl-chip"><input type="checkbox"> Azure</label>
-                                    <label class="nl-chip"><input type="checkbox"> AI / ML</label>
+                                    <label class="nl-chip">
+                                        <input type="checkbox" name="group[fabric]" value="1">
+                                        <span class="nl-chip-check" aria-hidden="true"></span>
+                                        <span data-i18n="nl__chip_fabric">Fabric</span>
+                                    </label>
+                                    <label class="nl-chip">
+                                        <input type="checkbox" name="group[snowflake]" value="1">
+                                        <span class="nl-chip-check" aria-hidden="true"></span>
+                                        <span data-i18n="nl__chip_snowflake">Snowflake</span>
+                                    </label>
+                                    <label class="nl-chip">
+                                        <input type="checkbox" name="group[powerbi]" value="1">
+                                        <span class="nl-chip-check" aria-hidden="true"></span>
+                                        <span data-i18n="nl__chip_powerbi">Power BI</span>
+                                    </label>
+                                    <label class="nl-chip">
+                                        <input type="checkbox" name="group[azure]" value="1">
+                                        <span class="nl-chip-check" aria-hidden="true"></span>
+                                        <span data-i18n="nl__chip_azure">Azure</span>
+                                    </label>
+                                    <label class="nl-chip">
+                                        <input type="checkbox" name="group[aiml]" value="1">
+                                        <span class="nl-chip-check" aria-hidden="true"></span>
+                                        <span data-i18n="nl__chip_aiml">AI / ML</span>
+                                    </label>
                                 </div>
                             </div>
                             <button type="submit" class="btn-primary btn-full"><span data-i18n="nl__submit">S'abonner à la newsletter</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>

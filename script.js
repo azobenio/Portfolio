@@ -132,6 +132,11 @@
             nl__label_email: 'Email',
             nl__placeholder_name: 'Votre prénom',
             nl__interests_label: "Centres d'intérêt :",
+            nl__chip_fabric: 'Fabric',
+            nl__chip_snowflake: 'Snowflake',
+            nl__chip_powerbi: 'Power BI',
+            nl__chip_azure: 'Azure',
+            nl__chip_aiml: 'AI / ML',
             nl__submit: "S'abonner à la newsletter",
             nl__disclaimer: '🔒 Vos données restent privées. Désabonnement en un clic.',
             // Footer
@@ -260,6 +265,11 @@
             nl__label_email: 'Email',
             nl__placeholder_name: 'Your first name',
             nl__interests_label: 'Interests:',
+            nl__chip_fabric: 'Fabric',
+            nl__chip_snowflake: 'Snowflake',
+            nl__chip_powerbi: 'Power BI',
+            nl__chip_azure: 'Azure',
+            nl__chip_aiml: 'AI / ML',
             nl__submit: 'Subscribe to the newsletter',
             nl__disclaimer: '🔒 Your data stays private. Unsubscribe in one click.',
             // Footer
@@ -465,8 +475,9 @@ if (nlForm) {
             btn.style.background = '';
             btn.disabled = false;
             nlForm.reset();
-            nlForm.querySelectorAll('.nl-chip input[type="checkbox"]').forEach((cb, i) => {
-                cb.checked = i < 3;
+            // Tout décocher après reset (choix libre, rien de pré-sélectionné)
+            nlForm.querySelectorAll('.nl-chip input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
             });
         }, 3000);
     });
