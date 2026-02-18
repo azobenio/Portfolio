@@ -31,7 +31,7 @@
             nav__blog: 'Blog',
             nav__newsletter: 'Newsletter',
             // Hero
-            hero__badge: 'Disponible pour missions',
+            hero__badge: 'Data Engineer \u2022 Fabric & Snowflake',
             hero__greeting: 'Salut, je suis',
             hero__desc: 'Je conçois des <span class="text-accent">pipelines de données robustes</span>, des architectures Lakehouse et des solutions analytiques modernes pour transformer la donnée brute en valeur métier.',
             hero__cta_blog: 'Lire mon blog',
@@ -159,7 +159,7 @@
             nav__blog: 'Blog',
             nav__newsletter: 'Newsletter',
             // Hero
-            hero__badge: 'Available for projects',
+            hero__badge: 'Data Engineer \u2022 Fabric & Snowflake',
             hero__greeting: "Hey, I'm",
             hero__desc: 'I design <span class="text-accent">robust data pipelines</span>, Lakehouse architectures and modern analytical solutions to turn raw data into business value.',
             hero__cta_blog: 'Read my blog',
