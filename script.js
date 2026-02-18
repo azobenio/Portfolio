@@ -731,7 +731,7 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
     const HEADER_OFFSET  = 80;
     const isMobile       = () => window.innerWidth <= 767;
 
-    let wrapper, allSections, dots;
+    let wrapper, slider, allSections, dots;
     let currentIndex   = 0;
     let isAnimating    = false;
     let lastGoTime     = 0;
@@ -743,16 +743,11 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
     // true si la section tall a encore du scroll interne dans la direction donnée
     function canScrollInside(sec, goingDown) {
         if (!isTall(sec)) return false;
-        if (goingDown) {
-            // peut encore défiler vers le bas ?
-            return sec.scrollTop + sec.clientHeight < sec.scrollHeight - 2;
-        } else {
-            // peut encore défiler vers le haut ?
-            return sec.scrollTop > 2;
-        }
+        if (goingDown) return sec.scrollTop + sec.clientHeight < sec.scrollHeight - 2;
+        else           return sec.scrollTop > 2;
     }
 
-    // ---- goTo : déplacer le wrapper d'une section ----
+    // ---- goTo : translater le SLIDER (pas le wrapper) ----
     function goTo(index) {
         if (index < 0 || index >= allSections.length) return;
         if (isAnimating) return;
@@ -763,12 +758,9 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
         lastGoTime   = now;
         currentIndex = index;
 
-        // Translation du wrapper : translateY(-index * 100vh)
-        wrapper.style.transform = `translateY(-${index * 100}vh)`;
+        // Le slider se translate vers le haut pour révéler la section index
+        slider.style.transform = `translateY(-${index * 100}vh)`;
 
-        // Remettre le scroll interne de la section cible en haut
-        // (sauf si on y revient depuis le bas → laisser tel quel)
-        // On reset seulement si on avance (pas si on recule)
         updateActiveDot(index);
         updateActiveNavLink();
         updateHeaderScrolled();
@@ -950,43 +942,46 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
         allSections = Array.from(document.querySelectorAll('.fp-section'));
         if (!wrapper || !allSections.length) return;
 
-        // Ajouter la classe fp-tall aux sections longues
+        // Créer le slider intérieur et y déplacer toutes les sections
+        slider = document.createElement('div');
+        slider.className = 'fp-slider';
+        // Insérer le slider dans le wrapper, puis y déplacer les sections
+        wrapper.appendChild(slider);
         allSections.forEach(sec => {
             if (isTall(sec)) sec.classList.add('fp-tall');
+            slider.appendChild(sec);
         });
-
-        // Mise en page : les sections sont empilées verticalement, le wrapper translate
-        wrapper.style.transition = 'transform 0.7s cubic-bezier(0.77, 0, 0.175, 1)';
-        wrapper.style.willChange = 'transform';
 
         buildDots();
         buildNextButtons();
         patchAnchorLinks();
         setupIntersectionObservers();
 
-        // Listeners
+        // Listeners (sur document pour capturer partout)
         document.addEventListener('wheel',      onWheel,      { passive: false });
         document.addEventListener('touchstart', onTouchStart, { passive: true  });
         document.addEventListener('touchend',   onTouchEnd,   { passive: true  });
         document.addEventListener('keydown',    onKeyDown);
 
-        // Resize : repositionner
+        // Resize : repositionner sans animation
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(() => {
                 if (!isMobile()) {
-                    wrapper.style.transition = 'none';
-                    wrapper.style.transform = `translateY(-${currentIndex * 100}vh)`;
-                    requestAnimationFrame(() => {
-                        wrapper.style.transition = 'transform 0.7s cubic-bezier(0.77, 0, 0.175, 1)';
-                    });
+                    const prev = slider.style.transition;
+                    slider.style.transition = 'none';
+                    slider.style.transform  = `translateY(-${currentIndex * 100}vh)`;
+                    requestAnimationFrame(() => { slider.style.transition = prev; });
                 }
             }, 200);
         });
 
-        // État initial
-        goTo(0);
+        // État initial (index 0, sans animation)
+        slider.style.transform = 'translateY(0)';
+        updateActiveDot(0);
+        updateActiveNavLink();
+        updateHeaderScrolled();
     }
 
     if (document.readyState === 'loading') {

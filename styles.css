@@ -678,7 +678,7 @@ img{max-width:100%;display:block}
 /* 1. Body : ne scrolle plus */
 body { overflow: hidden; height: 100vh; }
 
-/* 2. Scroll wrapper : scroll JS uniquement (overflow:hidden bloque le natif) */
+/* 2. Viewport fixe — clip tout ce qui dépasse */
 .fp-wrapper {
     position: fixed;
     inset: 0;
@@ -686,12 +686,20 @@ body { overflow: hidden; height: 100vh; }
     z-index: 1;
 }
 
-/* 3. Sections : chacune occupe exactement 100vh */
+/* 2b. Slide container : empile les sections, se translate en JS */
+.fp-slider {
+    width: 100%;
+    will-change: transform;
+    transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* 3. Chaque section = exactement 1 écran */
 .fp-section {
     height: 100vh;
+    width: 100%;
     box-sizing: border-box;
     position: relative;
-    overflow: hidden;          /* clip par défaut */
+    overflow: hidden;
 }
 
 /* 3b. Sections tall : scroll interne activé */
@@ -703,6 +711,7 @@ body { overflow: hidden; height: 100vh; }
 }
 .fp-section.fp-tall::-webkit-scrollbar { width: 4px; }
 .fp-section.fp-tall::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+
 .footer.fp-section {
     height: 100vh;
     display: flex;
@@ -802,10 +811,11 @@ body { overflow: hidden; height: 100vh; }
 .fp-next svg { animation: fp-bounce 1.6s ease-in-out infinite; }
 @keyframes fp-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
 
-/* 6. Mobile : scroll libre */
+/* 6. Mobile : scroll libre natif */
 @media (max-width: 767px) {
     body { overflow: auto; height: auto; }
     .fp-wrapper { position: static; overflow: visible; height: auto; }
+    .fp-slider  { transform: none !important; transition: none; }
     .fp-section { height: auto; min-height: 100vh; overflow: visible; }
     .fp-section.fp-tall { overflow: visible; height: auto; }
     .footer.fp-section { height: auto; min-height: unset; overflow: visible; }
