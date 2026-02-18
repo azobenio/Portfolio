@@ -18,6 +18,319 @@
     }
 })();
 
+// ---- Language Toggle (FR/EN) ----
+(function() {
+    const translations = {
+        fr: {
+            meta__title: 'JMS.dev | Data Engineer — Microsoft Fabric & Snowflake',
+            meta__description: 'Portfolio de Jean Marie Sadio, Data Engineer spécialisé Microsoft Fabric, Snowflake et Power BI.',
+            // Nav
+            nav__about: 'À propos',
+            nav__techstack: 'Tech Stack',
+            nav__projects: 'Projets',
+            nav__blog: 'Blog',
+            nav__newsletter: 'Newsletter',
+            // Hero
+            hero__badge: 'Disponible pour missions',
+            hero__greeting: 'Salut, je suis',
+            hero__desc: 'Je conçois des <span class="text-accent">pipelines de données robustes</span>, des architectures Lakehouse et des solutions analytiques modernes pour transformer la donnée brute en valeur métier.',
+            hero__cta_blog: 'Lire mon blog',
+            hero__cta_newsletter: "S'abonner",
+            hero__stat_years: 'ANNÉES',
+            hero__stat_projects: 'PROJETS',
+            hero__stat_clients: 'CLIENTS',
+            // About
+            about__tag: 'À PROPOS',
+            about__heading: 'Transformer la donnée en <span class="gradient-text">décisions.</span>',
+            about__p1: "Passionné par l'ingénierie des données depuis plusieurs années, j'ai développé une expertise solide sur les plateformes modernes de Data Engineering. Mon approche combine rigueur technique et vision business pour livrer des solutions qui ont un impact réel.",
+            about__p2: "Chez <strong>Devoteam</strong>, je conçois et implémente des architectures de données complexes pour des clients grands comptes, en m'appuyant sur <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong> et les meilleures pratiques du secteur.",
+            about__p3: "Au-delà du code, je m'intéresse à l'intersection entre technologie et stratégie : comment la donnée peut devenir un véritable avantage concurrentiel pour les organisations.",
+            // Certifications
+            cert__tag: 'CERTIFICATIONS',
+            cert__heading: 'Expertise <span class="gradient-text">validée.</span>',
+            // Tech Stack
+            ts__tag: 'TECH STACK',
+            ts__heading: 'Mes outils <span class="gradient-text">de prédilection.</span>',
+            ts__cat_languages: 'Langages',
+            ts__cat_platforms: 'Plateformes Data',
+            ts__cat_etl: 'ETL / Orchestration',
+            ts__cat_cloud: 'Cloud & DevOps',
+            ts__cat_modeling: 'Modélisation',
+            // Human Behind It
+            human__tag: 'THE HUMAN BEHIND IT',
+            human__heading: 'Au-delà du <span class="gradient-text">code.</span>',
+            human__hobbies_title: 'Ce qui me passionne',
+            human__music_label: 'Musique',
+            human__music_sub: 'Afrobeats & Hip-Hop',
+            human__photo_label: 'Photographie',
+            human__photo_sub: 'Street & portraits',
+            human__gaming_label: 'Gaming',
+            human__gaming_sub: 'FPS & stratégie',
+            human__reading_label: 'Lecture',
+            human__reading_sub: 'Tech & philosophie',
+            human__travel_label: 'Voyage',
+            human__travel_sub: 'Explorer le monde',
+            human__coffee_label: 'Café',
+            human__coffee_sub: 'Carburant du dev',
+            human__philo_title: 'Ma philosophie',
+            human__philo_1_sub: 'Livrer tôt, itérer vite',
+            human__philo_2_sub: 'Toujours apprendre',
+            human__philo_3_sub: 'Vision sur la durée',
+            human__philo_4_sub: 'Le plaisir avant tout',
+            human__quote: '"Les données sont le pétrole du XXIe siècle — mais seulement si on sait les raffiner."',
+            human__mantra: '🎯 Mon mantra : Build → Measure → Learn → Repeat',
+            // Projects
+            projects__tag: 'PROJETS',
+            projects__heading: 'Ce que je <span class="gradient-text">construis.</span>',
+            projects__status: 'En développement',
+            projects__desc: 'Une plateforme SaaS de gestion des flux de données pour les équipes Data. Conçue pour simplifier l\'orchestration, la transformation et le monitoring des pipelines.',
+            projects__stack_label: 'Stack :',
+            projects__feature_1: 'Orchestration de pipelines visuels',
+            projects__feature_2: 'Monitoring temps-réel',
+            projects__feature_3: 'Connecteurs natifs Fabric & Snowflake',
+            projects__cta_more: 'En savoir plus',
+            projects__cta_contact: 'Me contacter',
+            // Blog
+            blog__tag: 'ARTICLES',
+            blog__hero_desc: 'Mes dernières publications sur Microsoft Fabric, Snowflake, Power BI et le Data Engineering.',
+            blog__search_placeholder: 'Rechercher un article...',
+            blog__filter_all: 'Tous',
+            blog__featured_title: 'Power BI September 2025 Update : Schema Evolution & Data Refresh',
+            blog__featured_desc: "Le modèle s'adapte intelligemment aux changements de source — colonnes ajoutées, renommées ou supprimées. Schema Evolution et Data Refresh in Desktop changent la donne pour les Data Engineers.",
+            blog__read_full: 'Lire sur LinkedIn',
+            blog__read_short: 'Lire',
+            blog__card1_title: 'DAX Query View : Écrire et tester du DAX directement dans le navigateur',
+            blog__card1_excerpt: 'DAX Query View arrive dans Power BI Service / Fabric. Écrire, exécuter et tester des requêtes DAX dans le navigateur avec Copilot intégré.',
+            blog__card2_title: 'TMDL View : Gérer vos modèles sémantiques par le code',
+            blog__card2_excerpt: 'Le Tabular Model Definition Language View arrive dans Power BI Desktop — scripter et modifier vos modèles sémantiques directement en code.',
+            blog__card3_title: 'OneLake Security : Modèle de sécurité unifié dans Fabric',
+            blog__card3_excerpt: 'OneLake Security est fondamental dans Fabric. Enforcer des règles de sécurité directement sur les tables stockées dans OneLake.',
+            blog__card4_title: 'Azure Data Studio : Fin de vie — et maintenant ?',
+            blog__card4_excerpt: 'Microsoft a officiellement déprécié Azure Data Studio. Quelles alternatives pour votre workflow de Data Engineer ?',
+            blog__card5_title: 'Agent-To-Agent (A2A) avec Azure AI Foundry',
+            blog__card5_excerpt: "Développement d'agents IA avec Azure AI Foundry : concepts, cas d'usage et guide pratique pour créer des architectures A2A.",
+            blog__card6_title: 'Devoteam nommé Snowflake Partner of the Year France',
+            blog__card6_excerpt: 'Devoteam reconnu comme Snowflake Partner of the Year en France. Une belle reconnaissance de notre expertise Snowflake Data Cloud.',
+            blog__card7_title: 'Cross-Tenant Data Integration : ADLS Gen2 vers Fabric',
+            blog__card7_excerpt: "Comment copier des données d'un container Azure Data Lake Storage Gen2 cross-tenant et les intégrer dans Microsoft Fabric.",
+            blog__card8_title: 'Elbow Method & K-Means : Choisir le bon nombre de clusters',
+            blog__card8_excerpt: 'K-Means et la méthode du coude avec KElbowVisualizer de Yellowbrick pour un clustering optimal.',
+            // Newsletter
+            nl__tag: 'NEWSLETTER',
+            nl__title: 'Restez à la pointe du<br><span class="gradient-text" style="font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-1.5px">Data Engineering.</span>',
+            nl__desc: 'Chaque semaine, je partage des articles, des retours d\'expérience et des bonnes pratiques sur <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong>, <strong>Power BI</strong> et le monde de la Data.',
+            nl__perk1_title: 'Deep dives techniques',
+            nl__perk1_sub: 'Fabric, Snowflake, dbt, Azure',
+            nl__perk2_title: 'Veille hebdomadaire',
+            nl__perk2_sub: 'Les updates qui comptent',
+            nl__perk3_title: 'Tips & bonnes pratiques',
+            nl__perk3_sub: 'Patterns, optimisations, retours terrain',
+            nl__social_proof: 'Rejoignez les passionnés de Data Engineering',
+            nl__card_title: 'S\'abonner gratuitement',
+            nl__card_desc: 'Recevez chaque nouvel article directement dans votre boîte mail. Pas de spam, que du contenu Data.',
+            nl__label_name: 'Prénom',
+            nl__label_email: 'Email',
+            nl__placeholder_name: 'Votre prénom',
+            nl__interests_label: "Centres d'intérêt :",
+            nl__submit: "S'abonner à la newsletter",
+            nl__disclaimer: '🔒 Vos données restent privées. Désabonnement en un clic.',
+            // Footer
+            footer__tagline: 'Data Engineer spécialisé Microsoft Fabric & Snowflake. Transformer la donnée en valeur.',
+            footer__local_time: 'heure locale',
+            footer__nav_title: 'Navigation',
+            footer__nav_home: 'Accueil',
+            footer__resources_title: 'Ressources',
+            footer__resources_cv: 'CV / Résumé',
+            footer__resources_certs: 'Certifications',
+            footer__improve_title: 'Améliorer le site',
+            footer__improve_suggest: 'Suggérer une idée',
+            footer__copyright: '© 2026 JMS.dev — Jean Marie Sadio',
+            footer__privacy: 'Confidentialité',
+            footer__terms: 'Conditions',
+            footer__made_with: 'Fait avec <span class="heart">♥</span> et beaucoup de ☕'
+        },
+        en: {
+            meta__title: 'JMS.dev | Data Engineer — Microsoft Fabric & Snowflake',
+            meta__description: 'Portfolio of Jean Marie Sadio, Data Engineer specializing in Microsoft Fabric, Snowflake and Power BI.',
+            // Nav
+            nav__about: 'About',
+            nav__techstack: 'Tech Stack',
+            nav__projects: 'Projects',
+            nav__blog: 'Blog',
+            nav__newsletter: 'Newsletter',
+            // Hero
+            hero__badge: 'Available for projects',
+            hero__greeting: "Hey, I'm",
+            hero__desc: 'I design <span class="text-accent">robust data pipelines</span>, Lakehouse architectures and modern analytical solutions to turn raw data into business value.',
+            hero__cta_blog: 'Read my blog',
+            hero__cta_newsletter: 'Subscribe',
+            hero__stat_years: 'YEARS',
+            hero__stat_projects: 'PROJECTS',
+            hero__stat_clients: 'CLIENTS',
+            // About
+            about__tag: 'ABOUT',
+            about__heading: 'Turning data into <span class="gradient-text">decisions.</span>',
+            about__p1: 'Passionate about data engineering for several years, I have built solid expertise on modern Data Engineering platforms. My approach combines technical rigour with a business mindset to deliver solutions with real impact.',
+            about__p2: 'At <strong>Devoteam</strong>, I design and implement complex data architectures for large enterprise clients, leveraging <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong> and industry best practices.',
+            about__p3: 'Beyond the code, I am interested in the intersection of technology and strategy: how data can become a true competitive advantage for organisations.',
+            // Certifications
+            cert__tag: 'CERTIFICATIONS',
+            cert__heading: 'Validated <span class="gradient-text">expertise.</span>',
+            // Tech Stack
+            ts__tag: 'TECH STACK',
+            ts__heading: 'My tools <span class="gradient-text">of choice.</span>',
+            ts__cat_languages: 'Languages',
+            ts__cat_platforms: 'Data Platforms',
+            ts__cat_etl: 'ETL / Orchestration',
+            ts__cat_cloud: 'Cloud & DevOps',
+            ts__cat_modeling: 'Modelling',
+            // Human Behind It
+            human__tag: 'THE HUMAN BEHIND IT',
+            human__heading: 'Beyond the <span class="gradient-text">code.</span>',
+            human__hobbies_title: 'What I am passionate about',
+            human__music_label: 'Music',
+            human__music_sub: 'Afrobeats & Hip-Hop',
+            human__photo_label: 'Photography',
+            human__photo_sub: 'Street & portraits',
+            human__gaming_label: 'Gaming',
+            human__gaming_sub: 'FPS & strategy',
+            human__reading_label: 'Reading',
+            human__reading_sub: 'Tech & philosophy',
+            human__travel_label: 'Travel',
+            human__travel_sub: 'Exploring the world',
+            human__coffee_label: 'Coffee',
+            human__coffee_sub: "Dev's fuel",
+            human__philo_title: 'My philosophy',
+            human__philo_1_sub: 'Ship early, iterate fast',
+            human__philo_2_sub: 'Always be learning',
+            human__philo_3_sub: 'Think long-term',
+            human__philo_4_sub: 'Enjoy the journey',
+            human__quote: '"Data is the oil of the 21st century — but only if you know how to refine it."',
+            human__mantra: '🎯 My mantra: Build → Measure → Learn → Repeat',
+            // Projects
+            projects__tag: 'PROJECTS',
+            projects__heading: 'What I am <span class="gradient-text">building.</span>',
+            projects__status: 'In development',
+            projects__desc: 'A SaaS platform for managing data workflows for Data teams. Designed to simplify pipeline orchestration, transformation and monitoring.',
+            projects__stack_label: 'Stack:',
+            projects__feature_1: 'Visual pipeline orchestration',
+            projects__feature_2: 'Real-time monitoring',
+            projects__feature_3: 'Native Fabric & Snowflake connectors',
+            projects__cta_more: 'Learn more',
+            projects__cta_contact: 'Contact me',
+            // Blog
+            blog__tag: 'ARTICLES',
+            blog__hero_desc: 'My latest posts on Microsoft Fabric, Snowflake, Power BI and Data Engineering.',
+            blog__search_placeholder: 'Search articles...',
+            blog__filter_all: 'All',
+            blog__featured_title: 'Power BI September 2025 Update: Schema Evolution & Data Refresh',
+            blog__featured_desc: 'The model intelligently adapts to source changes — columns added, renamed or removed. Schema Evolution and Data Refresh in Desktop are game-changers for Data Engineers.',
+            blog__read_full: 'Read on LinkedIn',
+            blog__read_short: 'Read',
+            blog__card1_title: 'DAX Query View: Write and test DAX directly in the browser',
+            blog__card1_excerpt: 'DAX Query View comes to Power BI Service / Fabric. Write, run and test DAX queries in the browser with built-in Copilot.',
+            blog__card2_title: 'TMDL View: Manage your semantic models with code',
+            blog__card2_excerpt: 'Tabular Model Definition Language View arrives in Power BI Desktop — script and modify your semantic models directly in code.',
+            blog__card3_title: 'OneLake Security: Unified security model in Fabric',
+            blog__card3_excerpt: 'OneLake Security is fundamental in Fabric. Enforce security rules directly on tables stored in OneLake.',
+            blog__card4_title: 'Azure Data Studio: End of life — what now?',
+            blog__card4_excerpt: 'Microsoft has officially deprecated Azure Data Studio. What alternatives exist for your Data Engineer workflow?',
+            blog__card5_title: 'Agent-To-Agent (A2A) with Azure AI Foundry',
+            blog__card5_excerpt: 'Building AI agents with Azure AI Foundry: concepts, use cases and practical guide to creating A2A architectures.',
+            blog__card6_title: 'Devoteam named Snowflake Partner of the Year France',
+            blog__card6_excerpt: "Devoteam recognised as Snowflake Partner of the Year in France. A great recognition of our Snowflake Data Cloud expertise.",
+            blog__card7_title: 'Cross-Tenant Data Integration: ADLS Gen2 to Fabric',
+            blog__card7_excerpt: 'How to copy data from a cross-tenant Azure Data Lake Storage Gen2 container and integrate it into Microsoft Fabric.',
+            blog__card8_title: 'Elbow Method & K-Means: Choosing the right number of clusters',
+            blog__card8_excerpt: 'K-Means and the elbow method with KElbowVisualizer from Yellowbrick for optimal clustering.',
+            // Newsletter
+            nl__tag: 'NEWSLETTER',
+            nl__title: 'Stay ahead in<br><span class="gradient-text" style="font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-1.5px">Data Engineering.</span>',
+            nl__desc: 'Every week I share articles, experience feedback and best practices on <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong>, <strong>Power BI</strong> and the world of Data.',
+            nl__perk1_title: 'Technical deep dives',
+            nl__perk1_sub: 'Fabric, Snowflake, dbt, Azure',
+            nl__perk2_title: 'Weekly watch',
+            nl__perk2_sub: 'The updates that matter',
+            nl__perk3_title: 'Tips & best practices',
+            nl__perk3_sub: 'Patterns, optimisations, field feedback',
+            nl__social_proof: 'Join Data Engineering enthusiasts',
+            nl__card_title: 'Subscribe for free',
+            nl__card_desc: 'Receive every new article directly in your inbox. No spam, only Data content.',
+            nl__label_name: 'First name',
+            nl__label_email: 'Email',
+            nl__placeholder_name: 'Your first name',
+            nl__interests_label: 'Interests:',
+            nl__submit: 'Subscribe to the newsletter',
+            nl__disclaimer: '🔒 Your data stays private. Unsubscribe in one click.',
+            // Footer
+            footer__tagline: 'Data Engineer specialising in Microsoft Fabric & Snowflake. Turning data into value.',
+            footer__local_time: 'local time',
+            footer__nav_title: 'Navigation',
+            footer__nav_home: 'Home',
+            footer__resources_title: 'Resources',
+            footer__resources_cv: 'CV / Resume',
+            footer__resources_certs: 'Certifications',
+            footer__improve_title: 'Improve the site',
+            footer__improve_suggest: 'Suggest an idea',
+            footer__copyright: '© 2026 JMS.dev — Jean Marie Sadio',
+            footer__privacy: 'Privacy',
+            footer__terms: 'Terms',
+            footer__made_with: 'Made with <span class="heart">♥</span> and lots of ☕'
+        }
+    };
+
+    function applyLanguage(lang) {
+        const t = translations[lang];
+        if (!t) return;
+
+        // 1. <html lang="...">
+        document.documentElement.setAttribute('lang', lang);
+
+        // 2. <title> and <meta description>
+        document.title = t.meta__title;
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', t.meta__description);
+
+        // 3. textContent (data-i18n)
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) el.textContent = t[key];
+        });
+
+        // 4. innerHTML (data-i18n-html — nested tags)
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.getAttribute('data-i18n-html');
+            if (t[key] !== undefined) el.innerHTML = t[key];
+        });
+
+        // 5. placeholder (data-i18n-placeholder)
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+        });
+
+        // 6. Button label shows active language
+        const inner = document.querySelector('.lang-toggle-inner');
+        if (inner) inner.textContent = lang.toUpperCase();
+
+        // 7. Persist
+        localStorage.setItem('lang', lang);
+    }
+
+    // Init on load
+    const saved = localStorage.getItem('lang') || 'fr';
+    applyLanguage(saved);
+
+    // Click
+    const toggle = document.getElementById('langToggle');
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            const current = localStorage.getItem('lang') || 'fr';
+            applyLanguage(current === 'fr' ? 'en' : 'fr');
+        });
+    }
+})();
+
 // ---- Cursor Stalker ----
 const stalker = document.getElementById('cursorStalker');
 let mx = 0, my = 0, sx = 0, sy = 0;
@@ -217,7 +530,9 @@ window.addEventListener('scroll', () => {
 
         // Update count
         if (searchCount) {
-            searchCount.textContent = visible + ' article' + (visible > 1 ? 's' : '');
+            const currentLang = localStorage.getItem('lang') || 'fr';
+            const word = currentLang === 'fr' ? 'article' : 'article';
+            searchCount.textContent = visible + ' ' + word + (visible > 1 ? 's' : '');
         }
     }
 

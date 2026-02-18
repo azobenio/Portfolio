@@ -30,15 +30,87 @@
     <!-- ===== HEADER ===== -->
     <header class="header" id="header">
         <div class="header-inner">
-            <a href="#" class="logo">
-                <span class="logo-icon">⚡</span>
-                <span class="logo-text">JMS<span class="logo-dim">.dev</span></span>
+            <a href="#" class="logo logo-bantaflow">
+                <!-- Icône B -->
+                <svg class="logo-bf-icon" width="34" height="34" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="hdr-gPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"   stop-color="#3c096c"/>
+                            <stop offset="50%"  stop-color="#9d4edd"/>
+                            <stop offset="100%" stop-color="#c77dff"/>
+                        </linearGradient>
+                        <linearGradient id="hdr-gVertical" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%"   stop-color="#e0aaff"/>
+                            <stop offset="100%" stop-color="#7b2cbf"/>
+                        </linearGradient>
+                        <linearGradient id="hdr-gFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%"   stop-color="#22d3c5" stop-opacity="0"/>
+                            <stop offset="40%"  stop-color="#22d3c5"/>
+                            <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="hdr-gStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"  stop-color="#c77dff"/>
+                            <stop offset="50%" stop-color="#22d3c5"/>
+                            <stop offset="100%" stop-color="#818cf8"/>
+                        </linearGradient>
+                        <filter id="hdr-fGlow" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="5" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <filter id="hdr-fNeon" x="-40%" y="-40%" width="180%" height="180%">
+                            <feGaussianBlur stdDeviation="8" result="b1"/>
+                            <feGaussianBlur stdDeviation="3" result="b2"/>
+                            <feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Anneau -->
+                    <circle cx="160" cy="138" r="116" fill="none" stroke="url(#hdr-gStroke)" stroke-width="3"
+                            stroke-dasharray="30 15 8 15 4 15" opacity="0.5">
+                        <animateTransform attributeName="transform" type="rotate"
+                            from="0 160 138" to="360 160 138" dur="18s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Points cardinaux -->
+                    <circle cx="160" cy="22"  r="5" fill="#e0aaff" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.4s" repeatCount="indefinite"/></circle>
+                    <circle cx="276" cy="138" r="5" fill="#22d3c5" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/></circle>
+                    <circle cx="160" cy="254" r="5" fill="#9d4edd" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="44"  cy="138" r="5" fill="#818cf8" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="3s"   repeatCount="indefinite"/></circle>
+                    <!-- Lettre B -->
+                    <g filter="url(#hdr-fNeon)">
+                        <rect x="92" y="78" width="18" height="120" rx="4" fill="url(#hdr-gVertical)"/>
+                        <path d="M 108 78 L 152 78 Q 198 78 198 108 Q 198 134 165 138 L 108 138 Z" fill="url(#hdr-gPurple)">
+                            <animate attributeName="opacity" values=".9;1;.9" dur="3s" repeatCount="indefinite"/>
+                        </path>
+                        <path d="M 108 142 L 158 142 Q 215 142 215 172 Q 215 200 158 200 L 108 200 Z" fill="url(#hdr-gPurple)">
+                            <animate attributeName="opacity" values="1;.9;1" dur="3s" begin=".5s" repeatCount="indefinite"/>
+                        </path>
+                        <line x1="108" y1="139" x2="185" y2="139" stroke="url(#hdr-gFlow)" stroke-width="2.5">
+                            <animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/>
+                        </line>
+                        <!-- Perles -->
+                        <circle cx="101" cy="86"  r="4" fill="#e0aaff" filter="url(#hdr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/></circle>
+                        <circle cx="101" cy="139" r="4" fill="#22d3c5" filter="url(#hdr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.2s" begin=".3s" repeatCount="indefinite"/></circle>
+                        <circle cx="101" cy="192" r="4" fill="#9d4edd" filter="url(#hdr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.4s" begin=".6s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <!-- Flux droite -->
+                    <path d="M 218 142 Q 255 142 278 138" fill="none" stroke="#22d3c5" stroke-width="2.5" stroke-dasharray="8 5" opacity="0.9">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-26" dur=".7s" repeatCount="indefinite"/>
+                    </path>
+                    <circle r="3" fill="#22d3c5" filter="url(#hdr-fGlow)" opacity="0">
+                        <animateMotion dur="1s" repeatCount="indefinite" begin="0.2s" path="M 218 142 Q 255 142 278 138"/>
+                        <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="0.2s"/>
+                    </circle>
+                </svg>
+                <!-- Wordmark -->
+                <span class="logo-bf-wordmark">
+                    <span class="logo-bf-banta">BANTA</span><span class="logo-bf-flow">FLOW</span>
+                </span>
             </a>
             <nav class="nav-desktop">
-                <a href="#about" class="nav-link">À propos</a>
-                <a href="#techstack" class="nav-link">Tech Stack</a>
-                <a href="#blog" class="nav-link">Blog</a>
-                <a href="#newsletter" class="nav-link">Newsletter</a>
+                <a href="#about" class="nav-link" data-i18n="nav__about">À propos</a>
+                <a href="#techstack" class="nav-link" data-i18n="nav__techstack">Tech Stack</a>
+                <a href="#projects" class="nav-link" data-i18n="nav__projects">Projets</a>
+                <a href="#blog" class="nav-link" data-i18n="nav__blog">Blog</a>
+                <a href="#newsletter" class="nav-link" data-i18n="nav__newsletter">Newsletter</a>
             </nav>
             <div class="header-right">
                 <div class="header-socials">
@@ -47,6 +119,7 @@
                     <a href="https://x.com/mazihno" target="_blank" aria-label="X" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                     <a href="mailto:azobensadio@gmail.com" aria-label="Email" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
                 </div>
+                <button class="lang-toggle" id="langToggle" aria-label="Switch language / Changer de langue"><span class="lang-toggle-inner">FR</span></button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
                     <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                     <svg class="theme-icon moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -60,10 +133,11 @@
     <!-- Mobile Nav -->
     <div class="mobile-nav" id="mobileNav">
         <nav class="mobile-nav-links">
-            <a href="#about">À propos</a>
-            <a href="#techstack">Tech Stack</a>
-            <a href="#blog">Blog</a>
-            <a href="#newsletter">Newsletter</a>
+            <a href="#about" data-i18n="nav__about">À propos</a>
+            <a href="#techstack" data-i18n="nav__techstack">Tech Stack</a>
+            <a href="#projects" data-i18n="nav__projects">Projets</a>
+            <a href="#blog" data-i18n="nav__blog">Blog</a>
+            <a href="#newsletter" data-i18n="nav__newsletter">Newsletter</a>
         </nav>
     </div>
 
@@ -74,28 +148,28 @@
                 <div class="hero-text">
                     <div class="hero-badge anim-in" style="--d:.1s">
                         <span class="hire-dot"></span>
-                        Data Engineer &bull; Microsoft Fabric &bull; Snowflake
+                        <span data-i18n="hero__badge">Data Engineer &bull; Microsoft Fabric &bull; Snowflake</span>
                     </div>
                     <h1 class="hero-title anim-in" style="--d:.2s">
-                        Salut, je suis<br>
+                        <span data-i18n="hero__greeting">Salut, je suis</span><br>
                         <span class="gradient-text">Jean Marie</span><br>
                         <span class="gradient-text">Sadio</span>
                     </h1>
-                    <p class="hero-desc anim-in" style="--d:.35s">
+                    <p class="hero-desc anim-in" style="--d:.35s" data-i18n-html="hero__desc">
                         Je conçois des <span class="text-accent">architectures de données modernes</span>
                         et des pipelines performants avec Microsoft Fabric et Snowflake,
                         pour transformer la donnée brute en valeur business.
                     </p>
                     <div class="hero-ctas anim-in" style="--d:.5s">
-                        <a href="#blog" class="btn-primary">Lire mon blog <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
-                        <a href="#newsletter" class="btn-ghost">S'abonner <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+                        <a href="#blog" class="btn-primary"><span data-i18n="hero__cta_blog">Lire mon blog</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                        <a href="#newsletter" class="btn-ghost"><span data-i18n="hero__cta_newsletter">S'abonner</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
                     </div>
                     <div class="hero-stats anim-in" style="--d:.65s">
-                        <div class="stat-item"><span class="stat-num" data-target="3">0</span><span class="stat-suf">+</span><span class="stat-lbl">ANNÉES</span></div>
+                        <div class="stat-item"><span class="stat-num" data-target="3">0</span><span class="stat-suf">+</span><span class="stat-lbl" data-i18n="hero__stat_years">ANNÉES</span></div>
                         <div class="stat-sep"></div>
-                        <div class="stat-item"><span class="stat-num" data-target="15">0</span><span class="stat-suf">+</span><span class="stat-lbl">PROJETS</span></div>
+                        <div class="stat-item"><span class="stat-num" data-target="15">0</span><span class="stat-suf">+</span><span class="stat-lbl" data-i18n="hero__stat_projects">PROJETS</span></div>
                         <div class="stat-sep"></div>
-                        <div class="stat-item"><span class="stat-num" data-target="10">0</span><span class="stat-suf">+</span><span class="stat-lbl">CLIENTS</span></div>
+                        <div class="stat-item"><span class="stat-num" data-target="10">0</span><span class="stat-suf">+</span><span class="stat-lbl" data-i18n="hero__stat_clients">CLIENTS</span></div>
                     </div>
                 </div>
                 <div class="hero-visual anim-in" style="--d:.3s">
@@ -116,13 +190,13 @@
     <!-- ===== ABOUT ===== -->
     <section class="section" id="about">
         <div class="container">
-            <div class="section-tag anim-scroll"><span class="tag-line"></span> À PROPOS</div>
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="about__tag">À PROPOS</span></div>
             <div class="about-grid">
                 <div class="about-left anim-scroll">
-                    <h2 class="section-heading">Transformer la donnée brute en<br><span class="text-accent">intelligence décisionnelle.</span></h2>
-                    <p class="body-text">Data Engineer passionné, je me spécialise dans la conception d'architectures de données cloud avec <strong>Microsoft Fabric</strong> et <strong>Snowflake</strong>. Mon objectif : créer des pipelines de données fiables, scalables et performants qui transforment la donnée en levier stratégique.</p>
-                    <p class="body-text">Mon parcours a commencé par une fascination pour le potentiel caché dans les données. Chaque dataset raconte une histoire — mon rôle est de construire l'infrastructure qui permet de la lire et de la comprendre.</p>
-                    <p class="body-text">Aujourd'hui, j'aide les entreprises à moderniser leur stack data, en allant de l'ingestion à la visualisation, avec des solutions robustes et bien orchestrées.</p>
+                    <h2 class="section-heading" data-i18n-html="about__heading">Transformer la donnée brute en<br><span class="text-accent">intelligence décisionnelle.</span></h2>
+                    <p class="body-text" data-i18n-html="about__p1">Data Engineer passionné, je me spécialise dans la conception d'architectures de données cloud avec <strong>Microsoft Fabric</strong> et <strong>Snowflake</strong>. Mon objectif : créer des pipelines de données fiables, scalables et performants qui transforment la donnée en levier stratégique.</p>
+                    <p class="body-text" data-i18n-html="about__p2">Mon parcours a commencé par une fascination pour le potentiel caché dans les données. Chaque dataset raconte une histoire — mon rôle est de construire l'infrastructure qui permet de la lire et de la comprendre.</p>
+                    <p class="body-text" data-i18n-html="about__p3">Aujourd'hui, j'aide les entreprises à moderniser leur stack data, en allant de l'ingestion à la visualisation, avec des solutions robustes et bien orchestrées.</p>
                 </div>
                 <div class="about-right anim-scroll">
                     <div class="code-window">
@@ -159,101 +233,241 @@
     <!-- ===== CERTIFICATIONS ===== -->
     <section class="section section-alt" id="certifications">
         <div class="container">
-            <div class="section-tag anim-scroll"><span class="tag-line"></span> CERTIFICATIONS</div>
-            <h2 class="section-heading anim-scroll">CERTIFIED<br><span class="text-accent">EXPERTISE.</span></h2>
-            <div class="cert-grid">
-                <!-- DP-700 -->
-                <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
-                    <div class="cert-logo cert-logo--ms">
-                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="cert__tag">CERTIFICATIONS</span></div>
+            <h2 class="section-heading anim-scroll" data-i18n-html="cert__heading">CERTIFIED<br><span class="text-accent">EXPERTISE.</span></h2>
+
+            <!-- Microsoft -->
+            <div class="cert-group anim-scroll">
+                <div class="cert-group-header">
+                    <div class="cert-group-icon" style="background:rgba(0,120,212,.1)">
+                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Microsoft" width="22" height="22">
                     </div>
-                    <div class="cert-info">
-                        <span class="cert-code">DP-700</span>
-                        <strong>Fabric Data Engineer</strong>
-                        <span class="cert-level">Associate</span>
-                    </div>
-                </a>
-                <!-- DP-600 -->
-                <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
-                    <div class="cert-logo cert-logo--ms">
-                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44">
-                    </div>
-                    <div class="cert-info">
-                        <span class="cert-code">DP-600</span>
-                        <strong>Fabric Analytics Engineer</strong>
-                        <span class="cert-level">Associate</span>
-                    </div>
-                </a>
-                <!-- DP-203 -->
-                <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
-                    <div class="cert-logo cert-logo--ms">
-                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44">
-                    </div>
-                    <div class="cert-info">
-                        <span class="cert-code">DP-203</span>
-                        <strong>Azure Data Engineer</strong>
-                        <span class="cert-level">Associate</span>
-                    </div>
-                </a>
-                <!-- AI-102 -->
-                <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
-                    <div class="cert-logo cert-logo--ms">
-                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44">
-                    </div>
-                    <div class="cert-info">
-                        <span class="cert-code">AI-102</span>
-                        <strong>Azure AI Engineer</strong>
-                        <span class="cert-level">Associate</span>
-                    </div>
-                </a>
-                <!-- PL-300 -->
-                <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
-                    <div class="cert-logo cert-logo--ms">
-                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44">
-                    </div>
-                    <div class="cert-info">
-                        <span class="cert-code">PL-300</span>
-                        <strong>Power BI Data Analyst</strong>
-                        <span class="cert-level">Associate</span>
-                    </div>
-                </a>
-                <!-- DP-900 -->
-                <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge cert-badge--fund anim-scroll">
-                    <div class="cert-logo cert-logo--ms">
-                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Fundamentals Badge" width="44" height="44">
-                    </div>
-                    <div class="cert-info">
-                        <span class="cert-code">DP-900</span>
-                        <strong>Azure Data Fundamentals</strong>
-                        <span class="cert-level">Fundamentals</span>
-                    </div>
-                </a>
-                <!-- AZ-900 -->
-                <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge cert-badge--fund anim-scroll">
-                    <div class="cert-logo cert-logo--ms">
-                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Fundamentals Badge" width="44" height="44">
-                    </div>
-                    <div class="cert-info">
-                        <span class="cert-code">AZ-900</span>
-                        <strong>Azure Fundamentals</strong>
-                        <span class="cert-level">Fundamentals</span>
-                    </div>
-                </a>
+                    <span>Microsoft</span>
+                </div>
+                <div class="cert-grid">
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-700</span><strong>Fabric Data Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-600</span><strong>Fabric Analytics Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-203</span><strong>Azure Data Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">AI-102</span><strong>Azure AI Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">PL-300</span><strong>Power BI Data Analyst</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge cert-badge--fund anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Fundamentals Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-900</span><strong>Azure Data Fundamentals</strong><span class="cert-level">Fundamentals</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge cert-badge--fund anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Fundamentals Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">AZ-900</span><strong>Azure Fundamentals</strong><span class="cert-level">Fundamentals</span></div>
+                    </a>
+                </div>
             </div>
+
+            <!-- Snowflake -->
+            <div class="cert-group anim-scroll">
+                <div class="cert-group-header">
+                    <div class="cert-group-icon" style="background:rgba(41,181,232,.1)">
+                        <span style="font-size:1.2rem">❄️</span>
+                    </div>
+                    <span>Snowflake</span>
+                </div>
+                <div class="cert-grid cert-grid--badge">
+                    <!-- Hands On Essentials - Data Warehouse -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/97fcc871-a820-4143-adf2-62517026cb58/Essentials-Data-Warehouse_2x.png" alt="Hands On Essentials - Data Warehouse" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>Hands On Essentials</strong>
+                            <span>Data Warehouse</span>
+                            <span class="cert-credly-issuer">Snowflake</span>
+                        </div>
+                    </a>
+                    <!-- Hands On Essentials - Data Sharing -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/1392296a-cadf-4037-b7ac-f01fef0fe31c/Essentials-Data-Sharing_2x.png" alt="Hands On Essentials - Data Sharing" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>Hands On Essentials</strong>
+                            <span>Data Sharing</span>
+                            <span class="cert-credly-issuer">Snowflake</span>
+                        </div>
+                    </a>
+                    <!-- Hands On Essentials - Data Applications -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/932e3102-58f6-474a-952d-a144b74c98d2/Essentials-Data-Applications_2x.png" alt="Hands On Essentials - Data Applications" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>Hands On Essentials</strong>
+                            <span>Data Applications</span>
+                            <span class="cert-credly-issuer">Snowflake</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kusto / Azure Data Explorer -->
+            <div class="cert-group anim-scroll">
+                <div class="cert-group-header">
+                    <div class="cert-group-icon" style="background:rgba(0,120,212,.1)">
+                        <span style="font-size:1.2rem">🔍</span>
+                    </div>
+                    <span>Kusto Detective Agency</span>
+                </div>
+                <div class="cert-grid cert-grid--badge">
+                    <!-- Onboarding -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-onboarding" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/84201552-025f-4b97-81c4-55be4ba896ff/image.png" alt="Kusto Detective Agency - Onboarding" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Onboarding</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #1 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-1-badge.1" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/size/160x160/images/14d53c52-2701-4045-9f89-e5e510eee2fd/image.png" alt="Kusto Detective Agency - Case #1" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #1</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #2 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-2-badge" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/ba8eb12f-2d57-4e9c-b1da-c395bd1d7fd3/image.png" alt="Kusto Detective Agency - Case #2" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #2</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #3 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-3-badge.1" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/9e9311e6-911b-4193-86ae-9b80c8b410fe/image.png" alt="Kusto Detective Agency - Case #3" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #3</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #4 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-4-badge" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/e7522dc8-886b-4a5b-9436-535e1adaa5c5/image.png" alt="Kusto Detective Agency - Case #4" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #4</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #5 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-5-badge" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/43b452c6-89f2-4649-bb84-19f3166a833e/image.png" alt="Kusto Detective Agency - Case #5" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #5</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Complete -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-complete" target="_blank" class="cert-badge-credly cert-badge-credly--highlight anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/6726e724-5ce8-477e-93f5-6b39d6933273/image.png" alt="Kusto Detective Agency - Complete" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Complete ⭐</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Case 1 -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/59a77d8a-a172-4090-a2e8-25aeeaa50cfc/blob" alt="KDA Fabric - Case 1" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Case 1</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Case 2 -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/449a3b1f-0ddf-46b4-bade-20e9e5a0e22d/blob" alt="KDA Fabric - Case 2" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Case 2</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Case 3 -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/81188bb6-b413-4e9b-8b64-aabdaa059e18/blob" alt="KDA Fabric - Case 3" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Case 3</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Completed -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly cert-badge-credly--highlight anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/66a1e0c6-19d5-4bc3-8348-c8718e86fa00/blob" alt="KDA Fabric - Completed!" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Completed! ⭐</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- ===== TECH STACK ===== -->
     <section class="section section-alt" id="techstack">
         <div class="container">
-            <div class="section-tag anim-scroll"><span class="tag-line"></span> &lt;/&gt; TECH_STACK</div>
-            <h2 class="section-heading anim-scroll">TOOLS I<br><span class="text-accent">MASTER.</span></h2>
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="ts__tag">&lt;/&gt; TECH_STACK</span></div>
+            <h2 class="section-heading anim-scroll" data-i18n-html="ts__heading">TOOLS I<br><span class="text-accent">MASTER.</span></h2>
 
             <!-- Languages -->
             <div class="ts-category anim-scroll">
                 <div class="ts-cat-header">
                     <div class="ts-cat-icon" style="background:rgba(34,211,197,.1);color:var(--accent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
-                    <div><h3>Languages</h3><span class="ts-cat-count">4 technologies</span></div>
+                    <div><h3 data-i18n="ts__cat_languages">Languages</h3><span class="ts-cat-count">4 technologies</span></div>
                 </div>
                 <div class="ts-grid">
                     <div class="ts-card anim-scroll"><div class="ts-card-icon"><span style="font-size:1.6rem">🐍</span></div><span>Python</span></div>
@@ -267,7 +481,7 @@
             <div class="ts-category anim-scroll">
                 <div class="ts-cat-header">
                     <div class="ts-cat-icon" style="background:rgba(99,102,241,.1);color:#818cf8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-                    <div><h3>Data Platforms</h3><span class="ts-cat-count">4 technologies</span></div>
+                    <div><h3 data-i18n="ts__cat_platforms">Data Platforms</h3><span class="ts-cat-count">4 technologies</span></div>
                 </div>
                 <div class="ts-grid">
                     <div class="ts-card anim-scroll"><div class="ts-card-icon"><span style="font-size:1.6rem">🔷</span></div><span>Microsoft Fabric</span></div>
@@ -281,7 +495,7 @@
             <div class="ts-category anim-scroll">
                 <div class="ts-cat-header">
                     <div class="ts-cat-icon" style="background:rgba(251,146,60,.1);color:#fb923c"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
-                    <div><h3>ETL / Orchestration</h3><span class="ts-cat-count">5 technologies</span></div>
+                    <div><h3 data-i18n="ts__cat_etl">ETL / Orchestration</h3><span class="ts-cat-count">5 technologies</span></div>
                 </div>
                 <div class="ts-grid">
                     <div class="ts-card anim-scroll"><div class="ts-card-icon"><span style="font-size:1.6rem">🔄</span></div><span>Azure Data Factory</span></div>
@@ -296,7 +510,7 @@
             <div class="ts-category anim-scroll">
                 <div class="ts-cat-header">
                     <div class="ts-cat-icon" style="background:rgba(56,189,248,.1);color:#38bdf8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 110-14h9.5C21 5 23 7 23 9.5S21 14 18.5 14H9a2.5 2.5 0 010-5h9.5"/></svg></div>
-                    <div><h3>Cloud & DevOps</h3><span class="ts-cat-count">6 technologies</span></div>
+                    <div><h3 data-i18n="ts__cat_cloud">Cloud & DevOps</h3><span class="ts-cat-count">6 technologies</span></div>
                 </div>
                 <div class="ts-grid">
                     <div class="ts-card anim-scroll"><div class="ts-card-icon"><span style="font-size:1.6rem">☁️</span></div><span>Azure</span></div>
@@ -312,7 +526,7 @@
             <div class="ts-category anim-scroll">
                 <div class="ts-cat-header">
                     <div class="ts-cat-icon" style="background:rgba(168,85,247,.1);color:#a855f7"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-                    <div><h3>Data Modeling</h3><span class="ts-cat-count">4 technologies</span></div>
+                    <div><h3 data-i18n="ts__cat_modeling">Data Modeling</h3><span class="ts-cat-count">4 technologies</span></div>
                 </div>
                 <div class="ts-grid">
                     <div class="ts-card anim-scroll"><div class="ts-card-icon"><span style="font-size:1.6rem">⭐</span></div><span>Star Schema</span></div>
@@ -327,71 +541,340 @@
     <!-- ===== THE HUMAN BEHIND IT ===== -->
     <section class="section" id="human">
         <div class="container">
-            <div class="section-tag anim-scroll"><span class="tag-line"></span> BEYOND THE CODE</div>
-            <h2 class="section-heading anim-scroll">THE HUMAN<br><span class="text-accent">BEHIND IT.</span></h2>
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="human__tag">BEYOND THE CODE</span></div>
+            <h2 class="section-heading anim-scroll" data-i18n-html="human__heading">THE HUMAN<br><span class="text-accent">BEHIND IT.</span></h2>
 
             <div class="human-grid">
                 <!-- Left: Hobbies -->
                 <div class="human-col anim-scroll">
-                    <h3 class="human-col-title">WHEN I'M NOT CODING</h3>
+                    <h3 class="human-col-title" data-i18n="human__hobbies_title">WHEN I'M NOT CODING</h3>
                     <div class="hobby-grid">
                         <div class="hobby-card">
                             <div class="hobby-icon" style="background:rgba(168,85,247,.12);color:#a855f7"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-                            <strong>Musique</strong>
-                            <span>Lo-fi beats & guitare</span>
+                            <strong data-i18n="human__music_label">Musique</strong>
+                            <span data-i18n="human__music_sub">Lo-fi beats & guitare</span>
                         </div>
                         <div class="hobby-card">
                             <div class="hobby-icon" style="background:rgba(251,146,60,.12);color:#fb923c"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-                            <strong>Photo</strong>
-                            <span>Street & paysages</span>
+                            <strong data-i18n="human__photo_label">Photo</strong>
+                            <span data-i18n="human__photo_sub">Street & paysages</span>
                         </div>
                         <div class="hobby-card">
                             <div class="hobby-icon" style="background:rgba(56,189,248,.12);color:#38bdf8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M15 9.5l3 2.5-3 2.5"/></svg></div>
-                            <strong>Gaming</strong>
-                            <span>Stratégie & jeux indé</span>
+                            <strong data-i18n="human__gaming_label">Gaming</strong>
+                            <span data-i18n="human__gaming_sub">Stratégie & jeux indé</span>
                         </div>
                         <div class="hobby-card">
                             <div class="hobby-icon" style="background:rgba(251,113,133,.12);color:#fb7185"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
-                            <strong>Lecture</strong>
-                            <span>Sci-fi & tech blogs</span>
+                            <strong data-i18n="human__reading_label">Lecture</strong>
+                            <span data-i18n="human__reading_sub">Sci-fi & tech blogs</span>
                         </div>
                         <div class="hobby-card">
                             <div class="hobby-icon" style="background:rgba(34,211,197,.12);color:var(--accent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
-                            <strong>Voyage</strong>
-                            <span>Nouveaux horizons</span>
+                            <strong data-i18n="human__travel_label">Voyage</strong>
+                            <span data-i18n="human__travel_sub">Nouveaux horizons</span>
                         </div>
                         <div class="hobby-card">
                             <div class="hobby-icon" style="background:rgba(245,158,11,.12);color:#f59e0b"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
-                            <strong>Café</strong>
-                            <span>Fuel des nuits blanches</span>
+                            <strong data-i18n="human__coffee_label">Café</strong>
+                            <span data-i18n="human__coffee_sub">Fuel des nuits blanches</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right: Philosophy -->
                 <div class="human-col anim-scroll">
-                    <h3 class="human-col-title">MY PHILOSOPHY</h3>
+                    <h3 class="human-col-title" data-i18n="human__philo_title">MY PHILOSOPHY</h3>
                     <div class="philo-list">
                         <div class="philo-item">
                             <span class="philo-num">01</span>
-                            <div><strong>Ship Fast</strong><span>Biais vers l'action. Le parfait est l'ennemi du bien.</span></div>
+                            <div><strong>Ship Fast</strong><span data-i18n="human__philo_1_sub">Biais vers l'action. Le parfait est l'ennemi du bien.</span></div>
                         </div>
                         <div class="philo-item">
                             <span class="philo-num">02</span>
-                            <div><strong>Stay Curious</strong><span>Toujours apprendre, toujours expérimenter.</span></div>
+                            <div><strong>Stay Curious</strong><span data-i18n="human__philo_2_sub">Toujours apprendre, toujours expérimenter.</span></div>
                         </div>
                         <div class="philo-item">
                             <span class="philo-num">03</span>
-                            <div><strong>Think Long-term</strong><span>Construire des systèmes qui scalent, écrire du code qui dure.</span></div>
+                            <div><strong>Think Long-term</strong><span data-i18n="human__philo_3_sub">Construire des systèmes qui scalent, écrire du code qui dure.</span></div>
                         </div>
                         <div class="philo-item">
                             <span class="philo-num">04</span>
-                            <div><strong>Have Fun</strong><span>La vie est trop courte pour les projets ennuyeux.</span></div>
+                            <div><strong>Have Fun</strong><span data-i18n="human__philo_4_sub">La vie est trop courte pour les projets ennuyeux.</span></div>
                         </div>
                     </div>
                     <div class="philo-quote">
-                        <p><em>"La data, c'est de la poésie — le debugging, c'est l'édition."</em></p>
-                        <span>🚀 — Mon mantra</span>
+                        <p data-i18n="human__quote"><em>"La data, c'est de la poésie — le debugging, c'est l'édition."</em></p>
+                        <span data-i18n="human__mantra">🚀 — Mon mantra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SIDE PROJECTS / BANTAFLOW ===== -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="projects__tag">SIDE PROJECT</span></div>
+            <h2 class="section-heading anim-scroll" data-i18n-html="projects__heading">WHAT I'M<br><span class="text-accent">BUILDING.</span></h2>
+
+            <div class="project-card anim-scroll" id="bantaflowCard">
+                <!-- Glow orb derrière la card -->
+                <div class="project-card-glow"></div>
+
+                <!-- Colonne logo -->
+                <div class="project-logo-col">
+                    <div class="project-logo-wrap">
+                        <!-- ═══ BANTAFLOW SVG LOGO ═══ -->
+                        <svg class="bantaflow-svg" width="260" height="230"
+                             viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="bf-gPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%"   stop-color="#3c096c"/>
+                                    <stop offset="40%"  stop-color="#7b2cbf"/>
+                                    <stop offset="70%"  stop-color="#9d4edd"/>
+                                    <stop offset="100%" stop-color="#c77dff"/>
+                                </linearGradient>
+                                <linearGradient id="bf-gCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%"   stop-color="#22d3c5"/>
+                                    <stop offset="50%"  stop-color="#0ea5e9"/>
+                                    <stop offset="100%" stop-color="#818cf8"/>
+                                </linearGradient>
+                                <linearGradient id="bf-gStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%"   stop-color="#c77dff"/>
+                                    <stop offset="50%"  stop-color="#22d3c5"/>
+                                    <stop offset="100%" stop-color="#818cf8"/>
+                                </linearGradient>
+                                <linearGradient id="bf-gVertical" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%"   stop-color="#e0aaff"/>
+                                    <stop offset="100%" stop-color="#7b2cbf"/>
+                                </linearGradient>
+                                <linearGradient id="bf-gFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%"   stop-color="#22d3c5" stop-opacity="0"/>
+                                    <stop offset="30%"  stop-color="#22d3c5"/>
+                                    <stop offset="70%"  stop-color="#0ea5e9"/>
+                                    <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+                                </linearGradient>
+                                <filter id="bf-fGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                    <feGaussianBlur stdDeviation="5" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <filter id="bf-fNeon" x="-40%" y="-40%" width="180%" height="180%">
+                                    <feGaussianBlur stdDeviation="9" result="b1"/>
+                                    <feGaussianBlur stdDeviation="3"  result="b2"/>
+                                    <feMerge>
+                                        <feMergeNode in="b1"/>
+                                        <feMergeNode in="b2"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                                <filter id="bf-fSoft" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <pattern id="bf-pHex" x="0" y="0" width="28" height="24" patternUnits="userSpaceOnUse">
+                                    <polygon points="14,2 22,7 22,17 14,22 6,17 6,7"
+                                             fill="none" stroke="rgba(199,125,255,0.15)" stroke-width="0.8"/>
+                                </pattern>
+                                <radialGradient id="bf-gMask" cx="50%" cy="50%" r="50%">
+                                    <stop offset="40%"  stop-color="white"/>
+                                    <stop offset="100%" stop-color="black"/>
+                                </radialGradient>
+                                <mask id="bf-mCircle">
+                                    <circle cx="160" cy="138" r="110" fill="url(#bf-gMask)"/>
+                                </mask>
+                            </defs>
+
+                            <!-- Fond + pattern hex -->
+                            <circle cx="160" cy="138" r="118" fill="#0d0f1a" stroke="url(#bf-gStroke)" stroke-width="1.5" opacity="0.5">
+                                <animate attributeName="stroke-dasharray" values="0 745;745 0;0 745" dur="7s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="160" cy="138" r="112" fill="url(#bf-pHex)" mask="url(#bf-mCircle)" opacity="0.6"/>
+
+                            <!-- Anneaux rotatifs -->
+                            <g filter="url(#bf-fSoft)">
+                                <circle cx="160" cy="138" r="116" fill="none" stroke="url(#bf-gPurple)" stroke-width="2"
+                                        stroke-dasharray="30 15 8 15 4 15" opacity="0.45">
+                                    <animateTransform attributeName="transform" type="rotate"
+                                        from="0 160 138" to="360 160 138" dur="22s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="160" cy="138" r="107" fill="none" stroke="url(#bf-gCyan)" stroke-width="1"
+                                        stroke-dasharray="12 20 4 20" opacity="0.3">
+                                    <animateTransform attributeName="transform" type="rotate"
+                                        from="0 160 138" to="-360 160 138" dur="30s" repeatCount="indefinite"/>
+                                </circle>
+                            </g>
+
+                            <!-- Points cardinaux -->
+                            <g filter="url(#bf-fGlow)">
+                                <circle cx="160" cy="22" r="5" fill="#e0aaff"><animate attributeName="r" values="4;7;4" dur="2.4s" repeatCount="indefinite"/></circle>
+                                <circle cx="276" cy="138" r="5" fill="#22d3c5"><animate attributeName="r" values="4;7;4" dur="2.8s" repeatCount="indefinite"/></circle>
+                                <circle cx="160" cy="254" r="5" fill="#9d4edd"><animate attributeName="r" values="4;7;4" dur="2.2s" repeatCount="indefinite"/></circle>
+                                <circle cx="44"  cy="138" r="5" fill="#818cf8"><animate attributeName="r" values="4;7;4" dur="3s"   repeatCount="indefinite"/></circle>
+                            </g>
+
+                            <!-- Hexagone intérieur tournant -->
+                            <polygon points="160,72 202,95 202,140 160,163 118,140 118,95"
+                                     fill="rgba(123,44,191,0.05)" stroke="url(#bf-gPurple)" stroke-width="1.5" opacity="0.55">
+                                <animateTransform attributeName="transform" type="rotate"
+                                    from="0 160 118" to="360 160 118" dur="40s" repeatCount="indefinite"/>
+                            </polygon>
+
+                            <!-- ═ Lettre B ═ -->
+                            <g filter="url(#bf-fNeon)">
+                                <ellipse cx="148" cy="138" rx="52" ry="62" fill="rgba(123,44,191,0.07)"/>
+                                <!-- Barre verticale -->
+                                <rect x="92" y="78" width="18" height="120" rx="4"
+                                      fill="url(#bf-gVertical)" stroke="rgba(199,125,255,.35)" stroke-width="1">
+                                    <animate attributeName="opacity" values=".9;1;.9" dur="3s" repeatCount="indefinite"/>
+                                </rect>
+                                <!-- Bosse sup -->
+                                <path d="M 108 78 L 152 78 Q 198 78 198 108 Q 198 134 165 138 L 108 138 Z"
+                                      fill="url(#bf-gPurple)" stroke="rgba(199,125,255,.3)" stroke-width="1">
+                                    <animate attributeName="stroke" values="#c77dff;#e0aaff;#c77dff" dur="3s" repeatCount="indefinite"/>
+                                </path>
+                                <!-- Bosse inf (plus large) -->
+                                <path d="M 108 142 L 158 142 Q 215 142 215 172 Q 215 200 158 200 L 108 200 Z"
+                                      fill="url(#bf-gPurple)" stroke="rgba(199,125,255,.3)" stroke-width="1">
+                                    <animate attributeName="stroke" values="#9d4edd;#c77dff;#9d4edd" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+                                </path>
+                                <!-- Séparateur cyan -->
+                                <line x1="108" y1="139" x2="185" y2="139" stroke="url(#bf-gFlow)" stroke-width="2" opacity="0.9">
+                                    <animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/>
+                                </line>
+                                <!-- Perles -->
+                                <circle cx="101" cy="86"  r="4" fill="#e0aaff" filter="url(#bf-fGlow)"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/></circle>
+                                <circle cx="101" cy="139" r="4" fill="#22d3c5" filter="url(#bf-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.2s" begin=".3s" repeatCount="indefinite"/></circle>
+                                <circle cx="101" cy="192" r="4" fill="#9d4edd" filter="url(#bf-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.4s" begin=".6s" repeatCount="indefinite"/></circle>
+                            </g>
+
+                            <!-- ═ Flux de données ═ -->
+                            <g filter="url(#bf-fSoft)">
+                                <!-- Stream haut -->
+                                <path d="M 215 108 Q 248 108 265 90 Q 278 75 295 72"
+                                      fill="none" stroke="#c77dff" stroke-width="2" stroke-dasharray="8 5" opacity="0.8">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="-26" dur=".8s" repeatCount="indefinite"/>
+                                </path>
+                                <!-- Stream milieu -->
+                                <path d="M 218 142 Q 252 142 270 142 Q 288 142 306 138"
+                                      fill="none" stroke="#22d3c5" stroke-width="2.5" stroke-dasharray="10 5" opacity="0.9">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="-30" dur=".7s" repeatCount="indefinite"/>
+                                </path>
+                                <!-- Stream bas -->
+                                <path d="M 215 172 Q 248 172 262 188 Q 276 204 294 206"
+                                      fill="none" stroke="#9d4edd" stroke-width="2" stroke-dasharray="8 5" opacity="0.8">
+                                    <animate attributeName="stroke-dashoffset" from="0" to="-26" dur=".9s" repeatCount="indefinite"/>
+                                </path>
+                                <!-- Nœud hexagone (stream milieu) -->
+                                <g transform="translate(306,138)" filter="url(#bf-fGlow)">
+                                    <circle r="8" fill="#22d3c5" opacity=".12"/>
+                                    <polygon points="0,-7 6.06,-3.5 6.06,3.5 0,7 -6.06,3.5 -6.06,-3.5" fill="#22d3c5" opacity=".9">
+                                        <animate attributeName="opacity" values=".6;1;.6" dur="1.2s" repeatCount="indefinite"/>
+                                    </polygon>
+                                </g>
+                                <!-- Nœud triangle (stream haut) -->
+                                <g transform="translate(295,72)" filter="url(#bf-fGlow)">
+                                    <polygon points="0,-6 5.2,3 -5.2,3" fill="#e0aaff" opacity=".9">
+                                        <animate attributeName="opacity" values=".6;1;.6" dur="1.5s" repeatCount="indefinite"/>
+                                    </polygon>
+                                </g>
+                                <!-- Nœud carré (stream bas) -->
+                                <g transform="translate(294,206)" filter="url(#bf-fGlow)">
+                                    <rect x="-5" y="-5" width="10" height="10" rx="2" fill="#818cf8" opacity=".9">
+                                        <animateTransform attributeName="transform" type="rotate" from="0" to="90" dur="4s" repeatCount="indefinite"/>
+                                    </rect>
+                                </g>
+                                <!-- Particules animées -->
+                                <circle r="3" fill="#e0aaff" filter="url(#bf-fGlow)" opacity="0">
+                                    <animateMotion dur="1.2s" repeatCount="indefinite" path="M 215 108 Q 248 108 265 90 Q 278 75 295 72"/>
+                                    <animate attributeName="opacity" values="0;1;0" dur="1.2s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle r="3.5" fill="#22d3c5" filter="url(#bf-fGlow)" opacity="0">
+                                    <animateMotion dur="1s" repeatCount="indefinite" begin="0.3s" path="M 218 142 Q 252 142 270 142 Q 288 142 306 138"/>
+                                    <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="0.3s"/>
+                                </circle>
+                                <circle r="3" fill="#9d4edd" filter="url(#bf-fGlow)" opacity="0">
+                                    <animateMotion dur="1.4s" repeatCount="indefinite" begin="0.6s" path="M 215 172 Q 248 172 262 188 Q 276 204 294 206"/>
+                                    <animate attributeName="opacity" values="0;1;0" dur="1.4s" repeatCount="indefinite" begin="0.6s"/>
+                                </circle>
+                            </g>
+
+                            <!-- Déco coins -->
+                            <path d="M 28 52 L 36 44 L 44 52 L 36 60 Z" fill="none" stroke="#7b2cbf" stroke-width="1.5" opacity=".6">
+                                <animateTransform attributeName="transform" type="rotate" from="0 36 52" to="360 36 52" dur="10s" repeatCount="indefinite"/>
+                            </path>
+                            <polygon points="286,210 294,206 302,210 302,218 294,222 286,218" fill="none" stroke="#9d4edd" stroke-width="1.5" opacity=".55">
+                                <animateTransform attributeName="transform" type="rotate" from="0 294 214" to="-360 294 214" dur="12s" repeatCount="indefinite"/>
+                            </polygon>
+                            <g opacity=".45" transform="translate(286,50)">
+                                <line x1="0" y1="-8" x2="0" y2="8" stroke="#c77dff" stroke-width="2"><animate attributeName="opacity" values=".3;.8;.3" dur="2.5s" repeatCount="indefinite"/></line>
+                                <line x1="-8" y1="0" x2="8" y2="0" stroke="#c77dff" stroke-width="2"><animate attributeName="opacity" values=".3;.8;.3" dur="2.5s" repeatCount="indefinite"/></line>
+                                <circle cx="0" cy="0" r="3" fill="#e0aaff" filter="url(#bf-fGlow)"><animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/></circle>
+                            </g>
+                        </svg>
+
+                        <!-- Wordmark sous le SVG -->
+                        <div class="bf-wordmark">
+                            <span class="bf-wm-banta">BANTA</span><span class="bf-wm-flow">FLOW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colonne infos -->
+                <div class="project-info-col">
+                    <div class="project-status">
+                        <span class="hire-dot"></span> <span data-i18n="projects__status">En développement</span>
+                    </div>
+                    <h3 class="project-title">Bantaflow</h3>
+                    <p class="project-desc" data-i18n-html="projects__desc">
+                        Une plateforme <strong>Data Engineering</strong> pensée pour automatiser et orchestrer les pipelines de données modernes. Bantaflow connecte vos sources, transforme vos données et les livre là où elles comptent — avec une interface intuitive et des intégrations natives avec <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong> et <strong>dbt</strong>.
+                    </p>
+
+                    <!-- Stack utilisé -->
+                    <div class="project-stack">
+                        <span class="project-stack-label" data-i18n="projects__stack_label">Stack</span>
+                        <div class="project-chips">
+                            <span class="project-chip">Python</span>
+                            <span class="project-chip">Microsoft Fabric</span>
+                            <span class="project-chip">Snowflake</span>
+                            <span class="project-chip">dbt</span>
+                            <span class="project-chip">FastAPI</span>
+                            <span class="project-chip">React</span>
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="project-features">
+                        <div class="project-feature">
+                            <div class="pf-icon" style="background:rgba(123,44,191,.15);color:#c77dff">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            </div>
+                            <span data-i18n="projects__feature_1">Pipelines orchestrés end-to-end</span>
+                        </div>
+                        <div class="project-feature">
+                            <div class="pf-icon" style="background:rgba(34,211,197,.12);color:#22d3c5">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                            </div>
+                            <span data-i18n="projects__feature_2">Intégrations Fabric, Snowflake & dbt natives</span>
+                        </div>
+                        <div class="project-feature">
+                            <div class="pf-icon" style="background:rgba(129,140,248,.12);color:#818cf8">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                            </div>
+                            <span data-i18n="projects__feature_3">Monitoring temps réel & alertes</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="project-ctas">
+                        <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="btn-primary">
+                            <span data-i18n="projects__cta_more">En savoir plus</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                        </a>
+                        <a href="mailto:azobensadio@gmail.com" class="btn-ghost">
+                            <span data-i18n="projects__cta_contact">Me contacter</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -403,9 +886,9 @@
         <div class="container">
             <!-- Blog Hero -->
             <div class="blog-hero anim-scroll">
-                <div class="section-tag"><span class="tag-line"></span> ARTICLES</div>
+                <div class="section-tag"><span class="tag-line"></span> <span data-i18n="blog__tag">ARTICLES</span></div>
                 <h2 class="blog-hero-title">THE <span class="gradient-text">BLOG.</span></h2>
-                <p class="blog-hero-desc">Mes dernières publications sur Microsoft Fabric, Snowflake, Power BI et le Data Engineering.</p>
+                <p class="blog-hero-desc" data-i18n="blog__hero_desc">Mes dernières publications sur Microsoft Fabric, Snowflake, Power BI et le Data Engineering.</p>
                 <div class="blog-hero-stats">
                     <div class="bhs"><span class="bhs-num">9+</span><span class="bhs-lbl">ARTICLES</span></div>
                     <div class="bhs"><span class="bhs-num">5k+</span><span class="bhs-lbl">READERS</span></div>
@@ -416,11 +899,11 @@
             <div class="blog-controls anim-scroll">
                 <div class="blog-search">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <input type="text" id="blogSearch" placeholder="Rechercher un article...">
+                    <input type="text" id="blogSearch" placeholder="Rechercher un article..." data-i18n-placeholder="blog__search_placeholder">
                     <span class="search-count" id="searchCount">9 articles</span>
                 </div>
                 <div class="blog-filters" id="blogFilters">
-                    <button class="filter-btn active" data-filter="all">Tous</button>
+                    <button class="filter-btn active" data-filter="all" data-i18n="blog__filter_all">Tous</button>
                     <button class="filter-btn" data-filter="fabric">Fabric</button>
                     <button class="filter-btn" data-filter="powerbi">Power BI</button>
                     <button class="filter-btn" data-filter="snowflake">Snowflake</button>
@@ -460,69 +943,69 @@
                 </div>
                 <div class="bf-body">
                     <div class="bf-meta"><span class="blog-category">Power BI</span><span class="bf-date">Sept 2025</span></div>
-                    <h3 class="bf-title">Power BI September 2025 Update : Schema Evolution & Data Refresh</h3>
-                    <p class="bf-desc">Le modèle s'adapte intelligemment aux changements de source — colonnes ajoutées, renommées ou supprimées. Schema Evolution et Data Refresh in Desktop changent la donne pour les Data Engineers.</p>
+                    <h3 class="bf-title" data-i18n="blog__featured_title">Power BI September 2025 Update : Schema Evolution & Data Refresh</h3>
+                    <p class="bf-desc" data-i18n="blog__featured_desc">Le modèle s'adapte intelligemment aux changements de source — colonnes ajoutées, renommées ou supprimées. Schema Evolution et Data Refresh in Desktop changent la donne pour les Data Engineers.</p>
                     <div class="blog-tags"><span>#PowerBI</span><span>#SchemaEvolution</span><span>#DataRefresh</span></div>
-                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire sur LinkedIn <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link"><span data-i18n="blog__read_full">Lire sur LinkedIn</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </div>
             </article>
             <!-- Blog Grid -->
             <div class="blog-grid">
                 <article class="blog-card anim-scroll" data-cats="fabric">
                     <div class="blog-card-top"><span class="bf-date">Juil 2025</span><span class="blog-category">Fabric</span></div>
-                    <h3 class="blog-title">DAX Query View : Écrire et tester du DAX directement dans le navigateur</h3>
-                    <p class="blog-excerpt">DAX Query View arrive dans Power BI Service / Fabric. Écrire, exécuter et tester des requêtes DAX dans le navigateur avec Copilot intégré.</p>
+                    <h3 class="blog-title" data-i18n="blog__card1_title">DAX Query View : Écrire et tester du DAX directement dans le navigateur</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card1_excerpt">DAX Query View arrive dans Power BI Service / Fabric. Écrire, exécuter et tester des requêtes DAX dans le navigateur avec Copilot intégré.</p>
                     <div class="blog-tags"><span>#MicrosoftFabric</span><span>#DAX</span><span>#Copilot</span></div>
-                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
                 <article class="blog-card anim-scroll" data-cats="powerbi">
                     <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Power BI</span></div>
-                    <h3 class="blog-title">TMDL View : Gérer vos modèles sémantiques par le code</h3>
-                    <p class="blog-excerpt">Le Tabular Model Definition Language View arrive dans Power BI Desktop — scripter et modifier vos modèles sémantiques directement en code.</p>
+                    <h3 class="blog-title" data-i18n="blog__card2_title">TMDL View : Gérer vos modèles sémantiques par le code</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card2_excerpt">Le Tabular Model Definition Language View arrive dans Power BI Desktop — scripter et modifier vos modèles sémantiques directement en code.</p>
                     <div class="blog-tags"><span>#PowerBI</span><span>#TMDL</span><span>#SemanticModel</span></div>
-                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
                 <article class="blog-card anim-scroll" data-cats="fabric">
                     <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Fabric</span></div>
-                    <h3 class="blog-title">OneLake Security : Modèle de sécurité unifié dans Fabric</h3>
-                    <p class="blog-excerpt">OneLake Security est fondamental dans Fabric. Enforcer des règles de sécurité directement sur les tables stockées dans OneLake.</p>
+                    <h3 class="blog-title" data-i18n="blog__card3_title">OneLake Security : Modèle de sécurité unifié dans Fabric</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card3_excerpt">OneLake Security est fondamental dans Fabric. Enforcer des règles de sécurité directement sur les tables stockées dans OneLake.</p>
                     <div class="blog-tags"><span>#MicrosoftFabric</span><span>#OneLake</span><span>#DataGovernance</span></div>
-                    <a href="https://fr.linkedin.com/posts/jean-marie-sadio_microsoftfabric-powerbi-datagovernance-activity-7318175638987698176-9JuM" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://fr.linkedin.com/posts/jean-marie-sadio_microsoftfabric-powerbi-datagovernance-activity-7318175638987698176-9JuM" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
                 <article class="blog-card anim-scroll" data-cats="azure">
                     <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Azure</span></div>
-                    <h3 class="blog-title">Azure Data Studio : Fin de vie — et maintenant ?</h3>
-                    <p class="blog-excerpt">Microsoft a officiellement déprécié Azure Data Studio. Quelles alternatives pour votre workflow de Data Engineer ?</p>
+                    <h3 class="blog-title" data-i18n="blog__card4_title">Azure Data Studio : Fin de vie — et maintenant ?</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card4_excerpt">Microsoft a officiellement déprécié Azure Data Studio. Quelles alternatives pour votre workflow de Data Engineer ?</p>
                     <div class="blog-tags"><span>#Azure</span><span>#AzureDataStudio</span><span>#Deprecation</span></div>
-                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
                 <article class="blog-card anim-scroll" data-cats="ai">
                     <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">AI</span></div>
-                    <h3 class="blog-title">Agent-To-Agent (A2A) avec Azure AI Foundry</h3>
-                    <p class="blog-excerpt">Développement d'agents IA avec Azure AI Foundry : concepts, cas d'usage et guide pratique pour créer des architectures A2A.</p>
+                    <h3 class="blog-title" data-i18n="blog__card5_title">Agent-To-Agent (A2A) avec Azure AI Foundry</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card5_excerpt">Développement d'agents IA avec Azure AI Foundry : concepts, cas d'usage et guide pratique pour créer des architectures A2A.</p>
                     <div class="blog-tags"><span>#AzureAI</span><span>#A2A</span><span>#AIFoundry</span></div>
-                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
                 <article class="blog-card anim-scroll" data-cats="snowflake">
                     <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Snowflake</span></div>
-                    <h3 class="blog-title">Devoteam nommé Snowflake Partner of the Year France</h3>
-                    <p class="blog-excerpt">Devoteam reconnu comme Snowflake Partner of the Year en France. Une belle reconnaissance de notre expertise Snowflake Data Cloud.</p>
+                    <h3 class="blog-title" data-i18n="blog__card6_title">Devoteam nommé Snowflake Partner of the Year France</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card6_excerpt">Devoteam reconnu comme Snowflake Partner of the Year en France. Une belle reconnaissance de notre expertise Snowflake Data Cloud.</p>
                     <div class="blog-tags"><span>#Snowflake</span><span>#Devoteam</span><span>#PartnerOfTheYear</span></div>
-                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
                 <article class="blog-card anim-scroll" data-cats="fabric azure">
                     <div class="blog-card-top"><span class="bf-date">2025</span><span class="blog-category">Fabric</span></div>
-                    <h3 class="blog-title">Cross-Tenant Data Integration : ADLS Gen2 vers Fabric</h3>
-                    <p class="blog-excerpt">Comment copier des données d'un container Azure Data Lake Storage Gen2 cross-tenant et les intégrer dans Microsoft Fabric.</p>
+                    <h3 class="blog-title" data-i18n="blog__card7_title">Cross-Tenant Data Integration : ADLS Gen2 vers Fabric</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card7_excerpt">Comment copier des données d'un container Azure Data Lake Storage Gen2 cross-tenant et les intégrer dans Microsoft Fabric.</p>
                     <div class="blog-tags"><span>#Azure</span><span>#ADLS</span><span>#MicrosoftFabric</span></div>
-                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
                 <article class="blog-card anim-scroll" data-cats="ml">
                     <div class="blog-card-top"><span class="bf-date">Oct 2022</span><span class="blog-category">ML</span></div>
-                    <h3 class="blog-title">Elbow Method & K-Means : Choisir le bon nombre de clusters</h3>
-                    <p class="blog-excerpt">K-Means et la méthode du coude avec KElbowVisualizer de Yellowbrick pour un clustering optimal.</p>
+                    <h3 class="blog-title" data-i18n="blog__card8_title">Elbow Method & K-Means : Choisir le bon nombre de clusters</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card8_excerpt">K-Means et la méthode du coude avec KElbowVisualizer de Yellowbrick pour un clustering optimal.</p>
                     <div class="blog-tags"><span>#MachineLearning</span><span>#KMeans</span><span>#Data</span></div>
-                    <a href="https://at.linkedin.com/posts/jean-marie-sadio_elbow-method-k-means-is-a-simple-unsupervised-activity-6983077048424505344-aR1n" target="_blank" class="blog-link">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+                    <a href="https://at.linkedin.com/posts/jean-marie-sadio_elbow-method-k-means-is-a-simple-unsupervised-activity-6983077048424505344-aR1n" target="_blank" class="blog-link"><span data-i18n="blog__read_short">Lire</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
                 </article>
             </div>
         </div>
@@ -534,21 +1017,21 @@
             <div class="nl-layout">
                 <!-- Left: Content -->
                 <div class="nl-content anim-scroll">
-                    <div class="section-tag"><span class="tag-line"></span> NEWSLETTER</div>
-                    <h2 class="nl-title">Restez à la pointe du<br><span class="gradient-text" style="font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-1.5px">Data Engineering.</span></h2>
-                    <p class="body-text">Chaque semaine, je partage des articles, des retours d'expérience et des bonnes pratiques sur <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong>, <strong>Power BI</strong> et le monde de la Data.</p>
+                    <div class="section-tag"><span class="tag-line"></span> <span data-i18n="nl__tag">NEWSLETTER</span></div>
+                    <h2 class="nl-title" data-i18n-html="nl__title">Restez à la pointe du<br><span class="gradient-text" style="font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-1.5px">Data Engineering.</span></h2>
+                    <p class="body-text" data-i18n-html="nl__desc">Chaque semaine, je partage des articles, des retours d'expérience et des bonnes pratiques sur <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong>, <strong>Power BI</strong> et le monde de la Data.</p>
                     <div class="nl-perks">
                         <div class="nl-perk">
                             <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-                            <div><strong>Deep dives techniques</strong><span>Fabric, Snowflake, dbt, Azure</span></div>
+                            <div><strong data-i18n="nl__perk1_title">Deep dives techniques</strong><span data-i18n="nl__perk1_sub">Fabric, Snowflake, dbt, Azure</span></div>
                         </div>
                         <div class="nl-perk">
                             <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-                            <div><strong>Veille hebdomadaire</strong><span>Les updates qui comptent</span></div>
+                            <div><strong data-i18n="nl__perk2_title">Veille hebdomadaire</strong><span data-i18n="nl__perk2_sub">Les updates qui comptent</span></div>
                         </div>
                         <div class="nl-perk">
                             <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
-                            <div><strong>Tips & bonnes pratiques</strong><span>Patterns, optimisations, retours terrain</span></div>
+                            <div><strong data-i18n="nl__perk3_title">Tips & bonnes pratiques</strong><span data-i18n="nl__perk3_sub">Patterns, optimisations, retours terrain</span></div>
                         </div>
                     </div>
                     <div class="nl-social-proof">
@@ -557,7 +1040,7 @@
                             <div class="nl-avatar-dot" style="background:#06b6d4;margin-left:-6px"></div>
                             <div class="nl-avatar-dot" style="background:#818cf8;margin-left:-6px"></div>
                         </div>
-                        <span>Rejoignez les passionnés de Data Engineering</span>
+                        <span data-i18n="nl__social_proof">Rejoignez les passionnés de Data Engineering</span>
                     </div>
                 </div>
                 <!-- Right: Subscribe Card -->
@@ -567,15 +1050,15 @@
                         <div class="nl-card-icon">
                             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
                         </div>
-                        <h3>S'abonner gratuitement</h3>
-                        <p>Recevez chaque nouvel article directement dans votre boîte mail. Pas de spam, que du contenu Data.</p>
+                        <h3 data-i18n="nl__card_title">S'abonner gratuitement</h3>
+                        <p data-i18n="nl__card_desc">Recevez chaque nouvel article directement dans votre boîte mail. Pas de spam, que du contenu Data.</p>
                         <!-- MAILCHIMP: Remplacer l'action ci-dessous par votre URL Mailchimp embed form -->
                         <!-- Ex: https://XXXXX.us1.list-manage.com/subscribe/post?u=XXXX&id=XXXX -->
                         <form class="nl-form" id="newsletterForm" action="YOUR_MAILCHIMP_URL" method="POST" target="_blank">
-                            <div class="form-group"><label>Prénom</label><input type="text" name="FNAME" placeholder="Votre prénom" required></div>
-                            <div class="form-group"><label>Email</label><input type="email" name="EMAIL" placeholder="votre@email.com" required></div>
+                            <div class="form-group"><label data-i18n="nl__label_name">Prénom</label><input type="text" name="FNAME" placeholder="Votre prénom" data-i18n-placeholder="nl__placeholder_name" required></div>
+                            <div class="form-group"><label data-i18n="nl__label_email">Email</label><input type="email" name="EMAIL" placeholder="votre@email.com" required></div>
                             <div class="nl-topics">
-                                <span class="nl-topic-label">Centres d'intérêt :</span>
+                                <span class="nl-topic-label" data-i18n="nl__interests_label">Centres d'intérêt :</span>
                                 <div class="nl-topic-btns">
                                     <label class="nl-chip"><input type="checkbox" checked> Fabric</label>
                                     <label class="nl-chip"><input type="checkbox" checked> Snowflake</label>
@@ -584,9 +1067,9 @@
                                     <label class="nl-chip"><input type="checkbox"> AI / ML</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn-primary btn-full">S'abonner à la newsletter <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+                            <button type="submit" class="btn-primary btn-full"><span data-i18n="nl__submit">S'abonner à la newsletter</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
                         </form>
-                        <p class="nl-disclaimer">🔒 Vos données restent privées. Désabonnement en un clic.</p>
+                        <p class="nl-disclaimer" data-i18n="nl__disclaimer">🔒 Vos données restent privées. Désabonnement en un clic.</p>
                     </div>
                 </div>
             </div>
@@ -598,15 +1081,42 @@
         <div class="container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="logo"><span class="logo-icon">⚡</span><span class="logo-text">JMS<span class="logo-dim">.dev</span></span></a>
-                    <p>Data Engineer spécialisé Microsoft Fabric & Snowflake. Transformer la donnée en valeur.</p>
+                    <a href="#" class="logo logo-bantaflow">
+                        <svg class="logo-bf-icon" width="30" height="30" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="ftr-gPurple" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3c096c"/><stop offset="50%" stop-color="#9d4edd"/><stop offset="100%" stop-color="#c77dff"/></linearGradient>
+                                <linearGradient id="ftr-gVertical" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e0aaff"/><stop offset="100%" stop-color="#7b2cbf"/></linearGradient>
+                                <linearGradient id="ftr-gFlow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22d3c5" stop-opacity="0"/><stop offset="40%" stop-color="#22d3c5"/><stop offset="100%" stop-color="#818cf8" stop-opacity="0"/></linearGradient>
+                                <linearGradient id="ftr-gStroke" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c77dff"/><stop offset="50%" stop-color="#22d3c5"/><stop offset="100%" stop-color="#818cf8"/></linearGradient>
+                                <filter id="ftr-fGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                                <filter id="ftr-fNeon" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8" result="b1"/><feGaussianBlur stdDeviation="3" result="b2"/><feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                            </defs>
+                            <circle cx="160" cy="138" r="116" fill="none" stroke="url(#ftr-gStroke)" stroke-width="3" stroke-dasharray="30 15 8 15 4 15" opacity="0.5"><animateTransform attributeName="transform" type="rotate" from="0 160 138" to="360 160 138" dur="18s" repeatCount="indefinite"/></circle>
+                            <circle cx="160" cy="22"  r="5" fill="#e0aaff" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.4s" repeatCount="indefinite"/></circle>
+                            <circle cx="276" cy="138" r="5" fill="#22d3c5" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/></circle>
+                            <circle cx="160" cy="254" r="5" fill="#9d4edd" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.2s" repeatCount="indefinite"/></circle>
+                            <circle cx="44"  cy="138" r="5" fill="#818cf8" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="3s"   repeatCount="indefinite"/></circle>
+                            <g filter="url(#ftr-fNeon)">
+                                <rect x="92" y="78" width="18" height="120" rx="4" fill="url(#ftr-gVertical)"/>
+                                <path d="M 108 78 L 152 78 Q 198 78 198 108 Q 198 134 165 138 L 108 138 Z" fill="url(#ftr-gPurple)"/>
+                                <path d="M 108 142 L 158 142 Q 215 142 215 172 Q 215 200 158 200 L 108 200 Z" fill="url(#ftr-gPurple)"/>
+                                <line x1="108" y1="139" x2="185" y2="139" stroke="url(#ftr-gFlow)" stroke-width="2.5"><animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/></line>
+                                <circle cx="101" cy="86"  r="4" fill="#e0aaff" filter="url(#ftr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/></circle>
+                                <circle cx="101" cy="139" r="4" fill="#22d3c5" filter="url(#ftr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.2s" begin=".3s" repeatCount="indefinite"/></circle>
+                                <circle cx="101" cy="192" r="4" fill="#9d4edd" filter="url(#ftr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.4s" begin=".6s" repeatCount="indefinite"/></circle>
+                            </g>
+                            <path d="M 218 142 Q 255 142 278 138" fill="none" stroke="#22d3c5" stroke-width="2.5" stroke-dasharray="8 5" opacity="0.9"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur=".7s" repeatCount="indefinite"/></path>
+                        </svg>
+                        <span class="logo-bf-wordmark"><span class="logo-bf-banta">BANTA</span><span class="logo-bf-flow">FLOW</span></span>
+                    </a>
+                    <p data-i18n="footer__tagline">Data Engineer spécialisé Microsoft Fabric & Snowflake. Transformer la donnée en valeur.</p>
                     <div class="footer-loc">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                         Nantes, France
                     </div>
                     <div class="footer-time" id="footerTime">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                        <span id="localTime">--:--</span> heure locale
+                        <span id="localTime">--:--</span> <span data-i18n="footer__local_time">heure locale</span>
                     </div>
                     <div class="footer-socials">
                         <a href="https://github.com/azobenio" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
@@ -614,23 +1124,23 @@
                         <a href="https://x.com/mazihno" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
                     </div>
                 </div>
-                <div class="footer-col"><h4>Navigation</h4><a href="#hero">Accueil</a><a href="#about">À propos</a><a href="#blog">Blog</a><a href="#newsletter">Newsletter</a></div>
-                <div class="footer-col"><h4>Ressources</h4><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">CV / Résumé</a><a href="https://www.linkedin.com/in/jean-marie-sadio/details/certifications/" target="_blank">Certifications</a><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">LinkedIn</a></div>
+                <div class="footer-col"><h4 data-i18n="footer__nav_title">Navigation</h4><a href="#hero" data-i18n="footer__nav_home">Accueil</a><a href="#about" data-i18n="nav__about">À propos</a><a href="#projects" data-i18n="nav__projects">Projets</a><a href="#blog" data-i18n="nav__blog">Blog</a><a href="#newsletter" data-i18n="nav__newsletter">Newsletter</a></div>
+                <div class="footer-col"><h4 data-i18n="footer__resources_title">Ressources</h4><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" data-i18n="footer__resources_cv">CV / Résumé</a><a href="https://www.linkedin.com/in/jean-marie-sadio/details/certifications/" target="_blank" data-i18n="footer__resources_certs">Certifications</a><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">LinkedIn</a></div>
                 <div class="footer-col">
-                    <h4>Améliorer le site</h4>
+                    <h4 data-i18n="footer__improve_title">Améliorer le site</h4>
                     <a href="mailto:azobensadio@gmail.com" class="report-btn">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-                        Suggérer une idée
+                        <span data-i18n="footer__improve_suggest">Suggérer une idée</span>
                     </a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; 2026 JMS.dev &mdash; Jean Marie Sadio</span>
+                <span data-i18n="footer__copyright">&copy; 2026 JMS.dev &mdash; Jean Marie Sadio</span>
                 <div class="footer-bottom-links">
-                    <a href="#">Confidentialité</a>
-                    <a href="#">Conditions</a>
+                    <a href="#" data-i18n="footer__privacy">Confidentialité</a>
+                    <a href="#" data-i18n="footer__terms">Conditions</a>
                 </div>
-                <span>Fait avec <span class="heart">♥</span> et beaucoup de ☕</span>
+                <span data-i18n-html="footer__made_with">Fait avec <span class="heart">♥</span> et beaucoup de ☕</span>
             </div>
         </div>
     </footer>
