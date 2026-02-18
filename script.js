@@ -352,11 +352,11 @@ document.querySelectorAll('.cap-card').forEach(c => {
     });
 });
 
-// ---- Header scroll ----
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 50);
-});
+// ---- Header scroll ---- [replaced by fp-scroll manager]
+// const header = document.getElementById('header');
+// window.addEventListener('scroll', () => {
+//     header.classList.toggle('scrolled', window.scrollY > 50);
+// });
 
 // ---- Burger / Mobile Nav ----
 const burger = document.getElementById('burger');
@@ -374,24 +374,24 @@ document.querySelectorAll('.mobile-nav-links a').forEach(a => {
     });
 });
 
-// ---- Scroll Reveal (Intersection Observer) ----
-const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.anim-scroll').forEach(el => io.observe(el));
+// ---- Scroll Reveal (Intersection Observer) ---- [replaced by fp-scroll manager, root:wrapper]
+// const io = new IntersectionObserver(entries => {
+//     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+// }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+// document.querySelectorAll('.anim-scroll').forEach(el => io.observe(el));
 
-// Staggered children inside grids
-const ioGrid = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            e.target.querySelectorAll('.anim-scroll').forEach((child, i) => {
-                child.style.transitionDelay = `${i * 0.08}s`;
-                child.classList.add('visible');
-            });
-        }
-    });
-}, { threshold: 0.1 });
-document.querySelectorAll('.process-row, .cap-grid, .blog-grid, .social-row').forEach(g => ioGrid.observe(g));
+// Staggered children inside grids [replaced by fp-scroll manager, root:wrapper]
+// const ioGrid = new IntersectionObserver(entries => {
+//     entries.forEach(e => {
+//         if (e.isIntersecting) {
+//             e.target.querySelectorAll('.anim-scroll').forEach((child, i) => {
+//                 child.style.transitionDelay = `${i * 0.08}s`;
+//                 child.classList.add('visible');
+//             });
+//         }
+//     });
+// }, { threshold: 0.1 });
+// document.querySelectorAll('.process-row, .cap-grid, .blog-grid, .social-row').forEach(g => ioGrid.observe(g));
 
 // ---- Animated Counters ----
 function countUp(el, target) {
@@ -403,36 +403,37 @@ function countUp(el, target) {
         el.textContent = Math.floor(cur);
     }, 40);
 }
-const ioStats = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            e.target.querySelectorAll('.stat-num').forEach(n => countUp(n, +n.dataset.target));
-            ioStats.unobserve(e.target);
-        }
-    });
-}, { threshold: 0.35 });
-const statsEl = document.querySelector('.hero-stats');
-if (statsEl) ioStats.observe(statsEl);
+// [replaced by fp-scroll manager, root:wrapper]
+// const ioStats = new IntersectionObserver(entries => {
+//     entries.forEach(e => {
+//         if (e.isIntersecting) {
+//             e.target.querySelectorAll('.stat-num').forEach(n => countUp(n, +n.dataset.target));
+//             ioStats.unobserve(e.target);
+//         }
+//     });
+// }, { threshold: 0.35 });
+// const statsEl = document.querySelector('.hero-stats');
+// if (statsEl) ioStats.observe(statsEl);
 
-// ---- Smooth scroll ----
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-        e.preventDefault();
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
-    });
-});
+// ---- Smooth scroll ---- [replaced by fp-scroll manager patchAnchorLinks()]
+// document.querySelectorAll('a[href^="#"]').forEach(a => {
+//     a.addEventListener('click', e => {
+//         e.preventDefault();
+//         const t = document.querySelector(a.getAttribute('href'));
+//         if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+//     });
+// });
 
-// ---- Active nav link ----
-const sections = document.querySelectorAll('.section, .hero');
-const navLinks = document.querySelectorAll('.nav-link');
-window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
-    navLinks.forEach(l => {
-        l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
-    });
-});
+// ---- Active nav link ---- [replaced by fp-scroll manager updateActiveNavLink()]
+// const sections = document.querySelectorAll('.section, .hero');
+// const navLinks = document.querySelectorAll('.nav-link');
+// window.addEventListener('scroll', () => {
+//     let cur = '';
+//     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
+//     navLinks.forEach(l => {
+//         l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+//     });
+// });
 
 // ---- Newsletter Form (Mailchimp) ----
 const nlForm = document.getElementById('newsletterForm');
@@ -481,13 +482,13 @@ document.querySelectorAll('.nl-chip').forEach(chip => {
     });
 });
 
-// ---- Parallax deco circles ----
-window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    document.querySelectorAll('.deco-circle').forEach((c, i) => {
-        c.style.transform = `translateY(${y * (i + 1) * 0.02}px)`;
-    });
-});
+// ---- Parallax deco circles ---- [disabled: window.scrollY = 0 with body overflow:hidden]
+// window.addEventListener('scroll', () => {
+//     const y = window.scrollY;
+//     document.querySelectorAll('.deco-circle').forEach((c, i) => {
+//         c.style.transform = `translateY(${y * (i + 1) * 0.02}px)`;
+//     });
+// });
 
 // ---- Blog Search & Filter ----
 (function() {
@@ -669,34 +670,34 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
     codeWindow.style.transition = 'transform .4s ease';
 })();
 
-// ---- Parallax on Scroll for Orbs ----
-window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    document.querySelectorAll('.orb').forEach((orb, i) => {
-        const speed = (i + 1) * 0.03;
-        orb.style.transform += ''; // Let CSS animation handle it, just adjust top offset
-    });
-});
+// ---- Parallax on Scroll for Orbs ---- [disabled: window.scrollY = 0 with body overflow:hidden]
+// window.addEventListener('scroll', () => {
+//     const y = window.scrollY;
+//     document.querySelectorAll('.orb').forEach((orb, i) => {
+//         const speed = (i + 1) * 0.03;
+//         orb.style.transform += ''; // Let CSS animation handle it, just adjust top offset
+//     });
+// });
 
-// ---- Staggered reveal for Tech Stack & Hobby grids ----
-const ioGridNew = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            const children = e.target.querySelectorAll('.ts-card, .hobby-card');
-            children.forEach((child, i) => {
-                child.style.opacity = '0';
-                child.style.transform = 'translateY(20px)';
-                child.style.transition = `all .5s cubic-bezier(.16,1,.3,1) ${i * 0.06}s`;
-                requestAnimationFrame(() => {
-                    child.style.opacity = '1';
-                    child.style.transform = 'translateY(0)';
-                });
-            });
-            ioGridNew.unobserve(e.target);
-        }
-    });
-}, { threshold: 0.15 });
-document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
+// ---- Staggered reveal for Tech Stack & Hobby grids ---- [replaced by fp-scroll manager, root:wrapper]
+// const ioGridNew = new IntersectionObserver(entries => {
+//     entries.forEach(e => {
+//         if (e.isIntersecting) {
+//             const children = e.target.querySelectorAll('.ts-card, .hobby-card');
+//             children.forEach((child, i) => {
+//                 child.style.opacity = '0';
+//                 child.style.transform = 'translateY(20px)';
+//                 child.style.transition = `all .5s cubic-bezier(.16,1,.3,1) ${i * 0.06}s`;
+//                 requestAnimationFrame(() => {
+//                     child.style.opacity = '1';
+//                     child.style.transform = 'translateY(0)';
+//                 });
+//             });
+//             ioGridNew.unobserve(e.target);
+//         }
+//     });
+// }, { threshold: 0.15 });
+// document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
 
 // ---- Local Time (Nantes / Europe/Paris) ----
 (function() {
@@ -711,4 +712,261 @@ document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observ
 
     updateTime();
     setInterval(updateTime, 1000);
+})();
+
+// ========================================
+// FULL-PAGE SCROLL MANAGER
+// ========================================
+(function() {
+    'use strict';
+
+    const TALL_SECTIONS = ['certifications', 'techstack', 'blog', 'newsletter'];
+    const HEADER_OFFSET = 80;
+    const isMobile = () => window.innerWidth <= 767;
+
+    let wrapper, allSections, dots, currentIndex = 0;
+
+    // ---- 1. Build dot buttons ----
+    function buildDots() {
+        const nav = document.getElementById('fpDots');
+        if (!nav) return;
+        nav.innerHTML = '';
+        allSections.forEach((sec, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'fp-dot' + (i === 0 ? ' active' : '');
+            btn.setAttribute('data-label', sec.dataset.sectionLabel || sec.id);
+            btn.setAttribute('aria-label', 'Aller à : ' + (sec.dataset.sectionLabel || sec.id));
+            btn.addEventListener('click', () => scrollToSection(i));
+            nav.appendChild(btn);
+        });
+        dots = nav.querySelectorAll('.fp-dot');
+    }
+
+    // ---- 2. Add "Next" buttons to tall sections ----
+    function buildNextButtons() {
+        allSections.forEach((sec, i) => {
+            if (!TALL_SECTIONS.includes(sec.id)) return;
+            if (sec.querySelector('.fp-next')) return; // already exists
+            const btn = document.createElement('button');
+            btn.className = 'fp-next';
+            btn.setAttribute('aria-label', 'Section suivante');
+            btn.innerHTML = `NEXT<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>`;
+            btn.addEventListener('click', () => {
+                if (i + 1 < allSections.length) scrollToSection(i + 1);
+            });
+            sec.appendChild(btn);
+        });
+    }
+
+    // ---- 3. Scroll to section by index ----
+    function scrollToSection(index) {
+        if (!allSections[index]) return;
+        if (isMobile()) {
+            // On mobile, wrapper is static, use window scroll
+            const sec = allSections[index];
+            window.scrollTo({ top: sec.offsetTop - HEADER_OFFSET, behavior: 'smooth' });
+        } else {
+            allSections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // ---- 4. Determine visible section ----
+    function determineCurrentSection() {
+        if (!wrapper || !allSections.length) return 0;
+        const scrollTop = isMobile() ? window.scrollY : wrapper.scrollTop;
+        const viewportH = window.innerHeight;
+        const center = scrollTop + viewportH / 2;
+        let closest = 0, minDist = Infinity;
+        allSections.forEach((sec, i) => {
+            const sTop = isMobile() ? sec.offsetTop : sec.offsetTop;
+            const sCenter = sTop + sec.offsetHeight / 2;
+            const dist = Math.abs(center - sCenter);
+            if (dist < minDist) { minDist = dist; closest = i; }
+        });
+        return closest;
+    }
+
+    // ---- 5. Update active dot ----
+    function updateActiveDot(index) {
+        if (!dots) return;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    // ---- 6. Show/hide Next buttons ----
+    function checkNextButtonVisibility() {
+        if (isMobile()) return;
+        allSections.forEach(sec => {
+            const btn = sec.querySelector('.fp-next');
+            if (!btn) return;
+            const secBottom = sec.offsetTop + sec.offsetHeight;
+            const visibleBottom = wrapper.scrollTop + window.innerHeight;
+            // Show when content overflows and user hasn't scrolled to bottom yet
+            const overflows = sec.scrollHeight > window.innerHeight + 10;
+            const notAtBottom = secBottom - visibleBottom > 60;
+            btn.classList.toggle('visible', overflows && notAtBottom);
+        });
+    }
+
+    // ---- 7. Update header "scrolled" state ----
+    function updateHeaderScrolled() {
+        const header = document.getElementById('header');
+        if (!header) return;
+        const scrollTop = isMobile() ? window.scrollY : (wrapper ? wrapper.scrollTop : 0);
+        header.classList.toggle('scrolled', scrollTop > 50);
+    }
+
+    // ---- 8. Update active nav link ----
+    function updateActiveNavLink() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const idx = determineCurrentSection();
+        const secId = allSections[idx] ? allSections[idx].id : '';
+        navLinks.forEach(l => {
+            l.classList.toggle('active', l.getAttribute('href') === '#' + secId);
+        });
+    }
+
+    // ---- 9. Patch anchor links to use wrapper scroll ----
+    function patchAnchorLinks() {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const href = a.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (!target) return;
+                e.preventDefault();
+                if (isMobile()) {
+                    window.scrollTo({ top: target.offsetTop - HEADER_OFFSET, behavior: 'smooth' });
+                } else {
+                    const idx = Array.from(allSections).indexOf(target);
+                    if (idx !== -1) {
+                        scrollToSection(idx);
+                    } else {
+                        // Non-section anchor (e.g. inside a section)
+                        const scrollTop = target.offsetTop - HEADER_OFFSET;
+                        wrapper.scrollTo({ top: scrollTop, behavior: 'smooth' });
+                    }
+                }
+                // Close mobile nav if open
+                const burger = document.getElementById('burger');
+                const mobileNav = document.getElementById('mobileNav');
+                if (burger && mobileNav && mobileNav.classList.contains('open')) {
+                    burger.classList.remove('open');
+                    mobileNav.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    }
+
+    // ---- 10. Setup IntersectionObservers with root = wrapper ----
+    function setupIntersectionObservers() {
+        const root = isMobile() ? null : wrapper;
+
+        // Scroll reveal
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { root, threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.anim-scroll').forEach(el => io.observe(el));
+
+        // Staggered grid reveal
+        const ioGrid = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.querySelectorAll('.anim-scroll').forEach((child, i) => {
+                        child.style.transitionDelay = `${i * 0.08}s`;
+                        child.classList.add('visible');
+                    });
+                }
+            });
+        }, { root, threshold: 0.1 });
+        document.querySelectorAll('.process-row, .cap-grid, .blog-grid, .social-row').forEach(g => ioGrid.observe(g));
+
+        // Stats counter
+        const statsEl = document.querySelector('.hero-stats');
+        if (statsEl) {
+            const ioStats = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.querySelectorAll('.stat-num').forEach(n => countUp(n, +n.dataset.target));
+                        ioStats.unobserve(e.target);
+                    }
+                });
+            }, { root, threshold: 0.35 });
+            ioStats.observe(statsEl);
+        }
+
+        // Tech Stack & Hobby grids stagger
+        const ioGridNew = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const children = e.target.querySelectorAll('.ts-card, .hobby-card');
+                    children.forEach((child, i) => {
+                        child.style.opacity = '0';
+                        child.style.transform = 'translateY(20px)';
+                        child.style.transition = `all .5s cubic-bezier(.16,1,.3,1) ${i * 0.06}s`;
+                        requestAnimationFrame(() => {
+                            child.style.opacity = '1';
+                            child.style.transform = 'translateY(0)';
+                        });
+                    });
+                    ioGridNew.unobserve(e.target);
+                }
+            });
+        }, { root, threshold: 0.15 });
+        document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
+    }
+
+    // ---- 11. Main scroll handler ----
+    function onScroll() {
+        const idx = determineCurrentSection();
+        if (idx !== currentIndex) {
+            currentIndex = idx;
+            updateActiveDot(idx);
+            updateActiveNavLink();
+        }
+        updateHeaderScrolled();
+        checkNextButtonVisibility();
+    }
+
+    // ---- 12. Init ----
+    function init() {
+        wrapper = document.getElementById('fpWrapper');
+        allSections = Array.from(document.querySelectorAll('.fp-section'));
+
+        if (!wrapper || !allSections.length) return;
+
+        buildDots();
+        buildNextButtons();
+        patchAnchorLinks();
+        setupIntersectionObservers();
+
+        // Attach scroll listener
+        if (!isMobile()) {
+            wrapper.addEventListener('scroll', onScroll, { passive: true });
+        } else {
+            window.addEventListener('scroll', onScroll, { passive: true });
+        }
+
+        // Re-init on resize (mobile <-> desktop)
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                // Rebuild observers with correct root
+                setupIntersectionObservers();
+            }, 200);
+        });
+
+        // Initial state
+        updateHeaderScrolled();
+        updateActiveDot(0);
+        updateActiveNavLink();
+    }
+
+    // Run after DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 })();
