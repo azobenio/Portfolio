@@ -678,16 +678,13 @@ img{max-width:100%;display:block}
 /* 1. Body : ne scrolle plus */
 body { overflow: hidden; height: 100vh; }
 
-/* 2. Scroll wrapper */
+/* 2. Scroll wrapper — overflow:hidden géré par JS, scroll-snap retiré */
 .fp-wrapper {
     position: fixed;
     inset: 0;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    overflow: hidden;       /* JS contrôle tout le scroll via scrollTo */
     scroll-behavior: smooth;
     z-index: 1;
-    scrollbar-width: thin;
-    scrollbar-color: var(--bg3) var(--bg);
 }
 .fp-wrapper::-webkit-scrollbar { width: 5px; }
 .fp-wrapper::-webkit-scrollbar-track { background: var(--bg); }
