@@ -4,18 +4,17 @@
 
 // ---- Theme Toggle (dark/light) ----
 (function() {
-    const toggle = document.getElementById('themeToggle');
     const saved = localStorage.getItem('theme');
     if (saved) document.documentElement.setAttribute('data-theme', saved);
 
-    if (toggle) {
+    document.querySelectorAll('.theme-toggle').forEach(toggle => {
         toggle.addEventListener('click', () => {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'light' ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('theme', next);
         });
-    }
+    });
 })();
 
 // ---- Language Toggle (FR/EN) ----
@@ -332,8 +331,7 @@
         });
 
         // 6. Button label shows active language
-        const inner = document.querySelector('.lang-toggle-inner');
-        if (inner) inner.textContent = lang.toUpperCase();
+        document.querySelectorAll('.lang-toggle-inner').forEach(el => { el.textContent = lang.toUpperCase(); });
 
         // 7. Persist
         localStorage.setItem('lang', lang);
@@ -343,14 +341,13 @@
     const saved = localStorage.getItem('lang') || 'fr';
     applyLanguage(saved);
 
-    // Click
-    const toggle = document.getElementById('langToggle');
-    if (toggle) {
+    // Click — tous les boutons lang (sidebar + topbar)
+    document.querySelectorAll('.lang-toggle').forEach(toggle => {
         toggle.addEventListener('click', () => {
             const current = localStorage.getItem('lang') || 'fr';
             applyLanguage(current === 'fr' ? 'en' : 'fr');
         });
-    }
+    });
 })();
 
 // ---- Cursor Stalker ----
@@ -374,27 +371,24 @@ document.querySelectorAll('.cap-card').forEach(c => {
     });
 });
 
-// ---- Header scroll ----
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// ---- Burger / Mobile Nav ----
-const burger = document.getElementById('burger');
-const mobileNav = document.getElementById('mobileNav');
-burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    mobileNav.classList.toggle('open');
-    document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
-});
-document.querySelectorAll('.mobile-nav-links a').forEach(a => {
-    a.addEventListener('click', () => {
-        burger.classList.remove('open');
-        mobileNav.classList.remove('open');
-        document.body.style.overflow = '';
+// ---- Mobile drawer toggle ----
+(function() {
+    const burger = document.getElementById('topbarBurger');
+    const drawer = document.getElementById('mobDrawer');
+    if (!burger || !drawer) return;
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('open');
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
     });
-});
+    drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            burger.classList.remove('open');
+            drawer.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+})();
 
 // ---- Scroll Reveal (Intersection Observer) ----
 document.body.classList.add('js-loaded');
@@ -446,12 +440,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
 });
 
-// ---- Active nav link (multi-page) ----
+// ---- Active nav link (multi-page sidebar) ----
 (function() {
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.sb-nav-link');
     const page = (window.location.pathname.split('/').pop() || 'index.html');
     navLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === page);
+        const href = link.getAttribute('href');
+        link.classList.toggle('active', href === page);
     });
 })();
 
