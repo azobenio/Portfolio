@@ -455,7 +455,7 @@ document.querySelectorAll('.cap-card').forEach(c => {
 
 // ---- Mobile drawer toggle ----
 (function() {
-    const burger = document.getElementById('topbarBurger');
+    const burger = document.getElementById('hdrBurger');
     const drawer = document.getElementById('mobDrawer');
     if (!burger || !drawer) return;
     burger.addEventListener('click', () => {
@@ -469,6 +469,15 @@ document.querySelectorAll('.cap-card').forEach(c => {
             drawer.classList.remove('open');
             document.body.style.overflow = '';
         });
+    });
+})();
+
+// ---- Header scroll effect ----
+(function() {
+    const header = document.getElementById('siteHeader');
+    if (!header) return;
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 20);
     });
 })();
 
@@ -522,11 +531,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
 });
 
-// ---- Active nav link (multi-page sidebar) ----
+// ---- Active nav link (multi-page header) ----
 (function() {
-    const navLinks = document.querySelectorAll('.sb-nav-link');
     const page = (window.location.pathname.split('/').pop() || 'index.html');
-    navLinks.forEach(link => {
+    document.querySelectorAll('.hdr-link, .mob-link').forEach(link => {
         const href = link.getAttribute('href');
         link.classList.toggle('active', href === page);
     });
