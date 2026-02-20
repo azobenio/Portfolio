@@ -397,6 +397,7 @@ document.querySelectorAll('.mobile-nav-links a').forEach(a => {
 });
 
 // ---- Scroll Reveal (Intersection Observer) ----
+document.body.classList.add('js-loaded');
 const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0, rootMargin: '0px' });

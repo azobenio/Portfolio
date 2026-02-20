@@ -644,8 +644,9 @@ img{max-width:100%;display:block}
 /* ========== ANIMATIONS ========== */
 .anim-in{opacity:0;transform:translateY(28px);animation:fadeUp .75s var(--ease) forwards;animation-delay:var(--d,0s)}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-.anim-scroll{opacity:0;transform:translateY(36px);transition:all .65s var(--ease)}
-.anim-scroll.visible{opacity:1;transform:translateY(0)}
+.anim-scroll{opacity:1;transform:translateY(0);transition:all .65s var(--ease)}
+.js-loaded .anim-scroll{opacity:0;transform:translateY(36px)}
+.js-loaded .anim-scroll.visible{opacity:1;transform:translateY(0)}
 
 /* ========== RESPONSIVE ========== */
 @media(max-width:1024px){
