@@ -70,7 +70,7 @@
             human__reading_sub: 'Tech & philosophie',
             human__travel_label: 'Voyage',
             human__travel_sub: 'Explorer le monde',
-            human__coffee_label: 'Café',
+            human__coffee_label: 'Maté',
             human__coffee_sub: 'Carburant du dev',
             human__philo_title: 'Ma philosophie',
             human__philo_1_sub: 'Livrer tôt, itérer vite',
@@ -153,6 +153,12 @@
             footer__privacy: 'Confidentialité',
             footer__terms: 'Conditions',
             footer__made_with: 'Fait avec <span class="heart">♥</span> et beaucoup de ☕'
+            // Preview (index.html)
+            preview__voir_about: 'En savoir plus →',
+            preview__voir_stack: 'Voir le stack complet →',
+            preview__voir_projets: 'Voir le projet →',
+            preview__voir_blog: 'Tous les articles →',
+            preview__voir_newsletter: "S'abonner →",
         },
         en: {
             meta__title: 'JMS.dev | Data Engineer — Microsoft Fabric & Snowflake',
@@ -203,7 +209,7 @@
             human__reading_sub: 'Tech & philosophy',
             human__travel_label: 'Travel',
             human__travel_sub: 'Exploring the world',
-            human__coffee_label: 'Coffee',
+            human__coffee_label: 'Maté',
             human__coffee_sub: "Dev's fuel",
             human__philo_title: 'My philosophy',
             human__philo_1_sub: 'Ship early, iterate fast',
@@ -286,6 +292,12 @@
             footer__privacy: 'Privacy',
             footer__terms: 'Terms',
             footer__made_with: 'Made with <span class="heart">♥</span> and lots of ☕'
+            // Preview (index.html)
+            preview__voir_about: 'Learn more →',
+            preview__voir_stack: 'See full stack →',
+            preview__voir_projets: 'See the project →',
+            preview__voir_blog: 'All articles →',
+            preview__voir_newsletter: 'Subscribe →',
         }
     };
 
@@ -433,16 +445,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
 });
 
-// ---- Active nav link ----
-const sections = document.querySelectorAll('.section, .hero');
-const navLinks = document.querySelectorAll('.nav-link');
-window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
-    navLinks.forEach(l => {
-        l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+// ---- Active nav link (multi-page) ----
+(function() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const page = (window.location.pathname.split('/').pop() || 'index.html');
+    navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === page);
     });
-});
+})();
 
 // ---- Newsletter Form (Mailchimp) ----
 const nlForm = document.getElementById('newsletterForm');

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMS.dev | À propos — Jean Marie Sadio</title>
+    <meta name="description" content="Jean Marie Sadio - Data Engineer spécialisé Microsoft Fabric & Snowflake basé à Nantes, France.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+    <!-- Cursor Stalker -->
+    <div class="cursor-stalker" id="cursorStalker"></div>
+    <!-- Noise -->
+    <div class="noise"></div>
+    <!-- Deco circles -->
+    <div class="deco-circle deco-1"></div>
+    <div class="deco-circle deco-2"></div>
+    <div class="deco-circle deco-3"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo logo-bantaflow">
+                <!-- Icône B -->
+                <svg class="logo-bf-icon" width="34" height="34" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="hdr-gPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"   stop-color="#3c096c"/>
+                            <stop offset="50%"  stop-color="#9d4edd"/>
+                            <stop offset="100%" stop-color="#c77dff"/>
+                        </linearGradient>
+                        <linearGradient id="hdr-gVertical" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%"   stop-color="#e0aaff"/>
+                            <stop offset="100%" stop-color="#7b2cbf"/>
+                        </linearGradient>
+                        <linearGradient id="hdr-gFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%"   stop-color="#22d3c5" stop-opacity="0"/>
+                            <stop offset="40%"  stop-color="#22d3c5"/>
+                            <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+                        </linearGradient>
+                        <linearGradient id="hdr-gStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%"  stop-color="#c77dff"/>
+                            <stop offset="50%" stop-color="#22d3c5"/>
+                            <stop offset="100%" stop-color="#818cf8"/>
+                        </linearGradient>
+                        <filter id="hdr-fGlow" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="5" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <filter id="hdr-fNeon" x="-40%" y="-40%" width="180%" height="180%">
+                            <feGaussianBlur stdDeviation="8" result="b1"/>
+                            <feGaussianBlur stdDeviation="3" result="b2"/>
+                            <feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Anneau -->
+                    <circle cx="160" cy="138" r="116" fill="none" stroke="url(#hdr-gStroke)" stroke-width="3"
+                            stroke-dasharray="30 15 8 15 4 15" opacity="0.5">
+                        <animateTransform attributeName="transform" type="rotate"
+                            from="0 160 138" to="360 160 138" dur="18s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Points cardinaux -->
+                    <circle cx="160" cy="22"  r="5" fill="#e0aaff" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.4s" repeatCount="indefinite"/></circle>
+                    <circle cx="276" cy="138" r="5" fill="#22d3c5" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/></circle>
+                    <circle cx="160" cy="254" r="5" fill="#9d4edd" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="44"  cy="138" r="5" fill="#818cf8" filter="url(#hdr-fGlow)"><animate attributeName="r" values="4;6;4" dur="3s"   repeatCount="indefinite"/></circle>
+                    <!-- Lettre B -->
+                    <g filter="url(#hdr-fNeon)">
+                        <rect x="92" y="78" width="18" height="120" rx="4" fill="url(#hdr-gVertical)"/>
+                        <path d="M 108 78 L 152 78 Q 198 78 198 108 Q 198 134 165 138 L 108 138 Z" fill="url(#hdr-gPurple)">
+                            <animate attributeName="opacity" values=".9;1;.9" dur="3s" repeatCount="indefinite"/>
+                        </path>
+                        <path d="M 108 142 L 158 142 Q 215 142 215 172 Q 215 200 158 200 L 108 200 Z" fill="url(#hdr-gPurple)">
+                            <animate attributeName="opacity" values="1;.9;1" dur="3s" begin=".5s" repeatCount="indefinite"/>
+                        </path>
+                        <line x1="108" y1="139" x2="185" y2="139" stroke="url(#hdr-gFlow)" stroke-width="2.5">
+                            <animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/>
+                        </line>
+                        <!-- Perles -->
+                        <circle cx="101" cy="86"  r="4" fill="#e0aaff" filter="url(#hdr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/></circle>
+                        <circle cx="101" cy="139" r="4" fill="#22d3c5" filter="url(#hdr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.2s" begin=".3s" repeatCount="indefinite"/></circle>
+                        <circle cx="101" cy="192" r="4" fill="#9d4edd" filter="url(#hdr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.4s" begin=".6s" repeatCount="indefinite"/></circle>
+                    </g>
+                    <!-- Flux droite -->
+                    <path d="M 218 142 Q 255 142 278 138" fill="none" stroke="#22d3c5" stroke-width="2.5" stroke-dasharray="8 5" opacity="0.9">
+                        <animate attributeName="stroke-dashoffset" from="0" to="-26" dur=".7s" repeatCount="indefinite"/>
+                    </path>
+                    <circle r="3" fill="#22d3c5" filter="url(#hdr-fGlow)" opacity="0">
+                        <animateMotion dur="1s" repeatCount="indefinite" begin="0.2s" path="M 218 142 Q 255 142 278 138"/>
+                        <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="0.2s"/>
+                    </circle>
+                </svg>
+                <!-- Wordmark -->
+                <span class="logo-bf-wordmark">
+                    <span class="logo-bf-banta">BANTA</span><span class="logo-bf-flow">FLOW</span>
+                </span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="about.html" class="nav-link" data-i18n="nav__about">À propos</a>
+                <a href="techstack.html" class="nav-link" data-i18n="nav__techstack">Tech Stack</a>
+                <a href="projects.html" class="nav-link" data-i18n="nav__projects">Projets</a>
+                <a href="blog.html" class="nav-link" data-i18n="nav__blog">Blog</a>
+                <a href="newsletter.html" class="nav-link" data-i18n="nav__newsletter">Newsletter</a>
+            </nav>
+            <div class="header-right">
+                <div class="header-socials">
+                    <a href="https://github.com/azobenio" target="_blank" aria-label="GitHub" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" aria-label="LinkedIn" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="https://x.com/mazihno" target="_blank" aria-label="X" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="mailto:azobensadio@gmail.com" aria-label="Email" class="header-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></a>
+                </div>
+                <button class="lang-toggle" id="langToggle" aria-label="Switch language / Changer de langue"><span class="lang-toggle-inner">FR</span></button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+                    <svg class="theme-icon sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="theme-icon moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="newsletter.html" class="hire-badge"><span class="hire-dot"></span>NEWSLETTER</a>
+                <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <nav class="mobile-nav-links">
+            <a href="about.html" data-i18n="nav__about">À propos</a>
+            <a href="techstack.html" data-i18n="nav__techstack">Tech Stack</a>
+            <a href="projects.html" data-i18n="nav__projects">Projets</a>
+            <a href="blog.html" data-i18n="nav__blog">Blog</a>
+            <a href="newsletter.html" data-i18n="nav__newsletter">Newsletter</a>
+        </nav>
+    </div>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="about__tag">À PROPOS</span></div>
+            <div class="about-grid">
+                <div class="about-left anim-scroll">
+                    <h2 class="section-heading" data-i18n-html="about__heading">Transformer la donnée brute en<br><span class="text-accent">intelligence décisionnelle.</span></h2>
+                    <p class="body-text" data-i18n-html="about__p1">Data Engineer passionné, je me spécialise dans la conception d'architectures de données cloud avec <strong>Microsoft Fabric</strong> et <strong>Snowflake</strong>. Mon objectif : créer des pipelines de données fiables, scalables et performants qui transforment la donnée en levier stratégique.</p>
+                    <p class="body-text" data-i18n-html="about__p2">Mon parcours a commencé par une fascination pour le potentiel caché dans les données. Chaque dataset raconte une histoire — mon rôle est de construire l'infrastructure qui permet de la lire et de la comprendre.</p>
+                    <p class="body-text" data-i18n-html="about__p3">Aujourd'hui, j'aide les entreprises à moderniser leur stack data, en allant de l'ingestion à la visualisation, avec des solutions robustes et bien orchestrées.</p>
+                </div>
+                <div class="about-right anim-scroll">
+                    <div class="code-window">
+                        <div class="code-bar"><span class="code-dot" style="background:#ff5f57"></span><span class="code-dot" style="background:#febc2e"></span><span class="code-dot" style="background:#28c840"></span><span class="code-bar-title">profile.yaml</span></div>
+                        <pre class="code-body"><code><span class="ck">data_engineer</span>:
+  <span class="cp">name</span>: <span class="cs">"Jean Marie Sadio"</span>
+  <span class="cp">title</span>: <span class="cs">"Data Engineer"</span>
+  <span class="cp">location</span>: <span class="cs">"Nantes, France 🇫🇷"</span>
+  <span class="cp">company</span>: <span class="cs">"Devoteam"</span>
+  <span class="cp">stack</span>:
+    - <span class="cs">"Microsoft Fabric"</span>
+    - <span class="cs">"Snowflake"</span>
+    - <span class="cs">"Azure Data Factory"</span>
+    - <span class="cs">"dbt"</span>
+    - <span class="cs">"Python"</span>
+    - <span class="cs">"SQL"</span>
+    - <span class="cs">"Power BI"</span>
+  <span class="cp">certifications</span>:
+    - <span class="cs">"DP-700 Fabric Data Engineer"</span>
+    - <span class="cs">"DP-600 Fabric Analytics Engineer"</span>
+    - <span class="cs">"DP-203 Azure Data Engineer"</span>
+    - <span class="cs">"AI-102 Azure AI Engineer"</span>
+    - <span class="cs">"PL-300 Power BI Analyst"</span>
+    - <span class="cs">"DP-900 Azure Data Fundamentals"</span>
+    - <span class="cs">"AZ-900 Azure Fundamentals"</span>
+  <span class="cp">languages</span>: [<span class="cs">"FR"</span>, <span class="cs">"EN"</span>]
+  <span class="cp">coffee_driven</span>: <span class="cb">true</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section class="section section-alt" id="certifications">
+        <div class="container">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="cert__tag">CERTIFICATIONS</span></div>
+            <h2 class="section-heading anim-scroll" data-i18n-html="cert__heading">CERTIFIED<br><span class="text-accent">EXPERTISE.</span></h2>
+
+            <!-- Microsoft -->
+            <div class="cert-group anim-scroll">
+                <div class="cert-group-header">
+                    <div class="cert-group-icon" style="background:rgba(0,120,212,.1)">
+                        <img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Microsoft" width="22" height="22">
+                    </div>
+                    <span>Microsoft</span>
+                </div>
+                <div class="cert-grid">
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-700</span><strong>Fabric Data Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-600</span><strong>Fabric Analytics Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-203</span><strong>Azure Data Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">AI-102</span><strong>Azure AI Engineer</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-associate-badge.svg" alt="Associate Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">PL-300</span><strong>Power BI Data Analyst</strong><span class="cert-level">Associate</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge cert-badge--fund anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Fundamentals Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">DP-900</span><strong>Azure Data Fundamentals</strong><span class="cert-level">Fundamentals</span></div>
+                    </a>
+                    <a href="https://learn.microsoft.com/fr-fr/users/jeanmariesadio-2300/credentials?tab=credentials-tab" target="_blank" class="cert-badge cert-badge--fund anim-scroll">
+                        <div class="cert-logo cert-logo--ms"><img src="https://learn.microsoft.com/en-us/media/learn/certification/badges/microsoft-certified-fundamentals-badge.svg" alt="Fundamentals Badge" width="44" height="44"></div>
+                        <div class="cert-info"><span class="cert-code">AZ-900</span><strong>Azure Fundamentals</strong><span class="cert-level">Fundamentals</span></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Snowflake -->
+            <div class="cert-group anim-scroll">
+                <div class="cert-group-header">
+                    <div class="cert-group-icon" style="background:rgba(41,181,232,.1)">
+                        <span style="font-size:1.2rem">❄️</span>
+                    </div>
+                    <span>Snowflake</span>
+                </div>
+                <div class="cert-grid cert-grid--badge">
+                    <!-- Hands On Essentials - Data Warehouse -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/97fcc871-a820-4143-adf2-62517026cb58/Essentials-Data-Warehouse_2x.png" alt="Hands On Essentials - Data Warehouse" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>Hands On Essentials</strong>
+                            <span>Data Warehouse</span>
+                            <span class="cert-credly-issuer">Snowflake</span>
+                        </div>
+                    </a>
+                    <!-- Hands On Essentials - Data Sharing -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/1392296a-cadf-4037-b7ac-f01fef0fe31c/Essentials-Data-Sharing_2x.png" alt="Hands On Essentials - Data Sharing" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>Hands On Essentials</strong>
+                            <span>Data Sharing</span>
+                            <span class="cert-credly-issuer">Snowflake</span>
+                        </div>
+                    </a>
+                    <!-- Hands On Essentials - Data Applications -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/932e3102-58f6-474a-952d-a144b74c98d2/Essentials-Data-Applications_2x.png" alt="Hands On Essentials - Data Applications" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>Hands On Essentials</strong>
+                            <span>Data Applications</span>
+                            <span class="cert-credly-issuer">Snowflake</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kusto / Azure Data Explorer -->
+            <div class="cert-group anim-scroll">
+                <div class="cert-group-header">
+                    <div class="cert-group-icon" style="background:rgba(0,120,212,.1)">
+                        <span style="font-size:1.2rem">🔍</span>
+                    </div>
+                    <span>Kusto Detective Agency</span>
+                </div>
+                <div class="cert-grid cert-grid--badge">
+                    <!-- Onboarding -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-onboarding" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/84201552-025f-4b97-81c4-55be4ba896ff/image.png" alt="Kusto Detective Agency - Onboarding" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Onboarding</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #1 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-1-badge.1" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/size/160x160/images/14d53c52-2701-4045-9f89-e5e510eee2fd/image.png" alt="Kusto Detective Agency - Case #1" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #1</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #2 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-2-badge" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/ba8eb12f-2d57-4e9c-b1da-c395bd1d7fd3/image.png" alt="Kusto Detective Agency - Case #2" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #2</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #3 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-3-badge.1" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/9e9311e6-911b-4193-86ae-9b80c8b410fe/image.png" alt="Kusto Detective Agency - Case #3" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #3</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #4 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-4-badge" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/e7522dc8-886b-4a5b-9436-535e1adaa5c5/image.png" alt="Kusto Detective Agency - Case #4" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #4</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Case #5 -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-case-5-badge" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/43b452c6-89f2-4649-bb84-19f3166a833e/image.png" alt="Kusto Detective Agency - Case #5" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Case #5</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Complete -->
+                    <a href="https://www.credly.com/org/microsoft-azure-data-explorer/badge/kusto-detective-agency-complete" target="_blank" class="cert-badge-credly cert-badge-credly--highlight anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/6726e724-5ce8-477e-93f5-6b39d6933273/image.png" alt="Kusto Detective Agency - Complete" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Complete ⭐</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Case 1 -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/59a77d8a-a172-4090-a2e8-25aeeaa50cfc/blob" alt="KDA Fabric - Case 1" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Case 1</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Case 2 -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/449a3b1f-0ddf-46b4-bade-20e9e5a0e22d/blob" alt="KDA Fabric - Case 2" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Case 2</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Case 3 -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/81188bb6-b413-4e9b-8b64-aabdaa059e18/blob" alt="KDA Fabric - Case 3" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Case 3</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                    <!-- Fabric Completed -->
+                    <a href="https://www.credly.com/users/jean-sadio" target="_blank" class="cert-badge-credly cert-badge-credly--highlight anim-scroll">
+                        <div class="cert-credly-img">
+                            <img src="https://images.credly.com/images/66a1e0c6-19d5-4bc3-8348-c8718e86fa00/blob" alt="KDA Fabric - Completed!" width="80" height="80">
+                        </div>
+                        <div class="cert-credly-info">
+                            <strong>KDA Fabric Completed! ⭐</strong>
+                            <span>Kusto Detective Agency</span>
+                            <span class="cert-credly-issuer">Microsoft ADX</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== THE HUMAN BEHIND IT ===== -->
+    <section class="section" id="human">
+        <div class="container">
+            <div class="section-tag anim-scroll"><span class="tag-line"></span> <span data-i18n="human__tag">BEYOND THE CODE</span></div>
+            <h2 class="section-heading anim-scroll" data-i18n-html="human__heading">THE HUMAN<br><span class="text-accent">BEHIND IT.</span></h2>
+
+            <div class="human-grid">
+                <!-- Left: Hobbies -->
+                <div class="human-col anim-scroll">
+                    <h3 class="human-col-title" data-i18n="human__hobbies_title">WHEN I'M NOT CODING</h3>
+                    <div class="hobby-grid">
+                        <div class="hobby-card">
+                            <div class="hobby-icon" style="background:rgba(168,85,247,.12);color:#a855f7"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+                            <strong data-i18n="human__music_label">Musique</strong>
+                            <span data-i18n="human__music_sub">Lo-fi beats & guitare</span>
+                        </div>
+                        <div class="hobby-card">
+                            <div class="hobby-icon" style="background:rgba(251,146,60,.12);color:#fb923c"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+                            <strong data-i18n="human__photo_label">Photo</strong>
+                            <span data-i18n="human__photo_sub">Street & paysages</span>
+                        </div>
+                        <div class="hobby-card">
+                            <div class="hobby-icon" style="background:rgba(56,189,248,.12);color:#38bdf8"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M15 9.5l3 2.5-3 2.5"/></svg></div>
+                            <strong data-i18n="human__gaming_label">Gaming</strong>
+                            <span data-i18n="human__gaming_sub">Stratégie & jeux indé</span>
+                        </div>
+                        <div class="hobby-card">
+                            <div class="hobby-icon" style="background:rgba(251,113,133,.12);color:#fb7185"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+                            <strong data-i18n="human__reading_label">Lecture</strong>
+                            <span data-i18n="human__reading_sub">Sci-fi & tech blogs</span>
+                        </div>
+                        <div class="hobby-card">
+                            <div class="hobby-icon" style="background:rgba(34,211,197,.12);color:var(--accent)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></div>
+                            <strong data-i18n="human__travel_label">Voyage</strong>
+                            <span data-i18n="human__travel_sub">Nouveaux horizons</span>
+                        </div>
+                        <div class="hobby-card">
+                            <div class="hobby-icon" style="background:rgba(101,163,13,.12);color:#84cc16">
+                                <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- calebasse ronde -->
+                                    <ellipse cx="42" cy="70" rx="26" ry="20" fill="currentColor" opacity="0.9"/>
+                                    <ellipse cx="42" cy="56" rx="17" ry="11" fill="currentColor" opacity="0.75"/>
+                                    <!-- col de la calebasse -->
+                                    <rect x="36" y="44" width="12" height="10" rx="3" fill="currentColor"/>
+                                    <!-- bombilla inclinée (paille) -->
+                                    <line x1="46" y1="43" x2="74" y2="10" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+                                    <!-- filtre bombilla -->
+                                    <ellipse cx="47" cy="43" rx="5" ry="3" fill="currentColor"/>
+                                    <!-- vapeur légère -->
+                                    <path d="M70 14 Q73 9 70 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+                                    <path d="M76 12 Q79 7 76 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+                                </svg>
+                            </div>
+                            <strong data-i18n="human__coffee_label">Maté</strong>
+                            <span data-i18n="human__coffee_sub">Carburant du dev</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Philosophy -->
+                <div class="human-col anim-scroll">
+                    <h3 class="human-col-title" data-i18n="human__philo_title">MY PHILOSOPHY</h3>
+                    <div class="philo-list">
+                        <div class="philo-item">
+                            <span class="philo-num">01</span>
+                            <div><strong>Ship Fast</strong><span data-i18n="human__philo_1_sub">Biais vers l'action. Le parfait est l'ennemi du bien.</span></div>
+                        </div>
+                        <div class="philo-item">
+                            <span class="philo-num">02</span>
+                            <div><strong>Stay Curious</strong><span data-i18n="human__philo_2_sub">Toujours apprendre, toujours expérimenter.</span></div>
+                        </div>
+                        <div class="philo-item">
+                            <span class="philo-num">03</span>
+                            <div><strong>Think Long-term</strong><span data-i18n="human__philo_3_sub">Construire des systèmes qui scalent, écrire du code qui dure.</span></div>
+                        </div>
+                        <div class="philo-item">
+                            <span class="philo-num">04</span>
+                            <div><strong>Have Fun</strong><span data-i18n="human__philo_4_sub">La vie est trop courte pour les projets ennuyeux.</span></div>
+                        </div>
+                    </div>
+                    <div class="philo-quote">
+                        <p data-i18n="human__quote"><em>"La data, c'est de la poésie — le debugging, c'est l'édition."</em></p>
+                        <span data-i18n="human__mantra">🚀 — Mon mantra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER (sahil.dev style) ===== -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo logo-bantaflow">
+                        <svg class="logo-bf-icon" width="30" height="30" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="ftr-gPurple" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3c096c"/><stop offset="50%" stop-color="#9d4edd"/><stop offset="100%" stop-color="#c77dff"/></linearGradient>
+                                <linearGradient id="ftr-gVertical" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e0aaff"/><stop offset="100%" stop-color="#7b2cbf"/></linearGradient>
+                                <linearGradient id="ftr-gFlow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22d3c5" stop-opacity="0"/><stop offset="40%" stop-color="#22d3c5"/><stop offset="100%" stop-color="#818cf8" stop-opacity="0"/></linearGradient>
+                                <linearGradient id="ftr-gStroke" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c77dff"/><stop offset="50%" stop-color="#22d3c5"/><stop offset="100%" stop-color="#818cf8"/></linearGradient>
+                                <filter id="ftr-fGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                                <filter id="ftr-fNeon" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8" result="b1"/><feGaussianBlur stdDeviation="3" result="b2"/><feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                            </defs>
+                            <circle cx="160" cy="138" r="116" fill="none" stroke="url(#ftr-gStroke)" stroke-width="3" stroke-dasharray="30 15 8 15 4 15" opacity="0.5"><animateTransform attributeName="transform" type="rotate" from="0 160 138" to="360 160 138" dur="18s" repeatCount="indefinite"/></circle>
+                            <circle cx="160" cy="22"  r="5" fill="#e0aaff" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.4s" repeatCount="indefinite"/></circle>
+                            <circle cx="276" cy="138" r="5" fill="#22d3c5" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/></circle>
+                            <circle cx="160" cy="254" r="5" fill="#9d4edd" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="2.2s" repeatCount="indefinite"/></circle>
+                            <circle cx="44"  cy="138" r="5" fill="#818cf8" filter="url(#ftr-fGlow)"><animate attributeName="r" values="4;6;4" dur="3s"   repeatCount="indefinite"/></circle>
+                            <g filter="url(#ftr-fNeon)">
+                                <rect x="92" y="78" width="18" height="120" rx="4" fill="url(#ftr-gVertical)"/>
+                                <path d="M 108 78 L 152 78 Q 198 78 198 108 Q 198 134 165 138 L 108 138 Z" fill="url(#ftr-gPurple)"/>
+                                <path d="M 108 142 L 158 142 Q 215 142 215 172 Q 215 200 158 200 L 108 200 Z" fill="url(#ftr-gPurple)"/>
+                                <line x1="108" y1="139" x2="185" y2="139" stroke="url(#ftr-gFlow)" stroke-width="2.5"><animate attributeName="opacity" values=".5;1;.5" dur="2s" repeatCount="indefinite"/></line>
+                                <circle cx="101" cy="86"  r="4" fill="#e0aaff" filter="url(#ftr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/></circle>
+                                <circle cx="101" cy="139" r="4" fill="#22d3c5" filter="url(#ftr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.2s" begin=".3s" repeatCount="indefinite"/></circle>
+                                <circle cx="101" cy="192" r="4" fill="#9d4edd" filter="url(#ftr-fGlow)"><animate attributeName="r" values="3;5;3" dur="2.4s" begin=".6s" repeatCount="indefinite"/></circle>
+                            </g>
+                            <path d="M 218 142 Q 255 142 278 138" fill="none" stroke="#22d3c5" stroke-width="2.5" stroke-dasharray="8 5" opacity="0.9"><animate attributeName="stroke-dashoffset" from="0" to="-26" dur=".7s" repeatCount="indefinite"/></path>
+                        </svg>
+                        <span class="logo-bf-wordmark"><span class="logo-bf-banta">BANTA</span><span class="logo-bf-flow">FLOW</span></span>
+                    </a>
+                    <p data-i18n="footer__tagline">Data Engineer spécialisé Microsoft Fabric & Snowflake. Transformer la donnée en valeur.</p>
+                    <div class="footer-loc">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        Nantes, France
+                    </div>
+                    <div class="footer-time" id="footerTime">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        <span id="localTime">--:--</span> <span data-i18n="footer__local_time">heure locale</span>
+                    </div>
+                    <div class="footer-socials">
+                        <a href="https://github.com/azobenio" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                        <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                        <a href="https://x.com/mazihno" target="_blank" class="ci-soc"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-col"><h4 data-i18n="footer__nav_title">Navigation</h4><a href="index.html" data-i18n="footer__nav_home">Accueil</a><a href="about.html" data-i18n="nav__about">À propos</a><a href="projects.html" data-i18n="nav__projects">Projets</a><a href="blog.html" data-i18n="nav__blog">Blog</a><a href="newsletter.html" data-i18n="nav__newsletter">Newsletter</a></div>
+                <div class="footer-col"><h4 data-i18n="footer__resources_title">Ressources</h4><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank" data-i18n="footer__resources_cv">CV / Résumé</a><a href="https://www.linkedin.com/in/jean-marie-sadio/details/certifications/" target="_blank" data-i18n="footer__resources_certs">Certifications</a><a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">LinkedIn</a></div>
+                <div class="footer-col">
+                    <h4 data-i18n="footer__improve_title">Améliorer le site</h4>
+                    <a href="mailto:azobensadio@gmail.com" class="report-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                        <span data-i18n="footer__improve_suggest">Suggérer une idée</span>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span data-i18n="footer__copyright">&copy; 2026 JMS.dev &mdash; Jean Marie Sadio</span>
+                <div class="footer-bottom-links">
+                    <a href="#" data-i18n="footer__privacy">Confidentialité</a>
+                    <a href="#" data-i18n="footer__terms">Conditions</a>
+                </div>
+                <span data-i18n-html="footer__made_with">Fait avec <span class="heart">♥</span> et beaucoup de ☕</span>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

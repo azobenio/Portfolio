@@ -110,7 +110,7 @@ img{max-width:100%;display:block}
 
 /* ---------- Layout ---------- */
 .container{max-width:1180px;margin:0 auto;padding:0 24px}
-.section{padding:110px 0;position:relative;z-index:1}
+.section{padding:80px 0;position:relative;z-index:1}
 .section-alt{background:var(--bg2)}
 
 /* ========== HEADER ========== */
@@ -381,6 +381,9 @@ img{max-width:100%;display:block}
 .ts-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:28px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:all .35s var(--ease);cursor:default;text-align:center}
 .ts-card:hover{background:var(--card-h);border-color:var(--border-h);transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.18)}
 .ts-card-icon{width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:var(--bg3);border-radius:14px;transition:all .3s}
+.ts-card-icon svg{flex-shrink:0;display:block}
+.ts-card-icon img{display:block;flex-shrink:0;max-width:38px;max-height:38px;object-fit:contain}
+.ts-card-icon i{line-height:1;display:flex}
 .ts-card:hover .ts-card-icon{transform:scale(1.08)}
 .ts-card span:last-child{font-size:.85rem;font-weight:600;color:var(--t2);transition:color .25s}
 .ts-card:hover span:last-child{color:var(--t1)}
@@ -615,8 +618,28 @@ img{max-width:100%;display:block}
 .btn-primary,.btn-ghost,.hire-badge{transition:all .3s var(--ease);will-change:transform}
 
 /* ========== SECTION DIVIDER GLOW ========== */
-.section-alt::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(34,211,197,.15) 30%,rgba(129,140,248,.15) 70%,transparent);pointer-events:none}
+/* Séparateur visible entre chaque section */
+.section::before,
+.section-alt::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:2px;
+    background:linear-gradient(90deg,transparent 0%,rgba(34,211,197,.35) 30%,rgba(129,140,248,.35) 70%,transparent 100%);
+    pointer-events:none;
+}
 .section-alt{position:relative}
+/* Ligne label flottante au-dessus du séparateur */
+.section::after,
+.section-alt::after{
+    content:'';
+    position:absolute;
+    top:0;left:50%;transform:translateX(-50%);
+    width:60px;height:2px;
+    background:var(--accent);
+    border-radius:2px;
+    pointer-events:none;
+}
 
 /* ========== ANIMATIONS ========== */
 .anim-in{opacity:0;transform:translateY(28px);animation:fadeUp .75s var(--ease) forwards;animation-delay:var(--d,0s)}
@@ -673,3 +696,16 @@ img{max-width:100%;display:block}
 
 /* scroll-margin pour compenser le header fixe lors des navigations ancre */
 section, footer { scroll-margin-top: 80px; }
+
+/* ===== PREVIEW CARDS (index.html) ===== */
+.preview-section { padding: 60px 0; }
+.preview-card { display: flex; flex-direction: column; gap: 20px; max-width: 680px; }
+.preview-card .section-heading { margin-bottom: 0; }
+.preview-card .body-text { color: var(--t2); }
+.preview-mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin: 8px 0; }
+.preview-mini-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 14px; text-align: center; font-size: .85rem; color: var(--t2); }
+.preview-blog-list { display: flex; flex-direction: column; gap: 12px; margin: 8px 0; }
+.preview-blog-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; font-size: .9rem; color: var(--t2); }
+.preview-blog-item strong { display: block; color: var(--t1); margin-bottom: 4px; font-size: .95rem; }
+.btn-preview { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; font-size: .95rem; text-decoration: none; transition: gap .2s; }
+.btn-preview:hover { gap: 10px; }
