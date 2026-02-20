@@ -175,6 +175,12 @@ img{max-width:100%;display:block}
 .sb-socials{display:flex;gap:6px;flex-wrap:wrap;padding-top:4px}
 .sb-soc{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;color:var(--t3);transition:all .2s;border:1px solid var(--border)}
 .sb-soc:hover{color:var(--accent);border-color:rgba(34,211,197,.4);background:rgba(34,211,197,.06)}
+/* Sidebar logo */
+.sb-logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.sb-logo-text{display:flex;align-items:baseline;gap:0;line-height:1}
+.sb-logo-banta{font-size:.95rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#e0aaff 0%,#c77dff 50%,#9d4edd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase}
+.sb-logo-flow{font-size:.95rem;font-weight:300;letter-spacing:2px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase}
+
 
 /* Divider */
 .sb-divider{height:1px;background:var(--border)}
