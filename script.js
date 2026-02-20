@@ -91,6 +91,45 @@
             projects__feature_3: 'Connecteurs natifs Fabric & Snowflake',
             projects__cta_more: 'En savoir plus',
             projects__cta_contact: 'Me contacter',
+            projects__hero_all: 'TOUS LES',
+            projects__hero_projects: 'PROJETS',
+            projects__hero_desc: 'Une collection de projets Data Engineering, pipelines, architectures Lakehouse et solutions analytiques modernes.',
+            projects__stat_projects: 'Projets',
+            projects__stat_tech: 'Technologies',
+            projects__stat_passion: 'Passion',
+            projects__explore: 'Explorer',
+            projects__featured_tag: 'PROJET PRINCIPAL',
+            projects__other_tag: 'AUTRES PROJETS',
+            projects__other_heading: 'Réalisations <span class="gradient-text">professionnelles.</span>',
+            projects__filter_all: 'Tous',
+            projects__card_done: 'Livré',
+            projects__card1_title: 'Migration Lakehouse — Microsoft Fabric',
+            projects__card1_desc: 'Migration complète d\'un Data Warehouse legacy vers une architecture Lakehouse sur Microsoft Fabric. Refonte des pipelines ETL, modélisation Delta Lake et gouvernance des données.',
+            projects__card1_f1: '50+ tables migrées',
+            projects__card1_f2: 'Temps de traitement ÷3',
+            projects__card2_title: 'Data Warehouse Analytique — Snowflake',
+            projects__card2_desc: 'Conception et implémentation d\'un Data Warehouse analytique sur Snowflake pour un client retail. Modélisation dimensionnelle, ingestion temps-réel et couche sémantique.',
+            projects__card2_f1: '20+ sources intégrées',
+            projects__card2_f2: 'Dashboards temps-réel',
+            projects__card3_title: 'Suite Dashboards Power BI — Secteur Énergie',
+            projects__card3_desc: 'Création d\'une suite de dashboards Power BI pour le suivi de la performance opérationnelle. Modèle sémantique DAX avancé, RLS et déploiement via Fabric workspace.',
+            projects__card3_f1: '12 rapports interactifs',
+            projects__card3_f2: 'Row-Level Security',
+            projects__card4_title: 'Pipeline ETL PySpark — Traitement Big Data',
+            projects__card4_desc: 'Développement de pipelines PySpark pour le traitement de données volumineuses. Ingestion batch et streaming, transformations complexes et écriture en Delta Lake.',
+            projects__card4_f1: '100M+ lignes / jour',
+            projects__card4_f2: 'SLA 99.5% uptime',
+            projects__card5_title: 'Cross-Tenant Data Integration — ADLS Gen2 vers Fabric',
+            projects__card5_desc: 'Intégration de données cross-tenant depuis Azure Data Lake Storage Gen2 vers Microsoft Fabric. Mise en place de la connectivité sécurisée et des pipelines d\'ingestion.',
+            projects__card5_f1: 'Multi-tenant sécurisé',
+            projects__card5_f2: 'Ingestion automatisée',
+            projects__card6_title: 'K-Means Clustering — Segmentation Client',
+            projects__card6_desc: 'Analyse de segmentation client avec K-Means et la méthode du coude. Pipeline de données, feature engineering et visualisation des clusters pour la stratégie marketing.',
+            projects__card6_f1: '5 segments identifiés',
+            projects__card6_f2: '+15% ROI campagnes',
+            projects__cta_title: 'Un projet Data en tête<span class="proj-dot">?</span>',
+            projects__cta_desc: 'Discutons de votre architecture de données, de vos pipelines ou de votre stratégie Data.',
+            projects__cta_email: 'Me contacter',
             // Blog
             blog__tag: 'ARTICLES',
             blog__hero_desc: 'Mes dernières publications sur Microsoft Fabric, Snowflake, Power BI et le Data Engineering.',
@@ -153,7 +192,7 @@
             footer__copyright: '© 2026 JMS.dev — Jean Marie Sadio',
             footer__privacy: 'Confidentialité',
             footer__terms: 'Conditions',
-            footer__made_with: 'Fait avec <span class="heart">♥</span> et beaucoup de ☕'
+            footer__made_with: 'Fait avec <span class="heart">♥</span> et beaucoup de ☕',
             // Preview (index.html)
             preview__voir_about: 'En savoir plus →',
             preview__voir_stack: 'Voir le stack complet →',
@@ -232,6 +271,45 @@
             projects__feature_3: 'Native Fabric & Snowflake connectors',
             projects__cta_more: 'Learn more',
             projects__cta_contact: 'Contact me',
+            projects__hero_all: 'ALL',
+            projects__hero_projects: 'PROJECTS',
+            projects__hero_desc: 'A curated collection of Data Engineering projects, pipelines, Lakehouse architectures and modern analytical solutions.',
+            projects__stat_projects: 'Projects',
+            projects__stat_tech: 'Technologies',
+            projects__stat_passion: 'Passion',
+            projects__explore: 'Explore',
+            projects__featured_tag: 'MAIN PROJECT',
+            projects__other_tag: 'OTHER PROJECTS',
+            projects__other_heading: 'Professional <span class="gradient-text">achievements.</span>',
+            projects__filter_all: 'All',
+            projects__card_done: 'Delivered',
+            projects__card1_title: 'Lakehouse Migration — Microsoft Fabric',
+            projects__card1_desc: 'Full migration of a legacy Data Warehouse to a Lakehouse architecture on Microsoft Fabric. ETL pipeline redesign, Delta Lake modelling and data governance.',
+            projects__card1_f1: '50+ tables migrated',
+            projects__card1_f2: 'Processing time ÷3',
+            projects__card2_title: 'Analytical Data Warehouse — Snowflake',
+            projects__card2_desc: 'Design and implementation of an analytical Data Warehouse on Snowflake for a retail client. Dimensional modelling, real-time ingestion and semantic layer.',
+            projects__card2_f1: '20+ sources integrated',
+            projects__card2_f2: 'Real-time dashboards',
+            projects__card3_title: 'Power BI Dashboard Suite — Energy Sector',
+            projects__card3_desc: 'Creation of a Power BI dashboard suite for operational performance monitoring. Advanced DAX semantic model, RLS and deployment via Fabric workspace.',
+            projects__card3_f1: '12 interactive reports',
+            projects__card3_f2: 'Row-Level Security',
+            projects__card4_title: 'PySpark ETL Pipeline — Big Data Processing',
+            projects__card4_desc: 'Development of PySpark pipelines for large-scale data processing. Batch and streaming ingestion, complex transformations and Delta Lake writes.',
+            projects__card4_f1: '100M+ rows / day',
+            projects__card4_f2: 'SLA 99.5% uptime',
+            projects__card5_title: 'Cross-Tenant Data Integration — ADLS Gen2 to Fabric',
+            projects__card5_desc: 'Cross-tenant data integration from Azure Data Lake Storage Gen2 to Microsoft Fabric. Secure connectivity setup and ingestion pipeline implementation.',
+            projects__card5_f1: 'Secure multi-tenant',
+            projects__card5_f2: 'Automated ingestion',
+            projects__card6_title: 'K-Means Clustering — Customer Segmentation',
+            projects__card6_desc: 'Customer segmentation analysis with K-Means and the elbow method. Data pipeline, feature engineering and cluster visualisation for marketing strategy.',
+            projects__card6_f1: '5 segments identified',
+            projects__card6_f2: '+15% campaign ROI',
+            projects__cta_title: 'Got a Data project in mind<span class="proj-dot">?</span>',
+            projects__cta_desc: "Let's discuss your data architecture, pipelines or Data strategy.",
+            projects__cta_email: 'Contact me',
             // Blog
             blog__tag: 'ARTICLES',
             blog__hero_desc: 'My latest posts on Microsoft Fabric, Snowflake, Power BI and Data Engineering.',
@@ -294,7 +372,7 @@
             footer__copyright: '© 2026 JMS.dev — Jean Marie Sadio',
             footer__privacy: 'Privacy',
             footer__terms: 'Terms',
-            footer__made_with: 'Made with <span class="heart">♥</span> and lots of ☕'
+            footer__made_with: 'Made with <span class="heart">♥</span> and lots of ☕',
             // Preview (index.html)
             preview__voir_about: 'Learn more →',
             preview__voir_stack: 'See full stack →',
@@ -643,8 +721,34 @@ window.addEventListener('scroll', () => {
     animate();
 })();
 
+// ---- Project Grid Filter ----
+(function() {
+    const filtersWrap = document.getElementById('projFilters');
+    const projCards = document.querySelectorAll('.proj-card');
+    if (!filtersWrap || !projCards.length) return;
+
+    const filterBtns = filtersWrap.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            projCards.forEach(card => {
+                const cats = (card.dataset.cats || '').toLowerCase();
+                if (filter === 'all' || cats.includes(filter)) {
+                    card.classList.remove('hidden');
+                    card.style.display = '';
+                } else {
+                    card.classList.add('hidden');
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+})();
+
 // ---- Radial Glow on Cards (mouse tracking) ----
-document.querySelectorAll('.ts-card, .hobby-card, .blog-card').forEach(card => {
+document.querySelectorAll('.ts-card, .hobby-card, .blog-card, .proj-card').forEach(card => {
     card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
@@ -687,7 +791,7 @@ document.querySelectorAll('.btn-primary, .btn-ghost, .hire-badge').forEach(btn =
 const ioGridNew = new IntersectionObserver(entries => {
     entries.forEach(e => {
         if (e.isIntersecting) {
-            const children = e.target.querySelectorAll('.ts-card, .hobby-card');
+            const children = e.target.querySelectorAll('.ts-card, .hobby-card, .proj-card');
             children.forEach((child, i) => {
                 child.style.opacity = '0';
                 child.style.transform = 'translateY(20px)';
@@ -701,7 +805,7 @@ const ioGridNew = new IntersectionObserver(entries => {
         }
     });
 }, { threshold: 0, rootMargin: '0px' });
-document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
+document.querySelectorAll('.ts-grid, .hobby-grid, .proj-grid').forEach(g => ioGridNew.observe(g));
 
 // ---- Local Time (Nantes / Europe/Paris) ----
 (function() {
