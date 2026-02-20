@@ -75,8 +75,79 @@
 
     <!-- Main content -->
     <main class="main-content">
-    <!-- ===== FOOTER (sahil.dev style) ===== -->
 
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="section" id="newsletter">
+        <div class="container">
+            <div class="section-tag anim-in" style="--d:.1s"><span class="tag-line"></span><span data-i18n="nl__tag">NEWSLETTER</span></div>
+
+            <div class="nl-layout">
+                <!-- Left: Content -->
+                <div class="nl-content anim-in" style="--d:.2s">
+                    <h2 class="nl-title" data-i18n-html="nl__title">Restez à la pointe du<br><span class="gradient-text" style="font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-1.5px">Data Engineering.</span></h2>
+                    <p class="body-text" data-i18n-html="nl__desc">Chaque semaine, je partage des articles, des retours d'expérience et des bonnes pratiques sur <strong>Microsoft Fabric</strong>, <strong>Snowflake</strong>, <strong>Power BI</strong> et le monde de la Data.</p>
+
+                    <div class="nl-perks">
+                        <div class="nl-perk">
+                            <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+                            <div><strong data-i18n="nl__perk1_title">Deep dives techniques</strong><span data-i18n="nl__perk1_sub">Fabric, Snowflake, dbt, Azure</span></div>
+                        </div>
+                        <div class="nl-perk">
+                            <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                            <div><strong data-i18n="nl__perk2_title">Veille hebdomadaire</strong><span data-i18n="nl__perk2_sub">Les updates qui comptent</span></div>
+                        </div>
+                        <div class="nl-perk">
+                            <div class="nl-perk-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+                            <div><strong data-i18n="nl__perk3_title">Tips & bonnes pratiques</strong><span data-i18n="nl__perk3_sub">Patterns, optimisations, retours terrain</span></div>
+                        </div>
+                    </div>
+
+                    <div class="nl-social-proof">
+                        <div class="nl-avatars">
+                            <div class="nl-avatar-dot" style="background:var(--accent);margin-left:0"></div>
+                            <div class="nl-avatar-dot" style="background:#818cf8;margin-left:-8px"></div>
+                            <div class="nl-avatar-dot" style="background:#c77dff;margin-left:-8px"></div>
+                        </div>
+                        <span data-i18n="nl__social_proof">Rejoignez les passionnés de Data Engineering</span>
+                    </div>
+                </div>
+
+                <!-- Right: Newsletter Card -->
+                <div class="nl-card anim-in" style="--d:.35s">
+                    <div class="nl-card-glow"></div>
+                    <div class="nl-card-inner">
+                        <div class="nl-card-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
+                        <h3 data-i18n="nl__card_title">S'abonner gratuitement</h3>
+                        <p data-i18n="nl__card_desc">Recevez chaque nouvel article directement dans votre boîte mail. Pas de spam, que du contenu Data.</p>
+                        <form class="nl-form" id="newsletterForm" action="YOUR_MAILCHIMP_URL" method="POST" target="_blank">
+                            <div class="form-group">
+                                <label data-i18n="nl__label_name">Prénom</label>
+                                <input type="text" name="FNAME" data-i18n-placeholder="nl__placeholder_name" placeholder="Votre prénom" required>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="nl__label_email">Email</label>
+                                <input type="email" name="EMAIL" placeholder="vous@example.com" required>
+                            </div>
+                            <div class="nl-topics">
+                                <span class="nl-topic-label" data-i18n="nl__interests_label">Centres d'intérêt :</span>
+                                <div class="nl-topic-btns">
+                                    <label class="nl-chip"><input type="checkbox" name="TOPIC_FABRIC" value="1"><span class="nl-chip-check"></span><span data-i18n="nl__chip_fabric">Fabric</span></label>
+                                    <label class="nl-chip"><input type="checkbox" name="TOPIC_SNOW" value="1"><span class="nl-chip-check"></span><span data-i18n="nl__chip_snowflake">Snowflake</span></label>
+                                    <label class="nl-chip"><input type="checkbox" name="TOPIC_PBI" value="1"><span class="nl-chip-check"></span><span data-i18n="nl__chip_powerbi">Power BI</span></label>
+                                    <label class="nl-chip"><input type="checkbox" name="TOPIC_AZURE" value="1"><span class="nl-chip-check"></span><span data-i18n="nl__chip_azure">Azure</span></label>
+                                    <label class="nl-chip"><input type="checkbox" name="TOPIC_AI" value="1"><span class="nl-chip-check"></span><span data-i18n="nl__chip_aiml">AI / ML</span></label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary btn-full" data-i18n="nl__submit">S'abonner à la newsletter</button>
+                            <p class="nl-disclaimer" data-i18n="nl__disclaimer">&#128274; Vos données restent privées. Désabonnement en un clic.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
     <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-top">

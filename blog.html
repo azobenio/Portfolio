@@ -75,7 +75,148 @@
 
     <!-- Main content -->
     <main class="main-content">
-    <!-- ===== NEWSLETTER ===== -->
+
+    <!-- ===== BLOG ===== -->
+    <section class="section" id="blog">
+        <div class="container">
+            <!-- Blog Hero -->
+            <div class="blog-hero anim-in" style="--d:.1s">
+                <div class="section-tag" style="justify-content:center"><span class="tag-line"></span><span data-i18n="blog__tag">ARTICLES</span></div>
+                <h1 class="blog-hero-title"><span class="gradient-text">Blog.</span></h1>
+                <p class="blog-hero-desc" data-i18n="blog__hero_desc">Mes dernières publications sur Microsoft Fabric, Snowflake, Power BI et le Data Engineering.</p>
+                <div class="blog-hero-stats">
+                    <div class="bhs"><span class="bhs-num">8</span><span class="bhs-lbl">ARTICLES</span></div>
+                    <div class="bhs"><span class="bhs-num">5</span><span class="bhs-lbl">TOPICS</span></div>
+                    <div class="bhs"><span class="bhs-num">2026</span><span class="bhs-lbl">ACTIVE</span></div>
+                </div>
+            </div>
+
+            <!-- Search + Filters -->
+            <div class="blog-controls anim-in" style="--d:.2s">
+                <div class="blog-search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="text" id="blogSearch" data-i18n-placeholder="blog__search_placeholder" placeholder="Rechercher un article...">
+                    <span class="search-count" id="searchCount">9 articles</span>
+                </div>
+                <div class="blog-filters" id="blogFilters">
+                    <button class="filter-btn active" data-filter="all" data-i18n="blog__filter_all">Tous</button>
+                    <button class="filter-btn" data-filter="fabric">Fabric</button>
+                    <button class="filter-btn" data-filter="powerbi">Power BI</button>
+                    <button class="filter-btn" data-filter="snowflake">Snowflake</button>
+                    <button class="filter-btn" data-filter="azure">Azure</button>
+                    <button class="filter-btn" data-filter="ai">AI / ML</button>
+                </div>
+            </div>
+
+            <!-- Featured Article -->
+            <a href="https://www.linkedin.com/posts/jean-marie-sadio_powerbi-schemaevolution-datarefresh-activity-7248285791574487040-TaEr" target="_blank" class="blog-featured anim-scroll" data-cats="powerbi fabric">
+                <div class="bf-img">
+                    <div class="bf-dashboard">
+                        <div class="bf-dash-header"><div class="bf-dash-dots"><span></span><span></span><span></span></div><span class="bf-dash-title">schema_evolution.pbix</span></div>
+                        <div class="bf-dash-body">
+                            <div class="bf-dash-chart">
+                                <div class="bf-bar" style="--h:65%;--d:.1s;background:var(--accent)"></div>
+                                <div class="bf-bar" style="--h:45%;--d:.2s;background:rgba(129,140,248,.7)"></div>
+                                <div class="bf-bar" style="--h:80%;--d:.3s;background:var(--accent)"></div>
+                                <div class="bf-bar" style="--h:35%;--d:.4s;background:rgba(129,140,248,.7)"></div>
+                                <div class="bf-bar" style="--h:90%;--d:.5s;background:var(--accent)"></div>
+                                <div class="bf-bar" style="--h:55%;--d:.6s;background:rgba(129,140,248,.7)"></div>
+                                <div class="bf-bar" style="--h:70%;--d:.7s;background:var(--accent)"></div>
+                            </div>
+                            <div class="bf-dash-kpis">
+                                <div class="bf-kpi"><span class="bf-kpi-val">Schema</span><span class="bf-kpi-lbl">Auto-Detect</span></div>
+                                <div class="bf-kpi"><span class="bf-kpi-val">Refresh</span><span class="bf-kpi-lbl">In Desktop</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bf-body">
+                    <div class="bf-meta">
+                        <span class="blog-category">POWER BI</span>
+                        <span class="bf-date">Sep 2025</span>
+                    </div>
+                    <h2 class="bf-title" data-i18n="blog__featured_title">Power BI September 2025 Update : Schema Evolution & Data Refresh</h2>
+                    <p class="bf-desc" data-i18n="blog__featured_desc">Le modèle s'adapte intelligemment aux changements de source — colonnes ajoutées, renommées ou supprimées. Schema Evolution et Data Refresh in Desktop changent la donne pour les Data Engineers.</p>
+                    <span class="blog-link" data-i18n="blog__read_full">Lire sur LinkedIn <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </div>
+            </a>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid">
+                <!-- Card 1 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_powerbi-daxqueryview-microsoftfabric-activity-7275050958081454080-KgLH" target="_blank" class="blog-card anim-scroll" data-cats="powerbi fabric">
+                    <div class="blog-card-top"><span class="blog-category">POWER BI</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card1_title">DAX Query View : Écrire et tester du DAX directement dans le navigateur</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card1_excerpt">DAX Query View arrive dans Power BI Service / Fabric. Écrire, exécuter et tester des requêtes DAX dans le navigateur avec Copilot intégré.</p>
+                    <div class="blog-tags"><span>#PowerBI</span> <span>#DAX</span> <span>#Fabric</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+                <!-- Card 2 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_powerbi-tmdl-microsoftfabric-activity-7270378802592620545-rvlr" target="_blank" class="blog-card anim-scroll" data-cats="powerbi fabric">
+                    <div class="blog-card-top"><span class="blog-category">POWER BI</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card2_title">TMDL View : Gérer vos modèles sémantiques par le code</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card2_excerpt">Le Tabular Model Definition Language View arrive dans Power BI Desktop — scripter et modifier vos modèles sémantiques directement en code.</p>
+                    <div class="blog-tags"><span>#PowerBI</span> <span>#TMDL</span> <span>#Fabric</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+                <!-- Card 3 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_microsoftfabric-onelakesecurity-datagovernance-activity-7264951543861751808-xGbz" target="_blank" class="blog-card anim-scroll" data-cats="fabric">
+                    <div class="blog-card-top"><span class="blog-category">FABRIC</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card3_title">OneLake Security : Modèle de sécurité unifié dans Fabric</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card3_excerpt">OneLake Security est fondamental dans Fabric. Enforcer des règles de sécurité directement sur les tables stockées dans OneLake.</p>
+                    <div class="blog-tags"><span>#Fabric</span> <span>#OneLake</span> <span>#DataGovernance</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+                <!-- Card 4 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_azuredatastudio-azuredataexplorer-microsoftfabric-activity-7260239270643654656-XzTz" target="_blank" class="blog-card anim-scroll" data-cats="azure">
+                    <div class="blog-card-top"><span class="blog-category">AZURE</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card4_title">Azure Data Studio : Fin de vie — et maintenant ?</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card4_excerpt">Microsoft a officiellement déprécié Azure Data Studio. Quelles alternatives pour votre workflow de Data Engineer ?</p>
+                    <div class="blog-tags"><span>#Azure</span> <span>#DataStudio</span> <span>#Migration</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+                <!-- Card 5 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_a2a-azureaifoundry-agenttoagent-activity-7255174523015397376-IyYm" target="_blank" class="blog-card anim-scroll" data-cats="azure ai">
+                    <div class="blog-card-top"><span class="blog-category">AI / ML</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card5_title">Agent-To-Agent (A2A) avec Azure AI Foundry</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card5_excerpt">Développement d'agents IA avec Azure AI Foundry : concepts, cas d'usage et guide pratique pour créer des architectures A2A.</p>
+                    <div class="blog-tags"><span>#AzureAI</span> <span>#A2A</span> <span>#Agents</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+                <!-- Card 6 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_snowflake-devoteam-snowflakepartneroftheyear-activity-7253011291773526016-zyAK" target="_blank" class="blog-card anim-scroll" data-cats="snowflake">
+                    <div class="blog-card-top"><span class="blog-category">SNOWFLAKE</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card6_title">Devoteam nommé Snowflake Partner of the Year France</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card6_excerpt">Devoteam reconnu comme Snowflake Partner of the Year en France. Une belle reconnaissance de notre expertise Snowflake Data Cloud.</p>
+                    <div class="blog-tags"><span>#Snowflake</span> <span>#Devoteam</span> <span>#DataCloud</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+                <!-- Card 7 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_microsoftfabric-azuredatalakestorage-crosstenantintegration-activity-7249017143366275074-3rnH" target="_blank" class="blog-card anim-scroll" data-cats="fabric azure">
+                    <div class="blog-card-top"><span class="blog-category">FABRIC</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card7_title">Cross-Tenant Data Integration : ADLS Gen2 vers Fabric</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card7_excerpt">Comment copier des données d'un container Azure Data Lake Storage Gen2 cross-tenant et les intégrer dans Microsoft Fabric.</p>
+                    <div class="blog-tags"><span>#Fabric</span> <span>#ADLS</span> <span>#CrossTenant</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+                <!-- Card 8 -->
+                <a href="https://www.linkedin.com/posts/jean-marie-sadio_kmeans-elbowmethod-machinelearning-activity-7242174568478867456-HcO2" target="_blank" class="blog-card anim-scroll" data-cats="ai">
+                    <div class="blog-card-top"><span class="blog-category">AI / ML</span></div>
+                    <h3 class="blog-title" data-i18n="blog__card8_title">Elbow Method & K-Means : Choisir le bon nombre de clusters</h3>
+                    <p class="blog-excerpt" data-i18n="blog__card8_excerpt">K-Means et la méthode du coude avec KElbowVisualizer de Yellowbrick pour un clustering optimal.</p>
+                    <div class="blog-tags"><span>#KMeans</span> <span>#Clustering</span> <span>#ML</span></div>
+                    <span class="blog-link" data-i18n="blog__read_short">Lire <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span>
+                </a>
+            </div>
+
+            <!-- No results -->
+            <div class="blog-empty" id="blogEmpty">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <p>Aucun article trouvé</p>
+                <span>Essayez un autre terme de recherche ou filtre.</span>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer" id="contact">
         <div class="container">
