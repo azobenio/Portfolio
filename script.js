@@ -24,6 +24,8 @@
             meta__title: 'JMS.dev | Data Engineer — Microsoft Fabric & Snowflake',
             meta__description: 'Portfolio de Jean Marie Sadio, Data Engineer spécialisé Microsoft Fabric, Snowflake et Power BI.',
             // Nav
+            nav__home: 'Accueil',
+            sb__available: 'Disponible',
             nav__about: 'À propos',
             nav__techstack: 'Tech Stack',
             nav__projects: 'Projets',
@@ -163,6 +165,8 @@
             meta__title: 'JMS.dev | Data Engineer — Microsoft Fabric & Snowflake',
             meta__description: 'Portfolio of Jean Marie Sadio, Data Engineer specializing in Microsoft Fabric, Snowflake and Power BI.',
             // Nav
+            nav__home: 'Home',
+            sb__available: 'Available',
             nav__about: 'About',
             nav__techstack: 'Tech Stack',
             nav__projects: 'Projects',
