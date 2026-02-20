@@ -399,7 +399,7 @@ document.querySelectorAll('.mobile-nav-links a').forEach(a => {
 // ---- Scroll Reveal (Intersection Observer) ----
 const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0, rootMargin: '0px' });
 document.querySelectorAll('.anim-scroll').forEach(el => io.observe(el));
 
 // Staggered children inside grids
@@ -412,7 +412,7 @@ const ioGrid = new IntersectionObserver(entries => {
             });
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0, rootMargin: '0px' });
 document.querySelectorAll('.process-row, .cap-grid, .blog-grid, .social-row').forEach(g => ioGrid.observe(g));
 
 // ---- Animated Counters ----
@@ -432,7 +432,7 @@ const ioStats = new IntersectionObserver(entries => {
             ioStats.unobserve(e.target);
         }
     });
-}, { threshold: 0.35 });
+}, { threshold: 0 });
 const statsEl = document.querySelector('.hero-stats');
 if (statsEl) ioStats.observe(statsEl);
 
@@ -700,7 +700,7 @@ const ioGridNew = new IntersectionObserver(entries => {
             ioGridNew.unobserve(e.target);
         }
     });
-}, { threshold: 0.15 });
+}, { threshold: 0, rootMargin: '0px' });
 document.querySelectorAll('.ts-grid, .hobby-grid').forEach(g => ioGridNew.observe(g));
 
 // ---- Local Time (Nantes / Europe/Paris) ----
