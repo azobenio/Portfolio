@@ -135,8 +135,8 @@ img{max-width:100%;display:block}
 .hdr-logo:hover{transform:scale(1.05)}
 .hdr-logo-icon{filter:drop-shadow(0 0 6px rgba(157,78,221,.3));transition:filter .3s ease}
 .hdr-logo:hover .hdr-logo-icon{filter:drop-shadow(0 0 12px rgba(157,78,221,.5)) drop-shadow(0 0 20px rgba(34,211,197,.3))}
-.hdr-logo-banta{font-size:1rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#e0aaff 0%,#c77dff 50%,#9d4edd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase;transition:filter .3s ease}
-.hdr-logo-flow{font-size:1rem;font-weight:300;letter-spacing:2px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase;transition:filter .3s ease}
+.hdr-logo-banta{font-size:1rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#e0aaff 0%,#c77dff 50%,#9d4edd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;transition:filter .3s ease}
+.hdr-logo-flow{font-size:1rem;font-weight:300;letter-spacing:2px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;transition:filter .3s ease}
 .hdr-logo:hover .hdr-logo-banta,.hdr-logo:hover .hdr-logo-flow{filter:brightness(1.2)}
 .hdr-nav{display:flex;align-items:center;gap:4px}
 .hdr-link{padding:6px 14px;border-radius:8px;font-size:.865rem;font-weight:500;color:var(--t2);text-decoration:none;transition:all .2s}
@@ -322,8 +322,8 @@ img{max-width:100%;display:block}
 .bf-particle{position:absolute;background:#c77dff;border-radius:50%;animation:bf-float 3s ease-in-out infinite;opacity:.6;box-shadow:0 0 10px #c77dff,0 0 20px #9d4edd}
 @keyframes bf-float{0%,100%{transform:translateY(0) translateX(0) scale(1);opacity:.6}50%{transform:translateY(-80px) translateX(40px) scale(1.5);opacity:.2}}
 .bf-wordmark{display:flex;align-items:baseline;gap:0;margin-top:-12px}
-.bf-wm-banta{font-size:28px;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#e0aaff 0%,#c77dff 40%,#9d4edd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase}
-.bf-wm-flow{font-size:28px;font-weight:300;letter-spacing:4px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-transform:uppercase}
+.bf-wm-banta{font-size:28px;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#e0aaff 0%,#c77dff 40%,#9d4edd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bf-wm-flow{font-size:28px;font-weight:300;letter-spacing:4px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .project-info-col{display:flex;flex-direction:column;gap:24px}
 .project-status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:2px;color:rgba(199,125,255,.8);text-transform:uppercase;background:rgba(123,44,191,.1);border:1px solid rgba(199,125,255,.2);border-radius:20px;padding:6px 14px;width:fit-content}
 .project-title{font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-1px;color:var(--t1);line-height:1.1}
