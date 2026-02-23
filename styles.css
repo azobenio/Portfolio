@@ -138,8 +138,9 @@ img{max-width:100%;display:block}
 .hdr-logo:hover{transform:scale(1.05)}
 .hdr-logo-icon{filter:drop-shadow(0 0 6px rgba(157,78,221,.3));transition:filter .3s ease}
 .hdr-logo:hover .hdr-logo-icon{filter:drop-shadow(0 0 12px rgba(157,78,221,.5)) drop-shadow(0 0 20px rgba(34,211,197,.3))}
+.hdr-logo-text{display:flex;align-items:baseline;gap:0}
 .hdr-logo-banta{font-size:1rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#e0aaff 0%,#c77dff 50%,#9d4edd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;transition:filter .3s ease}
-.hdr-logo-flow{font-size:1rem;font-weight:300;letter-spacing:2px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;transition:filter .3s ease}
+.hdr-logo-flow{font-size:1rem;font-weight:300;letter-spacing:.5px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;transition:filter .3s ease}
 .hdr-logo:hover .hdr-logo-banta,.hdr-logo:hover .hdr-logo-flow{filter:brightness(1.2)}
 .hdr-nav{display:flex;align-items:center;gap:4px}
 .hdr-link{padding:6px 14px;border-radius:8px;font-size:.865rem;font-weight:500;color:var(--t2);text-decoration:none;transition:all .2s}
@@ -561,6 +562,10 @@ img{max-width:100%;display:block}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
 .footer-brand{display:flex;flex-direction:column;gap:12px}
 .footer-brand p{font-size:.88rem;color:var(--t2);line-height:1.6;max-width:280px}
+.logo-bantaflow{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-bf-wordmark{display:flex;align-items:baseline;gap:0}
+.logo-bf-banta{font-size:1.1rem;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,#e0aaff 0%,#c77dff 50%,#9d4edd 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-bf-flow{font-size:1.1rem;font-weight:300;letter-spacing:.5px;background:linear-gradient(135deg,#22d3c5 0%,#0ea5e9 60%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
 .footer-loc{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--t3)}
 .footer-loc svg{color:var(--accent);flex-shrink:0}
