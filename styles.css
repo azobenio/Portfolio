@@ -3,6 +3,9 @@
    Inspired by sahil.dev — Dark theme + Teal/Cyan accent
    ============================================================ */
 
+/* WIP — remove this class to reveal hidden sections */
+.hidden-wip{display:none!important}
+
 /* ---------- Tokens ---------- */
 /* Soft Dark — blue-grey palette (recommended by UI experts)        */
 /* Avoids pure black (#000) which causes eye strain & halation.     */
