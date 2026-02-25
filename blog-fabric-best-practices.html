@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMS.dev | Microsoft Fabric Lakehouse : 10 Best Practices pour le Data Engineering</title>
+    <meta name="description" content="Guide complet des best practices Microsoft Fabric Lakehouse : Delta Tables, V-Order, OPTIMIZE, VACUUM, Z-ORDER avec des exemples PySpark.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x26A1;</text></svg>">
+    <style>
+        /* ─── Blog Post Styles ─── */
+        .post-hero { text-align: center; padding: 120px 0 60px; }
+        .post-back { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: .9rem; font-weight: 500; margin-bottom: 30px; transition: opacity .3s; }
+        .post-back:hover { opacity: .7; }
+        .post-meta { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+        .post-category { background: rgba(34,211,197,.1); color: var(--accent); padding: 4px 14px; border-radius: 20px; font-size: .75rem; font-weight: 700; letter-spacing: 1px; border: 1px solid rgba(34,211,197,.2); }
+        .post-date { color: var(--t3); font-size: .85rem; }
+        .post-read-time { color: var(--t3); font-size: .85rem; }
+        .post-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+        .post-subtitle { font-size: 1.15rem; color: var(--t2); max-width: 700px; margin: 0 auto 30px; line-height: 1.6; }
+        .post-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .post-tags span { background: var(--bg3); color: var(--t2); padding: 4px 12px; border-radius: 6px; font-size: .8rem; font-family: var(--mono); }
+
+        /* ─── Article Content ─── */
+        .post-content { max-width: 820px; margin: 0 auto; padding: 40px 20px 80px; }
+        .post-content h2 { font-size: 1.8rem; font-weight: 700; margin: 50px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        .post-content h2 .h2-num { color: var(--accent); font-family: var(--mono); margin-right: 10px; }
+        .post-content h3 { font-size: 1.3rem; font-weight: 600; margin: 35px 0 15px; color: var(--t1); }
+        .post-content p { color: var(--t2); line-height: 1.8; margin-bottom: 18px; font-size: 1.02rem; }
+        .post-content strong { color: var(--t1); font-weight: 600; }
+        .post-content ul, .post-content ol { margin: 0 0 20px 24px; color: var(--t2); }
+        .post-content li { margin-bottom: 10px; line-height: 1.7; }
+        .post-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* Code blocks */
+        .code-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; margin: 20px 0 28px; overflow: hidden; }
+        .code-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--bg3); border-bottom: 1px solid var(--border); }
+        .code-lang { font-size: .75rem; font-family: var(--mono); color: var(--accent); font-weight: 600; letter-spacing: .5px; }
+        .code-file { font-size: .75rem; color: var(--t3); font-family: var(--mono); }
+        .code-block pre { padding: 20px; overflow-x: auto; margin: 0; }
+        .code-block code { font-family: var(--mono); font-size: .88rem; line-height: 1.7; color: var(--t2); }
+        .code-block .ck { color: #c792ea; }
+        .code-block .cf { color: #82aaff; }
+        .code-block .cs { color: #c3e88d; }
+        .code-block .cn { color: #f78c6c; }
+        .code-block .cc { color: #546e7a; font-style: italic; }
+        .code-block .cv { color: #ffcb6b; }
+
+        /* Info boxes */
+        .info-box { border-radius: 12px; padding: 20px 24px; margin: 24px 0; border-left: 4px solid; }
+        .info-box.tip { background: rgba(34,211,197,.06); border-color: var(--accent); }
+        .info-box.warning { background: rgba(251,191,36,.06); border-color: #fbbf24; }
+        .info-box.important { background: rgba(129,140,248,.06); border-color: #818cf8; }
+        .info-box-title { font-weight: 700; font-size: .9rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .info-box.tip .info-box-title { color: var(--accent); }
+        .info-box.warning .info-box-title { color: #fbbf24; }
+        .info-box.important .info-box-title { color: #818cf8; }
+        .info-box p { margin-bottom: 0; font-size: .95rem; }
+
+        /* Summary table */
+        .summary-table { width: 100%; border-collapse: collapse; margin: 20px 0 30px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+        .summary-table th { background: var(--bg3); color: var(--t1); font-weight: 600; padding: 14px 16px; text-align: left; font-size: .9rem; }
+        .summary-table td { padding: 12px 16px; border-top: 1px solid var(--border); color: var(--t2); font-size: .9rem; }
+        .summary-table tr:hover td { background: var(--bg2); }
+        .summary-table code { font-family: var(--mono); font-size: .82rem; background: var(--bg3); padding: 2px 8px; border-radius: 4px; color: var(--accent); }
+
+        /* TOC */
+        .post-toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin: 0 0 40px; }
+        .post-toc-title { font-weight: 700; font-size: .95rem; margin-bottom: 14px; color: var(--t1); display: flex; align-items: center; gap: 8px; }
+        .post-toc ol { margin: 0; padding-left: 20px; }
+        .post-toc li { margin-bottom: 8px; }
+        .post-toc a { color: var(--t2); text-decoration: none; font-size: .92rem; transition: color .2s; }
+        .post-toc a:hover { color: var(--accent); }
+
+        /* Author box */
+        .post-author { display: flex; align-items: center; gap: 16px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 40px 0; }
+        .post-author img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        .post-author-info { flex: 1; }
+        .post-author-name { font-weight: 700; font-size: 1rem; }
+        .post-author-role { color: var(--t3); font-size: .85rem; }
+
+        /* Sources section */
+        .post-sources { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin: 40px 0; }
+        .post-sources h3 { margin-top: 0; font-size: 1rem; margin-bottom: 12px; }
+        .post-sources ul { margin: 0; padding-left: 20px; }
+        .post-sources li { margin-bottom: 6px; font-size: .9rem; }
+    </style>
+</head>
+<body>
+    <!-- Cursor Stalker -->
+    <div class="cursor-stalker" id="cursorStalker"></div>
+    <!-- Noise -->
+    <div class="noise"></div>
+    <!-- Deco circles -->
+    <div class="deco-circle deco-1"></div>
+    <div class="deco-circle deco-2"></div>
+    <div class="deco-circle deco-3"></div>
+    <!-- Floating Particles -->
+    <canvas id="particlesCanvas" class="particles-canvas"></canvas>
+    <!-- Gradient Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner">
+            <a href="index.html" class="hdr-logo">
+                <img src="bantaflow-logo-wakanda.svg" alt="Bantaflow" class="hdr-logo-icon" width="36" height="36">
+                <span class="hdr-logo-text"><span class="hdr-logo-banta">Banta</span><span class="hdr-logo-flow">flow</span></span>
+            </a>
+            <nav class="hdr-nav">
+                <a href="index.html" class="hdr-link" data-i18n="nav__home">Accueil</a>
+                <a href="about.html" class="hdr-link" data-i18n="nav__about">A propos</a>
+                <a href="techstack.html" class="hdr-link" data-i18n="nav__techstack">Tech Stack</a>
+                <a href="projects.html" class="hdr-link" data-i18n="nav__projects">Projets</a>
+                <a href="blog.html" class="hdr-link" data-i18n="nav__blog">Blog</a>
+            </nav>
+            <div class="hdr-right">
+                <button class="hdr-btn lang-toggle" aria-label="Switch language"><span class="lang-toggle-inner">FR</span></button>
+                <button class="hdr-btn theme-toggle" aria-label="Changer de theme">
+                    <svg class="theme-icon sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="theme-icon moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="mailto:azobensadio@gmail.com" class="hdr-hire"><span class="hire-dot"></span><span data-i18n="sb__available">Disponible</span></a>
+                <button class="hdr-burger" id="hdrBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+    <!-- Mobile Drawer -->
+    <div class="mob-drawer" id="mobDrawer">
+        <a href="index.html" class="mob-link" data-i18n="nav__home">Accueil</a>
+        <a href="about.html" class="mob-link" data-i18n="nav__about">A propos</a>
+        <a href="techstack.html" class="mob-link" data-i18n="nav__techstack">Tech Stack</a>
+        <a href="projects.html" class="mob-link" data-i18n="nav__projects">Projets</a>
+        <a href="blog.html" class="mob-link" data-i18n="nav__blog">Blog</a>
+    </div>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+                <!-- Hero -->
+                <div class="post-hero">
+                    <a href="blog.html" class="post-back">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                        Retour au Blog
+                    </a>
+                    <div class="post-meta">
+                        <span class="post-category">MICROSOFT FABRIC</span>
+                        <span class="post-date">25 Fev 2026</span>
+                        <span class="post-read-time">12 min de lecture</span>
+                    </div>
+                    <h1 class="post-title">Microsoft Fabric Lakehouse :<br><span class="gradient-text">10 Best Practices</span> pour le Data Engineering</h1>
+                    <p class="post-subtitle">Guide complet pour optimiser vos Delta Tables dans Microsoft Fabric : V-Order, OPTIMIZE, VACUUM, Z-ORDER, et patterns d'ingestion avec des exemples PySpark concrets.</p>
+                    <div class="post-tags">
+                        <span>#MicrosoftFabric</span>
+                        <span>#DeltaLake</span>
+                        <span>#DataEngineering</span>
+                        <span>#PySpark</span>
+                        <span>#Lakehouse</span>
+                    </div>
+                </div>
+
+                <!-- Author -->
+                <div class="post-content">
+                    <div class="post-author">
+                        <img src="jm.jpg" alt="Jean Marie Sadio">
+                        <div class="post-author-info">
+                            <div class="post-author-name">Jean Marie Sadio</div>
+                            <div class="post-author-role">Data Engineer &mdash; Microsoft Fabric & Snowflake</div>
+                        </div>
+                    </div>
+
+                    <!-- TOC -->
+                    <div class="post-toc">
+                        <div class="post-toc-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+                            Sommaire
+                        </div>
+                        <ol>
+                            <li><a href="#bp1">Delta Lake : le format standard du Lakehouse</a></li>
+                            <li><a href="#bp2">Activer V-Order selon votre workload</a></li>
+                            <li><a href="#bp3">Tirer parti d'Optimize Write</a></li>
+                            <li><a href="#bp4">Lancer OPTIMIZE pour la bin-compaction</a></li>
+                            <li><a href="#bp5">Nettoyer avec VACUUM</a></li>
+                            <li><a href="#bp6">Utiliser Z-ORDER sur les colonnes filtrees</a></li>
+                            <li><a href="#bp7">Adopter l'architecture Medallion</a></li>
+                            <li><a href="#bp8">Choisir les bons modes d'ecriture</a></li>
+                            <li><a href="#bp9">Exploiter Low Shuffle Merge</a></li>
+                            <li><a href="#bp10">Automatiser la maintenance</a></li>
+                        </ol>
+                    </div>
+
+                    <!-- ═══ INTRODUCTION ═══ -->
+                    <p>Dans Microsoft Fabric, le <strong>Lakehouse</strong> est le coeur de l'architecture Data. Toutes les donnees sont stockees au format <strong>Delta Lake</strong> dans OneLake, ce qui offre une base unifiee pour tous les moteurs analytiques (Spark, SQL, Power BI). Mais pour tirer le meilleur parti de cette architecture, il faut connaitre les bonnes pratiques d'optimisation.</p>
+
+                    <p>Voici <strong>10 best practices essentielles</strong> que j'applique au quotidien sur mes projets Fabric, avec des exemples de code PySpark directement utilisables dans vos notebooks.</p>
+
+                    <!-- ═══ BP 1 ═══ -->
+                    <h2 id="bp1"><span class="h2-num">01.</span> Delta Lake : le format standard du Lakehouse</h2>
+                    <p>Dans Fabric, Delta Lake est le format par defaut pour toutes les tables. Contrairement a Azure Synapse o&ugrave; le format par defaut etait Parquet, Fabric utilise <strong>Delta nativement</strong>. Cela signifie que vous beneficiez automatiquement du support ACID, du time travel, et du schema enforcement.</p>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            Point cle
+                        </div>
+                        <p>Toutes les tables visibles dans l'explorateur Lakehouse sont des tables Delta optimisees. Quand vous chargez des donnees (CSV, Parquet, JSON), Fabric les convertit automatiquement en Delta.</p>
+                    </div>
+
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Config Spark</th>
+                                <th>Fabric</th>
+                                <th>Azure Synapse</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>spark.sql.sources.default</code></td>
+                                <td><strong>delta</strong></td>
+                                <td>parquet</td>
+                            </tr>
+                            <tr>
+                                <td><code>spark.sql.parquet.vorder.default</code></td>
+                                <td>false (configurable)</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td><code>optimizeWrite.enabled</code></td>
+                                <td><strong>true</strong></td>
+                                <td>false</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- ═══ BP 2 ═══ -->
+                    <h2 id="bp2"><span class="h2-num">02.</span> Activer V-Order selon votre workload</h2>
+                    <p><strong>V-Order</strong> est une optimisation d'ecriture sur le format Parquet, specifique a Fabric. Elle reorganise les donnees au moment de l'ecriture pour accelerer considerablement les lectures, notamment pour Power BI Direct Lake et le SQL analytics endpoint.</p>
+
+                    <p>Attention cependant : V-Order est <strong>desactive par defaut</strong> dans les nouveaux workspaces Fabric pour privilegier les performances d'ecriture. A vous de l'activer selon votre cas d'usage :</p>
+
+                    <ul>
+                        <li><strong>Workload read-heavy</strong> (dashboards, reporting) &rarr; Activer V-Order</li>
+                        <li><strong>Workload write-heavy</strong> (ingestion massive, ETL) &rarr; Garder desactive</li>
+                    </ul>
+
+                    <h3>Verifier la configuration V-Order</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">notebook_check_vorder.py</span>
+                        </div>
+<pre><code><span class="cc"># Verifier si V-Order est actif dans la session</span>
+vorder_status = spark.conf.get(<span class="cs">'spark.sql.parquet.vorder.default'</span>)
+<span class="cf">print</span>(<span class="cs">f"V-Order actif : <span class="cv">{vorder_status}</span>"</span>)</code></pre>
+                    </div>
+
+                    <h3>Activer V-Order pour la session</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">enable_vorder.py</span>
+                        </div>
+<pre><code><span class="cc"># Activer V-Order au niveau session (tous les writes seront V-Ordered)</span>
+spark.conf.set(<span class="cs">'spark.sql.parquet.vorder.default'</span>, <span class="cs">'true'</span>)
+
+<span class="cc"># Ou activer au niveau table (plus granulaire)</span>
+spark.sql(<span class="cs">"""
+    ALTER TABLE gold.dim_customers
+    SET TBLPROPERTIES("delta.parquet.vorder.enabled" = "true")
+"""</span>)</code></pre>
+                    </div>
+
+                    <h3>Activer V-Order a l'ecriture</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">write_with_vorder.py</span>
+                        </div>
+<pre><code><span class="cc"># Ecriture ponctuelle avec V-Order, sans changer la config session</span>
+df_report.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"overwrite"</span>) \
+    .option(<span class="cs">"parquet.vorder.enabled"</span>, <span class="cs">"true"</span>) \
+    .saveAsTable(<span class="cs">"gold.report_monthly_sales"</span>)</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
+                            Performance
+                        </div>
+                        <p>V-Order ajoute environ <strong>15% de temps d'ecriture</strong>, mais offre 40-60% d'amelioration en lecture pour Power BI Direct Lake et ~10% pour le SQL endpoint. Le trade-off en vaut la peine pour les couches Gold.</p>
+                    </div>
+
+                    <!-- ═══ BP 3 ═══ -->
+                    <h2 id="bp3"><span class="h2-num">03.</span> Tirer parti d'Optimize Write</h2>
+                    <p><strong>Optimize Write</strong> est une fonctionnalite Delta Lake qui reduit le nombre de fichiers ecrits en consolidant automatiquement les petits fichiers pendant les operations d'ecriture. C'est le premier rempart contre le "small file problem" qui degrade les performances des workloads Big Data.</p>
+
+                    <p>Bonne nouvelle : dans Fabric, <strong>Optimize Write est active par defaut</strong>. Vous n'avez rien a configurer. Si vous devez le desactiver temporairement (cas tres rares d'ingestion streaming haute frequence) :</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">optimize_write_config.py</span>
+                        </div>
+<pre><code><span class="cc"># Verifier le statut (devrait etre True dans Fabric)</span>
+spark.conf.get(<span class="cs">'spark.databricks.delta.optimizeWrite.enabled'</span>)
+
+<span class="cc"># Desactiver temporairement si necessaire (rare)</span>
+spark.conf.set(<span class="cs">'spark.databricks.delta.optimizeWrite.enabled'</span>, <span class="cs">'false'</span>)
+
+<span class="cc"># Ou controller par ecriture individuelle</span>
+df.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"append"</span>) \
+    .option(<span class="cs">"optimizeWrite"</span>, <span class="cs">"false"</span>) \
+    .saveAsTable(<span class="cs">"bronze.raw_events"</span>)</code></pre>
+                    </div>
+
+                    <!-- ═══ BP 4 ═══ -->
+                    <h2 id="bp4"><span class="h2-num">04.</span> Lancer OPTIMIZE pour la bin-compaction</h2>
+                    <p>Meme avec Optimize Write, des petits fichiers s'accumulent avec le temps (surtout avec des ecritures incrementales). La commande <strong>OPTIMIZE</strong> consolide ces fichiers en fichiers Parquet plus gros (idealement entre 128 MB et 1 GB), ce qui ameliore considerablement les performances de lecture.</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SPARK SQL</span>
+                            <span class="code-file">optimize_tables.sql</span>
+                        </div>
+<pre><code><span class="cc">-- Optimiser une table complete</span>
+<span class="ck">OPTIMIZE</span> silver.fact_transactions;
+
+<span class="cc">-- Optimiser avec un filtre (plus rapide, cible les partitions recentes)</span>
+<span class="ck">OPTIMIZE</span> silver.fact_transactions
+<span class="ck">WHERE</span> ingestion_date >= <span class="cs">'2026-02-01'</span>;
+
+<span class="cc">-- Optimiser + appliquer V-Order en meme temps</span>
+<span class="ck">OPTIMIZE</span> gold.dim_products <span class="ck">VORDER</span>;</code></pre>
+                    </div>
+
+                    <div class="info-box important">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                            Important
+                        </div>
+                        <p>Les commandes OPTIMIZE sont des commandes <strong>Spark SQL</strong>. Elles ne fonctionnent PAS dans le SQL analytics endpoint ou le Warehouse SQL editor (qui n'acceptent que du T-SQL). Utilisez un notebook ou un Spark Job Definition.</p>
+                    </div>
+
+                    <!-- ═══ BP 5 ═══ -->
+                    <h2 id="bp5"><span class="h2-num">05.</span> Nettoyer avec VACUUM</h2>
+                    <p>Delta Lake conserve les anciens fichiers Parquet pour supporter le time travel. Avec le temps, ces fichiers orphelins s'accumulent et augmentent les couts de stockage. <strong>VACUUM</strong> supprime les fichiers qui ne sont plus references par le log Delta et qui depassent la periode de retention.</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SPARK SQL</span>
+                            <span class="code-file">vacuum_tables.sql</span>
+                        </div>
+<pre><code><span class="cc">-- Supprimer les fichiers de plus de 7 jours (defaut)</span>
+<span class="ck">VACUUM</span> silver.fact_transactions;
+
+<span class="cc">-- Specifier une retention personnalisee (en heures)</span>
+<span class="ck">VACUUM</span> silver.fact_transactions <span class="ck">RETAIN</span> <span class="cn">168</span> <span class="ck">HOURS</span>;</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
+                            Attention
+                        </div>
+                        <p>Ne descendez <strong>jamais en dessous de 7 jours</strong> de retention sans une raison valide. Des lecteurs ou ecrivains concurrents peuvent encore utiliser les anciens fichiers. Un VACUUM trop agressif peut provoquer des erreurs de lecture voire corrompre la table.</p>
+                    </div>
+
+                    <!-- ═══ BP 6 ═══ -->
+                    <h2 id="bp6"><span class="h2-num">06.</span> Utiliser Z-ORDER sur les colonnes filtrees</h2>
+                    <p><strong>Z-ORDER</strong> reorganise les donnees a l'interieur des fichiers Parquet pour co-localiser les valeurs souvent interrogees ensemble. C'est particulierement efficace sur les colonnes utilisees dans les clauses <code>WHERE</code> et les jointures.</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SPARK SQL</span>
+                            <span class="code-file">zorder_optimize.sql</span>
+                        </div>
+<pre><code><span class="cc">-- Z-ORDER sur une colonne de filtre frequente</span>
+<span class="ck">OPTIMIZE</span> silver.fact_transactions
+<span class="ck">ZORDER BY</span> (customer_id);
+
+<span class="cc">-- Z-ORDER multi-colonnes + V-Order combines</span>
+<span class="ck">OPTIMIZE</span> silver.fact_transactions
+<span class="ck">WHERE</span> ingestion_date >= <span class="cs">'2026-02-01'</span>
+<span class="ck">ZORDER BY</span> (customer_id, product_id) <span class="ck">VORDER</span>;</code></pre>
+                    </div>
+
+                    <p>L'ordre des optimisations appliquees par Spark : <strong>bin-compaction</strong> &rarr; <strong>Z-ORDER</strong> &rarr; <strong>V-ORDER</strong>. Les trois sont compatibles et se completent.</p>
+
+                    <!-- ═══ BP 7 ═══ -->
+                    <h2 id="bp7"><span class="h2-num">07.</span> Adopter l'architecture Medallion</h2>
+                    <p>L'architecture <strong>Medallion</strong> (Bronze / Silver / Gold) est le pattern de reference pour structurer vos donnees dans le Lakehouse. Chaque couche a un role precis et des regles d'optimisation differentes :</p>
+
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Couche</th>
+                                <th>Role</th>
+                                <th>V-Order</th>
+                                <th>Optimisation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong style="color:#cd7f32">Bronze</strong></td>
+                                <td>Donnees brutes, ingestion rapide</td>
+                                <td>Off</td>
+                                <td>Append-only, OPTIMIZE hebdo</td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color:#c0c0c0">Silver</strong></td>
+                                <td>Donnees nettoyees, conformes</td>
+                                <td>Optionnel</td>
+                                <td>OPTIMIZE + Z-ORDER quotidien</td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color:#ffd700">Gold</strong></td>
+                                <td>Aggregats metier, reporting</td>
+                                <td><strong>On</strong></td>
+                                <td>OPTIMIZE + VORDER apres chaque refresh</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">medallion_pipeline.py</span>
+                        </div>
+<pre><code><span class="cc"># ─── BRONZE : Ingestion brute depuis un CSV ───</span>
+df_raw = spark.read \
+    .format(<span class="cs">"csv"</span>) \
+    .option(<span class="cs">"header"</span>, <span class="cs">"true"</span>) \
+    .option(<span class="cs">"inferSchema"</span>, <span class="cs">"true"</span>) \
+    .load(<span class="cs">"Files/raw/sales_2026.csv"</span>)
+
+df_raw.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"append"</span>) \
+    .saveAsTable(<span class="cs">"bronze.raw_sales"</span>)
+
+<span class="cc"># ─── SILVER : Nettoyage et typage ───</span>
+df_silver = spark.sql(<span class="cs">"""
+    SELECT
+        CAST(sale_id AS INT) AS sale_id,
+        CAST(customer_id AS INT) AS customer_id,
+        CAST(amount AS DECIMAL(10,2)) AS amount,
+        TO_DATE(sale_date, 'yyyy-MM-dd') AS sale_date,
+        current_timestamp() AS processed_at
+    FROM bronze.raw_sales
+    WHERE amount IS NOT NULL AND amount > 0
+"""</span>)
+
+df_silver.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"overwrite"</span>) \
+    .saveAsTable(<span class="cs">"silver.clean_sales"</span>)
+
+<span class="cc"># ─── GOLD : Agregation metier avec V-Order ───</span>
+df_gold = spark.sql(<span class="cs">"""
+    SELECT
+        customer_id,
+        COUNT(*) AS total_orders,
+        SUM(amount) AS total_revenue,
+        AVG(amount) AS avg_order_value,
+        MAX(sale_date) AS last_purchase_date
+    FROM silver.clean_sales
+    GROUP BY customer_id
+"""</span>)
+
+df_gold.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"overwrite"</span>) \
+    .option(<span class="cs">"parquet.vorder.enabled"</span>, <span class="cs">"true"</span>) \
+    .saveAsTable(<span class="cs">"gold.customer_metrics"</span>)</code></pre>
+                    </div>
+
+                    <!-- ═══ BP 8 ═══ -->
+                    <h2 id="bp8"><span class="h2-num">08.</span> Choisir les bons modes d'ecriture</h2>
+                    <p>Le choix entre <code>append</code>, <code>overwrite</code> et <code>merge</code> a un impact direct sur les performances et la maintenance de vos tables :</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">write_modes.py</span>
+                        </div>
+<pre><code><span class="cc"># Mode APPEND : ajout incremental (Bronze)</span>
+df_new_data.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"append"</span>) \
+    .saveAsTable(<span class="cs">"bronze.events"</span>)
+
+<span class="cc"># Mode OVERWRITE : remplacement complet (Gold / petites tables)</span>
+df_aggregated.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"overwrite"</span>) \
+    .saveAsTable(<span class="cs">"gold.daily_kpis"</span>)
+
+<span class="cc"># Mode OVERWRITE partiel avec replaceWhere (Silver / partitions)</span>
+df_today.write \
+    .format(<span class="cs">"delta"</span>) \
+    .mode(<span class="cs">"overwrite"</span>) \
+    .option(<span class="cs">"replaceWhere"</span>, <span class="cs">"sale_date = '2026-02-25'"</span>) \
+    .saveAsTable(<span class="cs">"silver.daily_sales"</span>)</code></pre>
+                    </div>
+
+                    <!-- ═══ BP 9 ═══ -->
+                    <h2 id="bp9"><span class="h2-num">09.</span> Exploiter Low Shuffle Merge</h2>
+                    <p>Le <strong>MERGE</strong> (upsert) est essentiel pour les tables de dimension en SCD Type 1. Fabric inclut une optimisation exclusive : le <strong>Low Shuffle Merge</strong>, qui exclut les lignes non modifiees du shuffle couteux. Cette optimisation est <strong>activee par defaut</strong> et ne necessite aucune modification de code.</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">merge_upsert.py</span>
+                        </div>
+<pre><code><span class="ck">from</span> delta.tables <span class="ck">import</span> DeltaTable
+
+<span class="cc"># Table cible existante</span>
+target = DeltaTable.forName(spark, <span class="cs">"silver.dim_customers"</span>)
+
+<span class="cc"># Source : nouvelles donnees / mises a jour</span>
+source = df_new_customers
+
+<span class="cc"># MERGE : upsert avec Low Shuffle Merge (actif par defaut)</span>
+target.alias(<span class="cs">"t"</span>).merge(
+    source.alias(<span class="cs">"s"</span>),
+    <span class="cs">"t.customer_id = s.customer_id"</span>
+).whenMatchedUpdateAll() \
+ .whenNotMatchedInsertAll() \
+ .execute()</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            Astuce
+                        </div>
+                        <p>Le Low Shuffle Merge est controle par <code>spark.microsoft.delta.merge.lowShuffle.enabled</code> (active par defaut). Il est compatible avec le Delta Lake open source et ne necessite aucun changement de code.</p>
+                    </div>
+
+                    <!-- ═══ BP 10 ═══ -->
+                    <h2 id="bp10"><span class="h2-num">10.</span> Automatiser la maintenance</h2>
+                    <p>Les commandes OPTIMIZE et VACUUM doivent etre executees regulierement. Voici un notebook de maintenance reutilisable que vous pouvez orchestrer avec un Data Pipeline Fabric :</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">PYSPARK</span>
+                            <span class="code-file">maintenance_job.py</span>
+                        </div>
+<pre><code><span class="cc"># ═══ Notebook de maintenance automatique ═══</span>
+<span class="cc"># A orchestrer quotidiennement via Data Pipeline</span>
+
+tables_to_maintain = [
+    {<span class="cs">"name"</span>: <span class="cs">"silver.fact_transactions"</span>, <span class="cs">"zorder"</span>: [<span class="cs">"customer_id"</span>]},
+    {<span class="cs">"name"</span>: <span class="cs">"silver.fact_events"</span>,       <span class="cs">"zorder"</span>: [<span class="cs">"event_type"</span>]},
+    {<span class="cs">"name"</span>: <span class="cs">"gold.customer_metrics"</span>,   <span class="cs">"zorder"</span>: []},
+    {<span class="cs">"name"</span>: <span class="cs">"gold.daily_kpis"</span>,         <span class="cs">"zorder"</span>: []},
+]
+
+<span class="ck">for</span> table <span class="ck">in</span> tables_to_maintain:
+    name = table[<span class="cs">"name"</span>]
+    zorder_cols = table[<span class="cs">"zorder"</span>]
+
+    <span class="cf">print</span>(<span class="cs">f"Maintenance : <span class="cv">{name}</span>"</span>)
+
+    <span class="cc"># Etape 1 : OPTIMIZE (+ Z-ORDER si applicable)</span>
+    <span class="ck">if</span> zorder_cols:
+        cols = <span class="cs">", "</span>.join(zorder_cols)
+        spark.sql(<span class="cs">f"OPTIMIZE <span class="cv">{name}</span> ZORDER BY (<span class="cv">{cols}</span>) VORDER"</span>)
+    <span class="ck">else</span>:
+        spark.sql(<span class="cs">f"OPTIMIZE <span class="cv">{name}</span> VORDER"</span>)
+
+    <span class="cc"># Etape 2 : VACUUM (retention 7 jours par defaut)</span>
+    spark.sql(<span class="cs">f"VACUUM <span class="cv">{name}</span>"</span>)
+
+    <span class="cf">print</span>(<span class="cs">f"  Done !"</span>)
+
+<span class="cf">print</span>(<span class="cs">"Maintenance terminee."</span>)</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            Alternative no-code
+                        </div>
+                        <p>Vous pouvez aussi lancer la maintenance via l'interface Lakehouse : clic droit sur une table &rarr; <strong>Maintenance</strong> &rarr; cochez OPTIMIZE, V-Order et/ou VACUUM &rarr; <strong>Run now</strong>. Pratique pour du ponctuel, mais le notebook reste preferable pour l'automatisation.</p>
+                    </div>
+
+                    <!-- ═══ CONCLUSION ═══ -->
+                    <h2><span class="h2-num">&Sigma;</span> Recapitulatif</h2>
+
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Best Practice</th>
+                                <th>Commande / Config</th>
+                                <th>Frequence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Format Delta par defaut</td>
+                                <td>Automatique dans Fabric</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>V-Order (couche Gold)</td>
+                                <td><code>parquet.vorder.enabled</code></td>
+                                <td>A chaque write Gold</td>
+                            </tr>
+                            <tr>
+                                <td>Optimize Write</td>
+                                <td>Active par defaut</td>
+                                <td>Automatique</td>
+                            </tr>
+                            <tr>
+                                <td>OPTIMIZE</td>
+                                <td><code>OPTIMIZE table</code></td>
+                                <td>Quotidien / Hebdo</td>
+                            </tr>
+                            <tr>
+                                <td>VACUUM</td>
+                                <td><code>VACUUM table</code></td>
+                                <td>Hebdomadaire</td>
+                            </tr>
+                            <tr>
+                                <td>Z-ORDER</td>
+                                <td><code>ZORDER BY (col)</code></td>
+                                <td>Avec OPTIMIZE</td>
+                            </tr>
+                            <tr>
+                                <td>Architecture Medallion</td>
+                                <td>Bronze / Silver / Gold</td>
+                                <td>Design initial</td>
+                            </tr>
+                            <tr>
+                                <td>Write modes</td>
+                                <td>append / overwrite / merge</td>
+                                <td>Par cas d'usage</td>
+                            </tr>
+                            <tr>
+                                <td>Low Shuffle Merge</td>
+                                <td>Actif par defaut</td>
+                                <td>Automatique</td>
+                            </tr>
+                            <tr>
+                                <td>Maintenance automatisee</td>
+                                <td>Notebook + Pipeline</td>
+                                <td>Quotidien</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>En appliquant ces 10 bonnes pratiques, vous construisez un Lakehouse performant, maintenable et optimise pour tous les moteurs analytiques de Fabric. La cle est d'adapter les strategies d'optimisation a chaque couche de votre architecture Medallion.</p>
+
+                    <p>Si vous avez des questions ou souhaitez echanger sur Microsoft Fabric, n'hesitez pas a me contacter sur <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">LinkedIn</a>.</p>
+
+                    <!-- Sources -->
+                    <div class="post-sources">
+                        <h3>Sources &amp; References</h3>
+                        <ul>
+                            <li><a href="https://learn.microsoft.com/en-us/fabric/data-engineering/delta-optimization-and-v-order" target="_blank">Delta Lake table optimization and V-Order - Microsoft Learn</a></li>
+                            <li><a href="https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-table-maintenance" target="_blank">Delta Table Maintenance in Microsoft Fabric - Microsoft Learn</a></li>
+                            <li><a href="https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-and-delta-tables" target="_blank">Lakehouse and Delta Tables - Microsoft Learn</a></li>
+                            <li><a href="https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-load-data" target="_blank">Load data into your Lakehouse with a notebook - Microsoft Learn</a></li>
+                            <li><a href="https://community.fabric.microsoft.com/" target="_blank">Microsoft Fabric Community</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
