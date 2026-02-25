@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JMS.dev | Snowflake pour les Debutants : Guide Complet pour Bien Demarrer</title>
+    <meta name="description" content="Guide complet Snowflake pour debutants : architecture, warehouses, databases, schemas, tables, stages, COPY INTO avec exemples SQL.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x26A1;</text></svg>">
+    <style>
+        /* ─── Blog Post Styles ─── */
+        .post-hero { text-align: center; padding: 120px 0 60px; }
+        .post-back { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-size: .9rem; font-weight: 500; margin-bottom: 30px; transition: opacity .3s; }
+        .post-back:hover { opacity: .7; }
+        .post-meta { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+        .post-category { background: rgba(41,128,185,.15); color: #56cfe1; padding: 4px 14px; border-radius: 20px; font-size: .75rem; font-weight: 700; letter-spacing: 1px; border: 1px solid rgba(41,128,185,.3); }
+        .post-date { color: var(--t3); font-size: .85rem; }
+        .post-read-time { color: var(--t3); font-size: .85rem; }
+        .post-title { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; }
+        .post-subtitle { font-size: 1.15rem; color: var(--t2); max-width: 700px; margin: 0 auto 30px; line-height: 1.6; }
+        .post-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .post-tags span { background: var(--bg3); color: var(--t2); padding: 4px 12px; border-radius: 6px; font-size: .8rem; font-family: var(--mono); }
+
+        /* ─── Article Content ─── */
+        .post-content { max-width: 820px; margin: 0 auto; padding: 40px 20px 80px; }
+        .post-content h2 { font-size: 1.8rem; font-weight: 700; margin: 50px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+        .post-content h2 .h2-num { color: #56cfe1; font-family: var(--mono); margin-right: 10px; }
+        .post-content h3 { font-size: 1.3rem; font-weight: 600; margin: 35px 0 15px; color: var(--t1); }
+        .post-content p { color: var(--t2); line-height: 1.8; margin-bottom: 18px; font-size: 1.02rem; }
+        .post-content strong { color: var(--t1); font-weight: 600; }
+        .post-content ul, .post-content ol { margin: 0 0 20px 24px; color: var(--t2); }
+        .post-content li { margin-bottom: 10px; line-height: 1.7; }
+        .post-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* Code blocks */
+        .code-block { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; margin: 20px 0 28px; overflow: hidden; }
+        .code-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--bg3); border-bottom: 1px solid var(--border); }
+        .code-lang { font-size: .75rem; font-family: var(--mono); color: #56cfe1; font-weight: 600; letter-spacing: .5px; }
+        .code-file { font-size: .75rem; color: var(--t3); font-family: var(--mono); }
+        .code-block pre { padding: 20px; overflow-x: auto; margin: 0; }
+        .code-block code { font-family: var(--mono); font-size: .88rem; line-height: 1.7; color: var(--t2); }
+        .code-block .ck { color: #c792ea; }
+        .code-block .cf { color: #82aaff; }
+        .code-block .cs { color: #c3e88d; }
+        .code-block .cn { color: #f78c6c; }
+        .code-block .cc { color: #546e7a; font-style: italic; }
+        .code-block .cv { color: #ffcb6b; }
+
+        /* Info boxes */
+        .info-box { border-radius: 12px; padding: 20px 24px; margin: 24px 0; border-left: 4px solid; }
+        .info-box.tip { background: rgba(86,207,225,.06); border-color: #56cfe1; }
+        .info-box.warning { background: rgba(251,191,36,.06); border-color: #fbbf24; }
+        .info-box.important { background: rgba(129,140,248,.06); border-color: #818cf8; }
+        .info-box-title { font-weight: 700; font-size: .9rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .info-box.tip .info-box-title { color: #56cfe1; }
+        .info-box.warning .info-box-title { color: #fbbf24; }
+        .info-box.important .info-box-title { color: #818cf8; }
+        .info-box p { margin-bottom: 0; font-size: .95rem; }
+
+        /* Summary table */
+        .summary-table { width: 100%; border-collapse: collapse; margin: 20px 0 30px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+        .summary-table th { background: var(--bg3); color: var(--t1); font-weight: 600; padding: 14px 16px; text-align: left; font-size: .9rem; }
+        .summary-table td { padding: 12px 16px; border-top: 1px solid var(--border); color: var(--t2); font-size: .9rem; }
+        .summary-table tr:hover td { background: var(--bg2); }
+        .summary-table code { font-family: var(--mono); font-size: .82rem; background: var(--bg3); padding: 2px 8px; border-radius: 4px; color: #56cfe1; }
+
+        /* TOC */
+        .post-toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin: 0 0 40px; }
+        .post-toc-title { font-weight: 700; font-size: .95rem; margin-bottom: 14px; color: var(--t1); display: flex; align-items: center; gap: 8px; }
+        .post-toc ol { margin: 0; padding-left: 20px; }
+        .post-toc li { margin-bottom: 8px; }
+        .post-toc a { color: var(--t2); text-decoration: none; font-size: .92rem; transition: color .2s; }
+        .post-toc a:hover { color: #56cfe1; }
+
+        /* Author box */
+        .post-author { display: flex; align-items: center; gap: 16px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 40px 0; }
+        .post-author img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid #56cfe1; }
+        .post-author-info { flex: 1; }
+        .post-author-name { font-weight: 700; font-size: 1rem; }
+        .post-author-role { color: var(--t3); font-size: .85rem; }
+
+        /* Sources */
+        .post-sources { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin: 40px 0; }
+        .post-sources h3 { margin-top: 0; font-size: 1rem; margin-bottom: 12px; }
+        .post-sources ul { margin: 0; padding-left: 20px; }
+        .post-sources li { margin-bottom: 6px; font-size: .9rem; }
+
+        /* Architecture diagram */
+        .arch-diagram { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 30px; margin: 24px 0; text-align: center; }
+        .arch-layer { display: inline-block; padding: 16px 32px; border-radius: 10px; margin: 6px; font-weight: 600; font-size: .95rem; min-width: 220px; }
+        .arch-layer.services { background: rgba(129,140,248,.12); border: 1px solid rgba(129,140,248,.3); color: #818cf8; }
+        .arch-layer.compute { background: rgba(86,207,225,.12); border: 1px solid rgba(86,207,225,.3); color: #56cfe1; }
+        .arch-layer.storage { background: rgba(34,211,197,.12); border: 1px solid rgba(34,211,197,.3); color: var(--accent); }
+        .arch-arrow { color: var(--t3); font-size: 1.5rem; display: block; margin: 4px 0; }
+        .arch-label { font-size: .75rem; color: var(--t3); margin-top: 4px; }
+
+        /* Series nav */
+        .series-nav { background: linear-gradient(135deg, rgba(86,207,225,.06), rgba(129,140,248,.04)); border: 1px solid rgba(86,207,225,.2); border-radius: 12px; padding: 24px 28px; margin: 40px 0; }
+        .series-nav-title { font-weight: 700; font-size: 1rem; color: #56cfe1; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .series-nav ol { margin: 0; padding-left: 20px; }
+        .series-nav li { margin-bottom: 6px; font-size: .92rem; color: var(--t2); }
+        .series-nav li.current { color: #56cfe1; font-weight: 600; }
+        .series-nav li.upcoming { color: var(--t3); }
+    </style>
+</head>
+<body>
+    <!-- Cursor Stalker -->
+    <div class="cursor-stalker" id="cursorStalker"></div>
+    <div class="noise"></div>
+    <div class="deco-circle deco-1"></div>
+    <div class="deco-circle deco-2"></div>
+    <div class="deco-circle deco-3"></div>
+    <canvas id="particlesCanvas" class="particles-canvas"></canvas>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner">
+            <a href="index.html" class="hdr-logo">
+                <img src="bantaflow-logo-wakanda.svg" alt="Bantaflow" class="hdr-logo-icon" width="36" height="36">
+                <span class="hdr-logo-text"><span class="hdr-logo-banta">Banta</span><span class="hdr-logo-flow">flow</span></span>
+            </a>
+            <nav class="hdr-nav">
+                <a href="index.html" class="hdr-link" data-i18n="nav__home">Accueil</a>
+                <a href="about.html" class="hdr-link" data-i18n="nav__about">A propos</a>
+                <a href="techstack.html" class="hdr-link" data-i18n="nav__techstack">Tech Stack</a>
+                <a href="projects.html" class="hdr-link" data-i18n="nav__projects">Projets</a>
+                <a href="blog.html" class="hdr-link" data-i18n="nav__blog">Blog</a>
+            </nav>
+            <div class="hdr-right">
+                <button class="hdr-btn lang-toggle" aria-label="Switch language"><span class="lang-toggle-inner">FR</span></button>
+                <button class="hdr-btn theme-toggle" aria-label="Changer de theme">
+                    <svg class="theme-icon sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="theme-icon moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="mailto:azobensadio@gmail.com" class="hdr-hire"><span class="hire-dot"></span><span data-i18n="sb__available">Disponible</span></a>
+                <button class="hdr-burger" id="hdrBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+    <div class="mob-drawer" id="mobDrawer">
+        <a href="index.html" class="mob-link" data-i18n="nav__home">Accueil</a>
+        <a href="about.html" class="mob-link" data-i18n="nav__about">A propos</a>
+        <a href="techstack.html" class="mob-link" data-i18n="nav__techstack">Tech Stack</a>
+        <a href="projects.html" class="mob-link" data-i18n="nav__projects">Projets</a>
+        <a href="blog.html" class="mob-link" data-i18n="nav__blog">Blog</a>
+    </div>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+                <!-- Hero -->
+                <div class="post-hero">
+                    <a href="blog.html" class="post-back">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                        Retour au Blog
+                    </a>
+                    <div class="post-meta">
+                        <span class="post-category">SNOWFLAKE</span>
+                        <span class="post-date">25 Fev 2026</span>
+                        <span class="post-read-time">15 min de lecture</span>
+                    </div>
+                    <h1 class="post-title">Snowflake pour les Debutants :<br><span class="gradient-text">Par ou commencer ?</span></h1>
+                    <p class="post-subtitle">Guide complet pour comprendre l'architecture Snowflake, creer votre premier environnement, charger des donnees et ecrire vos premieres requetes SQL.</p>
+                    <div class="post-tags">
+                        <span>#Snowflake</span>
+                        <span>#DataEngineering</span>
+                        <span>#SQL</span>
+                        <span>#Debutant</span>
+                        <span>#DataCloud</span>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="post-content">
+                    <!-- Author -->
+                    <div class="post-author">
+                        <img src="jm.jpg" alt="Jean Marie Sadio">
+                        <div class="post-author-info">
+                            <div class="post-author-name">Jean Marie Sadio</div>
+                            <div class="post-author-role">Data Engineer &mdash; Microsoft Fabric & Snowflake</div>
+                        </div>
+                    </div>
+
+                    <!-- Series -->
+                    <div class="series-nav">
+                        <div class="series-nav-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                            Serie : Snowflake Fondamentaux
+                        </div>
+                        <ol>
+                            <li class="current"><strong>Partie 1 : Par ou commencer ?</strong> (cet article)</li>
+                            <li class="upcoming">Partie 2 : Charger des donnees avec COPY INTO et Snowpipe</li>
+                            <li class="upcoming">Partie 3 : Transformer vos donnees avec SQL et Dynamic Tables</li>
+                            <li class="upcoming">Partie 4 : Securite, Roles et Bonnes Pratiques</li>
+                        </ol>
+                    </div>
+
+                    <!-- TOC -->
+                    <div class="post-toc">
+                        <div class="post-toc-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+                            Sommaire
+                        </div>
+                        <ol>
+                            <li><a href="#s1">Qu'est-ce que Snowflake ?</a></li>
+                            <li><a href="#s2">L'architecture 3 couches</a></li>
+                            <li><a href="#s3">Creer votre premier environnement</a></li>
+                            <li><a href="#s4">Databases, Schemas et Tables</a></li>
+                            <li><a href="#s5">Virtual Warehouses : la puissance de calcul</a></li>
+                            <li><a href="#s6">Les Stages : la zone de transit</a></li>
+                            <li><a href="#s7">Charger des donnees avec COPY INTO</a></li>
+                            <li><a href="#s8">Premieres requetes SQL</a></li>
+                            <li><a href="#s9">Bonnes pratiques de nommage</a></li>
+                            <li><a href="#s10">Prochaines etapes</a></li>
+                        </ol>
+                    </div>
+
+                    <!-- ═══ SECTION 1 ═══ -->
+                    <h2 id="s1"><span class="h2-num">01.</span> Qu'est-ce que Snowflake ?</h2>
+                    <p><strong>Snowflake</strong> est une plateforme de donnees cloud-native qui fonctionne sur AWS, Azure et Google Cloud. Contrairement aux data warehouses traditionnels, Snowflake <strong>separe le stockage du calcul</strong>, ce qui signifie que vous pouvez scaler l'un sans toucher a l'autre.</p>
+
+                    <p>En tant que Data Engineer, Snowflake vous offre :</p>
+                    <ul>
+                        <li><strong>Zero administration</strong> : pas de serveurs a gerer, pas de tuning d'index, pas de VACUUM</li>
+                        <li><strong>Scaling automatique</strong> : augmentez/diminuez la puissance en quelques secondes</li>
+                        <li><strong>Support multi-format</strong> : donnees structurees (CSV), semi-structurees (JSON, Parquet, Avro) et non-structurees</li>
+                        <li><strong>Pay-per-use</strong> : vous ne payez que quand vos warehouses tournent</li>
+                    </ul>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            Essai gratuit
+                        </div>
+                        <p>Snowflake offre un <strong>essai gratuit de 30 jours</strong> avec 400$ de credits. C'est largement suffisant pour suivre ce guide et experimenter. Inscrivez-vous sur <a href="https://signup.snowflake.com/" target="_blank">signup.snowflake.com</a>.</p>
+                    </div>
+
+                    <!-- ═══ SECTION 2 ═══ -->
+                    <h2 id="s2"><span class="h2-num">02.</span> L'architecture 3 couches</h2>
+                    <p>Snowflake repose sur une architecture unique a <strong>3 couches independantes</strong>. Comprendre cette architecture est fondamental pour bien utiliser la plateforme :</p>
+
+                    <!-- Architecture Diagram -->
+                    <div class="arch-diagram">
+                        <div class="arch-layer services">Cloud Services<div class="arch-label">Securite, Optimisation, Metadata</div></div>
+                        <div class="arch-arrow">&darr;</div>
+                        <div class="arch-layer compute">Virtual Warehouses (Compute)<div class="arch-label">Execution des requetes, scaling independant</div></div>
+                        <div class="arch-arrow">&darr;</div>
+                        <div class="arch-layer storage">Storage (Micro-partitions)<div class="arch-label">Donnees compressees, format colonnaire</div></div>
+                    </div>
+
+                    <h3>Couche Storage</h3>
+                    <p>Snowflake stocke toutes les donnees dans un format <strong>colonnaire compresse</strong> et optimise, organise en <strong>micro-partitions</strong>. Vous n'avez jamais a gerer le stockage directement : Snowflake s'occupe de la compression, du partitionnement et de l'optimisation.</p>
+
+                    <h3>Couche Compute</h3>
+                    <p>Les <strong>Virtual Warehouses</strong> sont des clusters de calcul independants. Chaque warehouse fonctionne de maniere isolee : un warehouse lent ne ralentit jamais un autre. Vous pouvez en creer autant que necessaire et les dimensionner selon vos besoins.</p>
+
+                    <h3>Couche Cloud Services</h3>
+                    <p>C'est le "cerveau" de Snowflake. Cette couche gere l'authentification, l'optimisation des requetes, la gestion des metadonnees et le controle d'acces. Elle est toujours active et ne genere presque aucun cout.</p>
+
+                    <!-- ═══ SECTION 3 ═══ -->
+                    <h2 id="s3"><span class="h2-num">03.</span> Creer votre premier environnement</h2>
+                    <p>Une fois connecte a Snowflake via <strong>Snowsight</strong> (l'interface web), la premiere etape est de creer votre espace de travail. Voici la hierarchie a comprendre :</p>
+
+                    <p><strong>Account</strong> &rarr; <strong>Database</strong> &rarr; <strong>Schema</strong> &rarr; <strong>Tables / Views / Stages</strong></p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SNOWFLAKE SQL</span>
+                            <span class="code-file">01_setup_environment.sql</span>
+                        </div>
+<pre><code><span class="cc">-- ═══ Creer un warehouse de travail ═══</span>
+<span class="ck">CREATE WAREHOUSE IF NOT EXISTS</span> DEV_WH
+    <span class="ck">WITH</span>
+    WAREHOUSE_SIZE = <span class="cs">'X-SMALL'</span>          <span class="cc">-- Le plus petit (1 credit/heure)</span>
+    AUTO_SUSPEND = <span class="cn">60</span>                    <span class="cc">-- Suspend apres 60 secondes d'inactivite</span>
+    AUTO_RESUME = <span class="cn">TRUE</span>                   <span class="cc">-- Redemarre automatiquement</span>
+    INITIALLY_SUSPENDED = <span class="cn">TRUE</span>;         <span class="cc">-- Ne demarre pas tout de suite</span>
+
+<span class="cc">-- ═══ Creer la database ═══</span>
+<span class="ck">CREATE DATABASE IF NOT EXISTS</span> LEARNING_DB
+    <span class="ck">COMMENT</span> = <span class="cs">'Database pour apprendre Snowflake'</span>;
+
+<span class="cc">-- ═══ Utiliser la database ═══</span>
+<span class="ck">USE DATABASE</span> LEARNING_DB;
+
+<span class="cc">-- ═══ Creer des schemas (couches de donnees) ═══</span>
+<span class="ck">CREATE SCHEMA IF NOT EXISTS</span> RAW
+    <span class="ck">COMMENT</span> = <span class="cs">'Donnees brutes - zone de landing'</span>;
+
+<span class="ck">CREATE SCHEMA IF NOT EXISTS</span> STAGING
+    <span class="ck">COMMENT</span> = <span class="cs">'Donnees nettoyees et transformees'</span>;
+
+<span class="ck">CREATE SCHEMA IF NOT EXISTS</span> ANALYTICS
+    <span class="ck">COMMENT</span> = <span class="cs">'Donnees metier prets pour le reporting'</span>;</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
+                            Credits
+                        </div>
+                        <p>Le warehouse <code>X-SMALL</code> consomme <strong>1 credit par heure</strong>. Avec <code>AUTO_SUSPEND = 60</code>, il s'eteint apres 1 minute d'inactivite. Vous ne payez que quand il execute des requetes.</p>
+                    </div>
+
+                    <!-- ═══ SECTION 4 ═══ -->
+                    <h2 id="s4"><span class="h2-num">04.</span> Databases, Schemas et Tables</h2>
+
+                    <p>La hierarchie d'objets dans Snowflake est simple mais importante a maitriser :</p>
+
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Objet</th>
+                                <th>Role</th>
+                                <th>Analogie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Database</strong></td>
+                                <td>Conteneur principal pour organiser vos donnees</td>
+                                <td>Un classeur</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Schema</strong></td>
+                                <td>Sous-dossier a l'interieur d'une database</td>
+                                <td>Un onglet du classeur</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Table</strong></td>
+                                <td>Structure qui contient les donnees en lignes/colonnes</td>
+                                <td>Une feuille de calcul</td>
+                            </tr>
+                            <tr>
+                                <td><strong>View</strong></td>
+                                <td>Requete sauvegardee (pas de stockage)</td>
+                                <td>Un raccourci vers une feuille</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SNOWFLAKE SQL</span>
+                            <span class="code-file">02_create_tables.sql</span>
+                        </div>
+<pre><code><span class="cc">-- Utiliser le bon contexte</span>
+<span class="ck">USE</span> LEARNING_DB.RAW;
+<span class="ck">USE WAREHOUSE</span> DEV_WH;
+
+<span class="cc">-- ═══ Table des clients ═══</span>
+<span class="ck">CREATE TABLE IF NOT EXISTS</span> customers (
+    customer_id     <span class="cf">INT</span>           <span class="ck">NOT NULL</span>,
+    first_name      <span class="cf">VARCHAR(100)</span>  <span class="ck">NOT NULL</span>,
+    last_name       <span class="cf">VARCHAR(100)</span>  <span class="ck">NOT NULL</span>,
+    email           <span class="cf">VARCHAR(255)</span>,
+    city            <span class="cf">VARCHAR(100)</span>,
+    country         <span class="cf">VARCHAR(50)</span>   <span class="ck">DEFAULT</span> <span class="cs">'France'</span>,
+    created_at      <span class="cf">TIMESTAMP</span>     <span class="ck">DEFAULT</span> <span class="cf">CURRENT_TIMESTAMP</span>()
+);
+
+<span class="cc">-- ═══ Table des commandes ═══</span>
+<span class="ck">CREATE TABLE IF NOT EXISTS</span> orders (
+    order_id        <span class="cf">INT</span>           <span class="ck">NOT NULL</span>,
+    customer_id     <span class="cf">INT</span>           <span class="ck">NOT NULL</span>,
+    product_name    <span class="cf">VARCHAR(200)</span>,
+    quantity        <span class="cf">INT</span>,
+    unit_price      <span class="cf">DECIMAL</span>(10,2),
+    order_date      <span class="cf">DATE</span>,
+    status          <span class="cf">VARCHAR(20)</span>   <span class="ck">DEFAULT</span> <span class="cs">'pending'</span>
+);
+
+<span class="cc">-- Verifier les tables creees</span>
+<span class="ck">SHOW TABLES IN SCHEMA</span> LEARNING_DB.RAW;</code></pre>
+                    </div>
+
+                    <!-- ═══ SECTION 5 ═══ -->
+                    <h2 id="s5"><span class="h2-num">05.</span> Virtual Warehouses : la puissance de calcul</h2>
+                    <p>Les <strong>Virtual Warehouses</strong> sont le moteur de Snowflake. Chaque warehouse est un cluster de calcul independant que vous pouvez dimensionner selon vos besoins :</p>
+
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Taille</th>
+                                <th>Credits/heure</th>
+                                <th>Cas d'usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>X-SMALL</code></td>
+                                <td>1</td>
+                                <td>Dev, tests, petites requetes</td>
+                            </tr>
+                            <tr>
+                                <td><code>SMALL</code></td>
+                                <td>2</td>
+                                <td>Requetes moyennes, BI legere</td>
+                            </tr>
+                            <tr>
+                                <td><code>MEDIUM</code></td>
+                                <td>4</td>
+                                <td>ETL courant, dashboards</td>
+                            </tr>
+                            <tr>
+                                <td><code>LARGE</code></td>
+                                <td>8</td>
+                                <td>Grosses transformations</td>
+                            </tr>
+                            <tr>
+                                <td><code>X-LARGE +</code></td>
+                                <td>16+</td>
+                                <td>Chargements massifs, ML</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SNOWFLAKE SQL</span>
+                            <span class="code-file">03_warehouse_management.sql</span>
+                        </div>
+<pre><code><span class="cc">-- Creer un warehouse dedie a l'ETL</span>
+<span class="ck">CREATE WAREHOUSE IF NOT EXISTS</span> ETL_WH
+    <span class="ck">WITH</span>
+    WAREHOUSE_SIZE = <span class="cs">'MEDIUM'</span>
+    AUTO_SUSPEND = <span class="cn">120</span>
+    AUTO_RESUME = <span class="cn">TRUE</span>
+    <span class="ck">COMMENT</span> = <span class="cs">'Warehouse dedie aux pipelines ETL'</span>;
+
+<span class="cc">-- Redimensionner a la volee (pas de downtime !)</span>
+<span class="ck">ALTER WAREHOUSE</span> ETL_WH <span class="ck">SET</span> WAREHOUSE_SIZE = <span class="cs">'LARGE'</span>;
+
+<span class="cc">-- Suspendre manuellement pour economiser</span>
+<span class="ck">ALTER WAREHOUSE</span> ETL_WH <span class="ck">SUSPEND</span>;
+
+<span class="cc">-- Voir tous vos warehouses</span>
+<span class="ck">SHOW WAREHOUSES</span>;</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            Best Practice
+                        </div>
+                        <p>Creez des <strong>warehouses separes par usage</strong> : un pour le dev (X-SMALL), un pour l'ETL (MEDIUM), un pour le reporting (SMALL). Cela permet d'isoler les performances et de controler les couts par equipe.</p>
+                    </div>
+
+                    <!-- ═══ SECTION 6 ═══ -->
+                    <h2 id="s6"><span class="h2-num">06.</span> Les Stages : la zone de transit</h2>
+                    <p>Un <strong>Stage</strong> est un emplacement de stockage intermediaire ou vous deposez vos fichiers avant de les charger dans une table. C'est le point d'entree de vos donnees dans Snowflake.</p>
+
+                    <p>Il existe deux types de stages :</p>
+                    <ul>
+                        <li><strong>Internal Stage</strong> : stockage gere par Snowflake (ideal pour debuter)</li>
+                        <li><strong>External Stage</strong> : pointe vers S3, Azure Blob, ou GCS (pour la production)</li>
+                    </ul>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SNOWFLAKE SQL</span>
+                            <span class="code-file">04_stages_and_formats.sql</span>
+                        </div>
+<pre><code><span class="ck">USE</span> LEARNING_DB.RAW;
+
+<span class="cc">-- ═══ Creer un file format pour les CSV ═══</span>
+<span class="ck">CREATE FILE FORMAT IF NOT EXISTS</span> csv_format
+    <span class="ck">TYPE</span> = <span class="cs">'CSV'</span>
+    FIELD_DELIMITER = <span class="cs">','</span>
+    SKIP_HEADER = <span class="cn">1</span>
+    NULL_IF = (<span class="cs">''</span>, <span class="cs">'NULL'</span>, <span class="cs">'null'</span>)
+    FIELD_OPTIONALLY_ENCLOSED_BY = <span class="cs">'"'</span>
+    TRIM_SPACE = <span class="cn">TRUE</span>;
+
+<span class="cc">-- ═══ Creer un file format pour JSON ═══</span>
+<span class="ck">CREATE FILE FORMAT IF NOT EXISTS</span> json_format
+    <span class="ck">TYPE</span> = <span class="cs">'JSON'</span>
+    STRIP_OUTER_ARRAY = <span class="cn">TRUE</span>;
+
+<span class="cc">-- ═══ Creer un internal stage ═══</span>
+<span class="ck">CREATE STAGE IF NOT EXISTS</span> raw_data_stage
+    FILE_FORMAT = csv_format
+    <span class="ck">COMMENT</span> = <span class="cs">'Stage pour les fichiers bruts CSV'</span>;
+
+<span class="cc">-- ═══ External stage (exemple avec AWS S3) ═══</span>
+<span class="cc">-- CREATE STAGE IF NOT EXISTS s3_stage</span>
+<span class="cc">--     URL = 's3://mon-bucket/data/'</span>
+<span class="cc">--     CREDENTIALS = (AWS_KEY_ID='...' AWS_SECRET_KEY='...')</span>
+<span class="cc">--     FILE_FORMAT = csv_format;</span>
+
+<span class="cc">-- Lister les fichiers dans un stage</span>
+<span class="ck">LIST</span> @raw_data_stage;</code></pre>
+                    </div>
+
+                    <!-- ═══ SECTION 7 ═══ -->
+                    <h2 id="s7"><span class="h2-num">07.</span> Charger des donnees avec COPY INTO</h2>
+                    <p>La commande <strong>COPY INTO</strong> est la methode principale pour charger des donnees dans Snowflake. C'est l'equivalent du <code>INSERT</code> mais optimise pour le chargement en masse de fichiers.</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SNOWFLAKE SQL</span>
+                            <span class="code-file">05_load_data.sql</span>
+                        </div>
+<pre><code><span class="cc">-- ═══ Etape 1 : Uploader un fichier vers le stage ═══</span>
+<span class="cc">-- Via Snowsight : cliquez sur le stage > Upload</span>
+<span class="cc">-- Ou via SnowSQL CLI :</span>
+<span class="cc">-- PUT file:///chemin/vers/customers.csv @raw_data_stage;</span>
+
+<span class="cc">-- ═══ Etape 2 : Charger dans la table ═══</span>
+<span class="ck">COPY INTO</span> customers
+    <span class="ck">FROM</span> @raw_data_stage/customers.csv
+    FILE_FORMAT = csv_format
+    ON_ERROR = <span class="cs">'CONTINUE'</span>              <span class="cc">-- Continue malgre les erreurs</span>
+    PURGE = <span class="cn">TRUE</span>;                        <span class="cc">-- Supprime le fichier apres chargement</span>
+
+<span class="cc">-- ═══ Verifier le chargement ═══</span>
+<span class="ck">SELECT COUNT</span>(*) <span class="ck">AS</span> total_rows <span class="ck">FROM</span> customers;
+
+<span class="cc">-- ═══ Voir l'historique des chargements ═══</span>
+<span class="ck">SELECT</span> *
+<span class="ck">FROM</span> <span class="cf">TABLE</span>(<span class="cf">INFORMATION_SCHEMA.LOAD_HISTORY</span>(
+    TABLE_NAME => <span class="cs">'CUSTOMERS'</span>
+))
+<span class="ck">ORDER BY</span> LAST_LOAD_TIME <span class="ck">DESC</span>
+<span class="ck">LIMIT</span> <span class="cn">5</span>;</code></pre>
+                    </div>
+
+                    <div class="info-box important">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                            ON_ERROR
+                        </div>
+                        <p><strong>CONTINUE</strong> ignore les lignes en erreur et charge le reste. <strong>ABORT_STATEMENT</strong> stoppe tout si une seule ligne echoue (plus strict, recommande en production). Utilisez <code>VALIDATION_MODE</code> pour tester avant de charger.</p>
+                    </div>
+
+                    <h3>Charger du JSON (semi-structure)</h3>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SNOWFLAKE SQL</span>
+                            <span class="code-file">06_load_json.sql</span>
+                        </div>
+<pre><code><span class="cc">-- Table avec une colonne VARIANT pour le JSON</span>
+<span class="ck">CREATE TABLE IF NOT EXISTS</span> raw_events (
+    event_data  <span class="cf">VARIANT</span>,
+    loaded_at   <span class="cf">TIMESTAMP</span> <span class="ck">DEFAULT</span> <span class="cf">CURRENT_TIMESTAMP</span>()
+);
+
+<span class="cc">-- Charger le JSON</span>
+<span class="ck">COPY INTO</span> raw_events (event_data)
+    <span class="ck">FROM</span> @raw_data_stage/events.json
+    FILE_FORMAT = json_format;
+
+<span class="cc">-- Interroger les donnees semi-structurees</span>
+<span class="ck">SELECT</span>
+    event_data:<span class="cv">user_id</span>::<span class="cf">INT</span> <span class="ck">AS</span> user_id,
+    event_data:<span class="cv">event_type</span>::<span class="cf">STRING</span> <span class="ck">AS</span> event_type,
+    event_data:<span class="cv">timestamp</span>::<span class="cf">TIMESTAMP</span> <span class="ck">AS</span> event_time
+<span class="ck">FROM</span> raw_events
+<span class="ck">LIMIT</span> <span class="cn">10</span>;</code></pre>
+                    </div>
+
+                    <!-- ═══ SECTION 8 ═══ -->
+                    <h2 id="s8"><span class="h2-num">08.</span> Premieres requetes SQL</h2>
+                    <p>Snowflake utilise du <strong>SQL standard ANSI</strong> enrichi de fonctions proprietaires. Si vous connaissez SQL, vous etes deja operationnel. Voici les requetes essentielles :</p>
+
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-lang">SNOWFLAKE SQL</span>
+                            <span class="code-file">07_first_queries.sql</span>
+                        </div>
+<pre><code><span class="cc">-- ═══ Inserer des donnees de test ═══</span>
+<span class="ck">INSERT INTO</span> customers (customer_id, first_name, last_name, email, city)
+<span class="ck">VALUES</span>
+    (<span class="cn">1</span>, <span class="cs">'Marie'</span>,  <span class="cs">'Dupont'</span>,  <span class="cs">'marie@email.com'</span>,   <span class="cs">'Paris'</span>),
+    (<span class="cn">2</span>, <span class="cs">'Ousmane'</span>,<span class="cs">'Diallo'</span>,  <span class="cs">'ousmane@email.com'</span>, <span class="cs">'Dakar'</span>),
+    (<span class="cn">3</span>, <span class="cs">'Sophie'</span>, <span class="cs">'Martin'</span>,  <span class="cs">'sophie@email.com'</span>,  <span class="cs">'Nantes'</span>),
+    (<span class="cn">4</span>, <span class="cs">'Amadou'</span>, <span class="cs">'Ba'</span>,      <span class="cs">'amadou@email.com'</span>,  <span class="cs">'Paris'</span>);
+
+<span class="ck">INSERT INTO</span> orders (order_id, customer_id, product_name, quantity, unit_price, order_date, status)
+<span class="ck">VALUES</span>
+    (<span class="cn">101</span>, <span class="cn">1</span>, <span class="cs">'Laptop Pro'</span>,    <span class="cn">1</span>, <span class="cn">1299.99</span>, <span class="cs">'2026-02-10'</span>, <span class="cs">'completed'</span>),
+    (<span class="cn">102</span>, <span class="cn">2</span>, <span class="cs">'Ecran 27"'</span>,     <span class="cn">2</span>, <span class="cn">349.00</span>,  <span class="cs">'2026-02-15'</span>, <span class="cs">'completed'</span>),
+    (<span class="cn">103</span>, <span class="cn">1</span>, <span class="cs">'Clavier meca'</span>,  <span class="cn">1</span>, <span class="cn">159.00</span>,  <span class="cs">'2026-02-20'</span>, <span class="cs">'pending'</span>),
+    (<span class="cn">104</span>, <span class="cn">3</span>, <span class="cs">'Souris ergo'</span>,   <span class="cn">1</span>, <span class="cn">89.99</span>,   <span class="cs">'2026-02-22'</span>, <span class="cs">'completed'</span>),
+    (<span class="cn">105</span>, <span class="cn">4</span>, <span class="cs">'Laptop Pro'</span>,    <span class="cn">1</span>, <span class="cn">1299.99</span>, <span class="cs">'2026-02-25'</span>, <span class="cs">'pending'</span>);
+
+<span class="cc">-- ═══ Jointure : commandes par client ═══</span>
+<span class="ck">SELECT</span>
+    c.first_name || <span class="cs">' '</span> || c.last_name <span class="ck">AS</span> client,
+    c.city,
+    <span class="cf">COUNT</span>(o.order_id) <span class="ck">AS</span> nb_commandes,
+    <span class="cf">SUM</span>(o.quantity * o.unit_price) <span class="ck">AS</span> chiffre_affaires
+<span class="ck">FROM</span> customers c
+<span class="ck">JOIN</span> orders o <span class="ck">ON</span> c.customer_id = o.customer_id
+<span class="ck">GROUP BY</span> c.first_name, c.last_name, c.city
+<span class="ck">ORDER BY</span> chiffre_affaires <span class="ck">DESC</span>;
+
+<span class="cc">-- ═══ Window function : classement par CA ═══</span>
+<span class="ck">SELECT</span>
+    c.first_name || <span class="cs">' '</span> || c.last_name <span class="ck">AS</span> client,
+    <span class="cf">SUM</span>(o.quantity * o.unit_price) <span class="ck">AS</span> ca,
+    <span class="cf">RANK</span>() <span class="ck">OVER</span> (<span class="ck">ORDER BY</span> <span class="cf">SUM</span>(o.quantity * o.unit_price) <span class="ck">DESC</span>) <span class="ck">AS</span> rang
+<span class="ck">FROM</span> customers c
+<span class="ck">JOIN</span> orders o <span class="ck">ON</span> c.customer_id = o.customer_id
+<span class="ck">GROUP BY</span> c.first_name, c.last_name;</code></pre>
+                    </div>
+
+                    <!-- ═══ SECTION 9 ═══ -->
+                    <h2 id="s9"><span class="h2-num">09.</span> Bonnes pratiques de nommage</h2>
+                    <p>Un nommage coherent est essentiel des le debut. Voici les conventions que j'utilise sur mes projets Snowflake :</p>
+
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Objet</th>
+                                <th>Convention</th>
+                                <th>Exemple</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Database</td>
+                                <td><code>PROJET_ENV</code></td>
+                                <td><code>ECOMMERCE_PROD</code></td>
+                            </tr>
+                            <tr>
+                                <td>Schema</td>
+                                <td><code>COUCHE</code> (Medallion)</td>
+                                <td><code>RAW</code>, <code>STAGING</code>, <code>ANALYTICS</code></td>
+                            </tr>
+                            <tr>
+                                <td>Table</td>
+                                <td><code>prefixe_nom</code></td>
+                                <td><code>dim_customers</code>, <code>fact_orders</code></td>
+                            </tr>
+                            <tr>
+                                <td>Warehouse</td>
+                                <td><code>USAGE_WH</code></td>
+                                <td><code>ETL_WH</code>, <code>BI_WH</code>, <code>DEV_WH</code></td>
+                            </tr>
+                            <tr>
+                                <td>Stage</td>
+                                <td><code>source_stage</code></td>
+                                <td><code>s3_raw_stage</code>, <code>azure_stage</code></td>
+                            </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td><code>EQUIPE_NIVEAU</code></td>
+                                <td><code>DATA_ENGINEER</code>, <code>ANALYST_READ</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            Conseil
+                        </div>
+                        <p>Snowflake convertit tout en <strong>MAJUSCULES</strong> par defaut. Si vous voulez preserver la casse, entourez les noms avec des guillemets doubles (<code>"mon_Table"</code>), mais evitez cette pratique : restez en UPPER_CASE pour la coherence.</p>
+                    </div>
+
+                    <!-- ═══ SECTION 10 ═══ -->
+                    <h2 id="s10"><span class="h2-num">10.</span> Prochaines etapes</h2>
+                    <p>Vous avez maintenant les bases pour demarrer avec Snowflake. Voici la feuille de route pour la suite :</p>
+
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Semaine</th>
+                                <th>Objectif</th>
+                                <th>Sujets cles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Semaine 1-2</strong></td>
+                                <td>Maitriser les bases</td>
+                                <td>SQL, Databases, Tables, Warehouses</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Semaine 3-4</strong></td>
+                                <td>Charger des donnees</td>
+                                <td>Stages, COPY INTO, Snowpipe, File Formats</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Semaine 5-6</strong></td>
+                                <td>Transformer</td>
+                                <td>SQL avance, Dynamic Tables, Streams, Tasks</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Semaine 7-8</strong></td>
+                                <td>Securiser et optimiser</td>
+                                <td>Roles, RBAC, Cost Management, Monitoring</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Dans le prochain article de cette serie, nous plongerons dans le <strong>chargement de donnees en profondeur</strong> : COPY INTO avance, Snowpipe pour l'ingestion en continu, et les patterns de chargement incrementaux.</p>
+
+                    <p>Si vous avez des questions ou souhaitez echanger, retrouvez-moi sur <a href="https://www.linkedin.com/in/jean-marie-sadio/" target="_blank">LinkedIn</a>.</p>
+
+                    <!-- Recap -->
+                    <div class="info-box tip">
+                        <div class="info-box-title">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                            Ce que vous savez faire maintenant
+                        </div>
+                        <p>Creer un warehouse, une database et des schemas &bull; Creer des tables &bull; Configurer des stages et file formats &bull; Charger des donnees avec COPY INTO &bull; Ecrire des requetes SQL avec JOIN et Window Functions &bull; Interroger du JSON avec VARIANT.</p>
+                    </div>
+
+                    <!-- Sources -->
+                    <div class="post-sources">
+                        <h3>Sources &amp; References</h3>
+                        <ul>
+                            <li><a href="https://docs.snowflake.com/en/user-guide/intro-key-concepts" target="_blank">Snowflake Key Concepts and Architecture - Snowflake Documentation</a></li>
+                            <li><a href="https://docs.snowflake.com/en/tutorials" target="_blank">Snowflake Tutorials - Snowflake Documentation</a></li>
+                            <li><a href="https://www.snowflake.com/fr/fundamentals/?tags=product%2Fdata-engineering" target="_blank">Snowflake Fondamentaux - Data Engineering</a></li>
+                            <li><a href="https://www.datacamp.com/blog/how-to-learn-snowflake" target="_blank">How to Learn Snowflake in 2026 - DataCamp</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
