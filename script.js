@@ -581,128 +581,204 @@ if (nlForm) {
 // ---- Newsletter Chip Toggle ----
 // Le toggle est géré nativement par le <label> HTML — pas besoin de JS
 
-// ---- PARALLAX SCROLLING ENGINE ----
-// Unified parallax system: hero layers, background elements, section cards
+// ---- PARALLAX SCROLLING ENGINE (ultranoir-inspired) ----
+// Dramatic multi-layer parallax with smooth lerp, depth & cinematic reveals
 (function() {
-    // Skip parallax on mobile or reduced motion
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.innerWidth < 480;
     if (prefersReduced || isMobile) return;
 
-    // Signal to CSS that parallax is active (prevents transition conflicts with anim-scroll)
     document.body.classList.add('parallax-active');
 
-    // Cache DOM elements
-    const heroText = document.querySelector('.hero-text');
-    const heroVisual = document.querySelector('.hero-visual');
-    const heroSection = document.getElementById('hero');
-    const decoCircles = document.querySelectorAll('.deco-circle');
-    const orbs = document.querySelectorAll('.orb');
-    const previewCards = document.querySelectorAll('.preview-card');
-    const sectionTags = document.querySelectorAll('.section-tag');
-    const miniCards = document.querySelectorAll('.preview-mini-card');
+    // ---- Cache DOM ----
+    const heroText      = document.querySelector('.hero-text');
+    const heroVisual    = document.querySelector('.hero-visual');
+    const heroSection   = document.getElementById('hero');
+    const heroBadge     = document.querySelector('.hero-badge');
+    const heroStats     = document.querySelector('.hero-stats');
+    const scrollCue     = document.querySelector('.scroll-cue');
+    const decoCircles   = document.querySelectorAll('.deco-circle');
+    const orbs          = document.querySelectorAll('.orb');
+    const sections      = document.querySelectorAll('.section, .section-alt');
+    const previewCards  = document.querySelectorAll('.preview-card');
+    const sectionTags   = document.querySelectorAll('.section-tag');
+    const sectionHeads  = document.querySelectorAll('.section-heading');
+    const miniCards     = document.querySelectorAll('.preview-mini-card');
+    const blogItems     = document.querySelectorAll('.preview-blog-item');
 
-    // Performance: use requestAnimationFrame with throttle
-    let ticking = false;
-    let scrollY = 0;
+    // ---- Smooth lerp (like ultranoir) ----
+    // Smooths scroll value so animations feel cinematic, not jerky
+    let currentY = 0;
+    let targetY  = 0;
+    const LERP   = 0.1; // lower = smoother / more cinematic (0.05-0.15)
 
-    function onScroll() {
-        scrollY = window.scrollY;
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
+    function onScroll() { targetY = window.scrollY; }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    targetY = currentY = window.scrollY;
+
+    // ---- Utility: map value from one range to another ----
+    function map(val, inMin, inMax, outMin, outMax) {
+        const t = Math.max(0, Math.min(1, (val - inMin) / (inMax - inMin)));
+        return outMin + t * (outMax - outMin);
     }
 
-    function updateParallax() {
-        ticking = false;
+    // ---- Main animation loop ----
+    function tick() {
+        // Smooth interpolation
+        currentY += (targetY - currentY) * LERP;
+        const y  = currentY;
         const vh = window.innerHeight;
 
-        // ===== 1. HERO PARALLAX =====
-        // Text moves up slower, visual moves up faster — creates depth
-        if (heroSection && scrollY < vh * 1.2) {
-            const heroProgress = scrollY / vh; // 0 → 1 as hero scrolls away
+        // ===== 1. HERO — cinematic depth separation =====
+        if (heroSection) {
+            const heroH    = heroSection.offsetHeight;
+            const progress = Math.min(1, y / (heroH * 0.7)); // 0→1 as hero exits
 
+            // Text block: slides up fast + fades + slight scale down
             if (heroText) {
-                const textY = scrollY * 0.25;        // moves at 25% scroll speed (slower)
-                const textOpacity = 1 - heroProgress * 0.8;
-                heroText.style.transform = `translate3d(0, ${textY}px, 0)`;
-                heroText.style.opacity = Math.max(0, textOpacity);
+                const ty = y * 0.45;
+                const op = 1 - progress * 1.2;
+                const sc = 1 - progress * 0.1;
+                heroText.style.transform = `translate3d(0,${ty}px,0) scale(${Math.max(0.85,sc)})`;
+                heroText.style.opacity = Math.max(0, op).toFixed(3);
             }
 
+            // Avatar: floats independently — slower, slight rotation
             if (heroVisual) {
-                const visualY = scrollY * 0.15;      // moves at 15% scroll speed (even slower — floats)
-                const visualScale = 1 - heroProgress * 0.08;
-                const visualOpacity = 1 - heroProgress * 0.6;
-                heroVisual.style.transform = `translate3d(0, ${visualY}px, 0) scale(${Math.max(0.85, visualScale)})`;
-                heroVisual.style.opacity = Math.max(0, visualOpacity);
+                const ty = y * -0.12; // moves UP (opposite direction = depth)
+                const rot = progress * 5;
+                const sc  = 1 + progress * 0.06;
+                const op  = 1 - progress * 0.9;
+                heroVisual.style.transform = `translate3d(0,${ty}px,0) scale(${Math.min(1.15,sc)}) rotate(${rot}deg)`;
+                heroVisual.style.opacity = Math.max(0, op).toFixed(3);
+            }
+
+            // Badge: slides left and fades
+            if (heroBadge) {
+                const tx = -progress * 80;
+                const op = 1 - progress * 1.5;
+                heroBadge.style.transform = `translate3d(${tx}px,0,0)`;
+                heroBadge.style.opacity = Math.max(0, op).toFixed(3);
+            }
+
+            // Stats: slide down and fade
+            if (heroStats) {
+                const ty = y * 0.6;
+                const op = 1 - progress * 1.3;
+                heroStats.style.transform = `translate3d(0,${ty}px,0)`;
+                heroStats.style.opacity = Math.max(0, op).toFixed(3);
+            }
+
+            // Scroll cue: disappears quickly
+            if (scrollCue) {
+                scrollCue.style.opacity = Math.max(0, 1 - progress * 3).toFixed(3);
             }
         }
 
-        // ===== 2. DECO CIRCLES — layered depth =====
+        // ===== 2. DECO CIRCLES — dramatic layered depth =====
         decoCircles.forEach((c, i) => {
-            const speeds = [0.035, 0.055, 0.08]; // each circle at different speed
-            const yOffset = scrollY * speeds[i % speeds.length];
-            const xDrift = Math.sin(scrollY * 0.001 + i) * 15; // subtle horizontal sway
-            c.style.transform = `translate3d(${xDrift}px, ${yOffset}px, 0)`;
+            const speeds = [0.12, 0.18, 0.25];
+            const rotSpeeds = [0.015, -0.02, 0.01];
+            const yOff = y * speeds[i % 3];
+            const xDrift = Math.sin(y * 0.002 + i * 2) * 40;
+            const rot = y * rotSpeeds[i % 3];
+            c.style.transform = `translate3d(${xDrift}px,${yOff}px,0) rotate(${rot}deg)`;
         });
 
-        // ===== 3. GRADIENT ORBS — slow drift parallax =====
+        // ===== 3. GRADIENT ORBS — large slow drift =====
         orbs.forEach((orb, i) => {
-            const speeds = [0.02, 0.04, 0.03];
-            const yOffset = scrollY * speeds[i % speeds.length];
-            // Combine with existing CSS animation by only adjusting translateY
-            orb.style.marginTop = `${yOffset}px`;
+            const speeds = [0.06, 0.1, 0.08];
+            orb.style.marginTop = `${y * speeds[i % 3]}px`;
         });
 
-        // ===== 4. PREVIEW CARDS — float up slightly as you scroll =====
-        previewCards.forEach(card => {
+        // ===== 4. SECTION CONTENT — dramatic scroll-linked reveals =====
+        sections.forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            const secTop = rect.top;
+            const secH   = rect.height;
+
+            // Only process visible sections (with margin)
+            if (secTop > vh * 1.3 || secTop + secH < -100) return;
+
+            // Progress: 0 when section top enters viewport, 1 when it reaches top
+            const enterProgress = map(secTop, vh, 0, 0, 1);
+
+            // Section glow
+            if (enterProgress > 0.05) sec.classList.add('parallax-in-view');
+
+            // Container inner offset — whole section content lifts
+            const container = sec.querySelector('.container');
+            if (container) {
+                const lift = map(enterProgress, 0, 0.5, 60, 0);
+                const op   = map(enterProgress, 0, 0.35, 0, 1);
+                container.style.transform = `translate3d(0,${lift}px,0)`;
+                container.style.opacity = op.toFixed(3);
+            }
+        });
+
+        // ===== 5. PREVIEW CARDS — horizontal slide + float =====
+        previewCards.forEach((card, i) => {
             const rect = card.getBoundingClientRect();
-            const cardCenter = rect.top + rect.height / 2;
-            const screenCenter = vh / 2;
-            const offset = (cardCenter - screenCenter) / vh; // -0.5 to 0.5
-            const translateY = offset * -30; // max ±30px parallax float
-            card.style.transform = `translate3d(0, ${translateY}px, 0)`;
+            if (rect.top > vh * 1.1 || rect.bottom < -50) return;
+            const progress = map(rect.top, vh, vh * 0.2, 0, 1);
+            const tx = (1 - progress) * (i % 2 === 0 ? -80 : 80); // alternate sides
+            const ty = (1 - progress) * 40;
+            const rot = (1 - progress) * (i % 2 === 0 ? -2 : 2);
+            card.style.transform = `translate3d(${tx}px,${ty}px,0) rotate(${rot}deg)`;
+            card.style.opacity = Math.min(1, progress * 1.5).toFixed(3);
         });
 
-        // ===== 5. SECTION TAGS — slide in from left with parallax =====
+        // ===== 6. SECTION TAGS — dramatic slide from left =====
         sectionTags.forEach(tag => {
             const rect = tag.getBoundingClientRect();
-            if (rect.top < vh && rect.bottom > 0) {
-                const progress = 1 - (rect.top / vh); // 0 → 1
-                const translateX = Math.max(0, (1 - progress * 1.5) * 40);
-                tag.style.transform = `translate3d(${translateX}px, 0, 0)`;
-            }
+            if (rect.top > vh || rect.bottom < 0) return;
+            const progress = map(rect.top, vh, vh * 0.3, 0, 1);
+            const tx = (1 - progress) * -120;
+            tag.style.transform = `translate3d(${tx}px,0,0)`;
+            tag.style.opacity = Math.min(1, progress * 1.8).toFixed(3);
         });
 
-        // ===== 6. MINI CARDS — staggered float =====
+        // ===== 7. SECTION HEADINGS — scale up reveal =====
+        sectionHeads.forEach(h => {
+            const rect = h.getBoundingClientRect();
+            if (rect.top > vh || rect.bottom < 0) return;
+            const progress = map(rect.top, vh, vh * 0.35, 0, 1);
+            const sc = map(progress, 0, 1, 0.88, 1);
+            const ty = (1 - progress) * 30;
+            h.style.transform = `translate3d(0,${ty}px,0) scale(${sc})`;
+            h.style.opacity = Math.min(1, progress * 1.4).toFixed(3);
+        });
+
+        // ===== 8. MINI CARDS — staggered cascade entrance =====
         miniCards.forEach((card, i) => {
             const rect = card.getBoundingClientRect();
-            if (rect.top < vh && rect.bottom > 0) {
-                const progress = 1 - (rect.top / vh);
-                const floatY = Math.sin(progress * Math.PI + i * 0.3) * 10;
-                card.style.transform = `translate3d(0, ${floatY}px, 0)`;
-            }
+            if (rect.top > vh * 1.1 || rect.bottom < -20) return;
+            const progress = map(rect.top, vh, vh * 0.4, 0, 1);
+            const delay = i * 0.08; // stagger
+            const p = Math.max(0, Math.min(1, progress - delay));
+            const ty = (1 - p) * 50;
+            const sc = map(p, 0, 1, 0.85, 1);
+            card.style.transform = `translate3d(0,${ty}px,0) scale(${sc})`;
+            card.style.opacity = Math.min(1, p * 2).toFixed(3);
         });
+
+        // ===== 9. BLOG ITEMS — slide from right staggered =====
+        blogItems.forEach((item, i) => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top > vh * 1.1 || rect.bottom < -20) return;
+            const progress = map(rect.top, vh, vh * 0.4, 0, 1);
+            const delay = i * 0.1;
+            const p = Math.max(0, Math.min(1, progress - delay));
+            const tx = (1 - p) * 100;
+            item.style.transform = `translate3d(${tx}px,0,0)`;
+            item.style.opacity = Math.min(1, p * 2).toFixed(3);
+        });
+
+        requestAnimationFrame(tick);
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    // Initial call
-    onScroll();
-
-    // ===== SECTION GLOW on reveal =====
-    const parallaxSections = document.querySelectorAll('.section, .section-alt');
-    const sectionObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('parallax-in-view');
-            }
-        });
-    }, {
-        threshold: 0.08,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    parallaxSections.forEach(s => sectionObserver.observe(s));
+    // Start the loop
+    requestAnimationFrame(tick);
 })();
 
 // ---- Blog Search & Filter ----
