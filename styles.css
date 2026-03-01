@@ -827,6 +827,17 @@ section, footer { scroll-margin-top: 20px; }
 
 /* ========== PARALLAX SCROLLING (ultranoir-inspired) ========== */
 
+/* 3D perspective context for mouse-tracking depth */
+.parallax-active .hero{
+  perspective:1400px;
+  perspective-origin:50% 50%;
+}
+.parallax-active .section,
+.parallax-active .section-alt{
+  perspective:1600px;
+  perspective-origin:50% 50%;
+}
+
 /* GPU acceleration — all parallax elements */
 .hero-text,
 .hero-visual,
@@ -841,6 +852,21 @@ section, footer { scroll-margin-top: 20px; }
 .preview-mini-card,
 .preview-blog-item{
   will-change:transform,opacity;
+  transform-style:preserve-3d;
+}
+
+/* Smooth transform origin for depth layers — kill CSS animations, JS drives them */
+.parallax-active .deco-circle,
+.parallax-active .orb{
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  animation:none !important;
+}
+
+/* Preview cards: ensure smooth 3D tilt */
+.parallax-active .preview-card{
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
 }
 
 /* Kill all CSS transitions on parallax elements — JS drives everything */

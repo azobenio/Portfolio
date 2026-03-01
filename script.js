@@ -582,7 +582,7 @@ if (nlForm) {
 // Le toggle est géré nativement par le <label> HTML — pas besoin de JS
 
 // ---- PARALLAX SCROLLING ENGINE (ultranoir-inspired) ----
-// Dramatic multi-layer parallax with smooth lerp, depth & cinematic reveals
+// Multi-layer parallax: scroll + mouse-tracking with 3D depth
 (function() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = window.innerWidth < 480;
@@ -606,15 +606,25 @@ if (nlForm) {
     const miniCards     = document.querySelectorAll('.preview-mini-card');
     const blogItems     = document.querySelectorAll('.preview-blog-item');
 
-    // ---- Smooth lerp (like ultranoir) ----
-    // Smooths scroll value so animations feel cinematic, not jerky
+    // ---- Smooth lerp for scroll ----
     let currentY = 0;
     let targetY  = 0;
-    const LERP   = 0.1; // lower = smoother / more cinematic (0.05-0.15)
+    const LERP   = 0.1;
 
     function onScroll() { targetY = window.scrollY; }
     window.addEventListener('scroll', onScroll, { passive: true });
     targetY = currentY = window.scrollY;
+
+    // ---- Mouse-tracking parallax (ultranoir 3D depth) ----
+    // Normalized mouse coords: -1 (left/top) to +1 (right/bottom)
+    let mouseTargetX = 0, mouseTargetY = 0;
+    let mouseX = 0, mouseY = 0;
+    const MOUSE_LERP = 0.06; // smooth & cinematic
+
+    document.addEventListener('mousemove', e => {
+        mouseTargetX = (e.clientX / window.innerWidth - 0.5) * 2;  // -1 to 1
+        mouseTargetY = (e.clientY / window.innerHeight - 0.5) * 2; // -1 to 1
+    });
 
     // ---- Utility: map value from one range to another ----
     function map(val, inMin, inMax, outMin, outMax) {
@@ -624,48 +634,60 @@ if (nlForm) {
 
     // ---- Main animation loop ----
     function tick() {
-        // Smooth interpolation
+        // Smooth scroll interpolation
         currentY += (targetY - currentY) * LERP;
         const y  = currentY;
         const vh = window.innerHeight;
+
+        // Smooth mouse interpolation (ultranoir-style cinematic lag)
+        mouseX += (mouseTargetX - mouseX) * MOUSE_LERP;
+        mouseY += (mouseTargetY - mouseY) * MOUSE_LERP;
 
         // ===== 1. HERO — cinematic depth separation =====
         if (heroSection) {
             const heroH    = heroSection.offsetHeight;
             const progress = Math.min(1, y / (heroH * 0.7)); // 0→1 as hero exits
 
-            // Text block: slides up fast + fades + slight scale down
+            // Text block: scroll parallax + mouse depth shift
             if (heroText) {
                 const ty = y * 0.45;
                 const op = 1 - progress * 1.2;
                 const sc = 1 - progress * 0.1;
-                heroText.style.transform = `translate3d(0,${ty}px,0) scale(${Math.max(0.85,sc)})`;
+                const mxOff = mouseX * -25; // moves opposite to mouse (depth)
+                const myOff = mouseY * -15;
+                heroText.style.transform = `translate3d(${mxOff}px,${ty + myOff}px,0) scale(${Math.max(0.85,sc)})`;
                 heroText.style.opacity = Math.max(0, op).toFixed(3);
             }
 
-            // Avatar: floats independently — slower, slight rotation
+            // Avatar: deeper layer — moves WITH mouse (foreground feel)
             if (heroVisual) {
-                const ty = y * -0.12; // moves UP (opposite direction = depth)
+                const ty = y * -0.12;
                 const rot = progress * 5;
                 const sc  = 1 + progress * 0.06;
                 const op  = 1 - progress * 0.9;
-                heroVisual.style.transform = `translate3d(0,${ty}px,0) scale(${Math.min(1.15,sc)}) rotate(${rot}deg)`;
+                const mxOff = mouseX * 18; // moves with mouse
+                const myOff = mouseY * 12;
+                heroVisual.style.transform = `translate3d(${mxOff}px,${ty + myOff}px,0) scale(${Math.min(1.15,sc)}) rotate(${rot}deg)`;
                 heroVisual.style.opacity = Math.max(0, op).toFixed(3);
             }
 
-            // Badge: slides left and fades
+            // Badge: scroll + subtle mouse shift
             if (heroBadge) {
                 const tx = -progress * 80;
                 const op = 1 - progress * 1.5;
-                heroBadge.style.transform = `translate3d(${tx}px,0,0)`;
+                const mxOff = mouseX * -12;
+                const myOff = mouseY * -8;
+                heroBadge.style.transform = `translate3d(${tx + mxOff}px,${myOff}px,0)`;
                 heroBadge.style.opacity = Math.max(0, op).toFixed(3);
             }
 
-            // Stats: slide down and fade
+            // Stats: scroll + mouse depth
             if (heroStats) {
                 const ty = y * 0.6;
                 const op = 1 - progress * 1.3;
-                heroStats.style.transform = `translate3d(0,${ty}px,0)`;
+                const mxOff = mouseX * -10;
+                const myOff = mouseY * -6;
+                heroStats.style.transform = `translate3d(${mxOff}px,${ty + myOff}px,0)`;
                 heroStats.style.opacity = Math.max(0, op).toFixed(3);
             }
 
@@ -675,20 +697,26 @@ if (nlForm) {
             }
         }
 
-        // ===== 2. DECO CIRCLES — dramatic layered depth =====
+        // ===== 2. DECO CIRCLES — scroll + mouse depth layers =====
         decoCircles.forEach((c, i) => {
             const speeds = [0.12, 0.18, 0.25];
             const rotSpeeds = [0.015, -0.02, 0.01];
+            const mouseDepth = [35, 55, 75]; // different depth per layer
             const yOff = y * speeds[i % 3];
             const xDrift = Math.sin(y * 0.002 + i * 2) * 40;
             const rot = y * rotSpeeds[i % 3];
-            c.style.transform = `translate3d(${xDrift}px,${yOff}px,0) rotate(${rot}deg)`;
+            const mxOff = mouseX * mouseDepth[i % 3];
+            const myOff = mouseY * mouseDepth[i % 3] * 0.6;
+            c.style.transform = `translate3d(${xDrift + mxOff}px,${yOff + myOff}px,0) rotate(${rot}deg)`;
         });
 
-        // ===== 3. GRADIENT ORBS — large slow drift =====
+        // ===== 3. GRADIENT ORBS — scroll + mouse reactive drift =====
         orbs.forEach((orb, i) => {
             const speeds = [0.06, 0.1, 0.08];
-            orb.style.marginTop = `${y * speeds[i % 3]}px`;
+            const mouseDepth = [40, 60, 50];
+            const mxOff = mouseX * mouseDepth[i % 3];
+            const myOff = mouseY * mouseDepth[i % 3] * 0.5;
+            orb.style.transform = `translate3d(${mxOff}px,${y * speeds[i % 3] + myOff}px,0)`;
         });
 
         // ===== 4. SECTION CONTENT — dramatic scroll-linked reveals =====
@@ -716,36 +744,44 @@ if (nlForm) {
             }
         });
 
-        // ===== 5. PREVIEW CARDS — horizontal slide + float =====
+        // ===== 5. PREVIEW CARDS — scroll entrance + mouse 3D tilt =====
         previewCards.forEach((card, i) => {
             const rect = card.getBoundingClientRect();
             if (rect.top > vh * 1.1 || rect.bottom < -50) return;
             const progress = map(rect.top, vh, vh * 0.2, 0, 1);
-            const tx = (1 - progress) * (i % 2 === 0 ? -80 : 80); // alternate sides
+            const tx = (1 - progress) * (i % 2 === 0 ? -80 : 80);
             const ty = (1 - progress) * 40;
             const rot = (1 - progress) * (i % 2 === 0 ? -2 : 2);
-            card.style.transform = `translate3d(${tx}px,${ty}px,0) rotate(${rot}deg)`;
+            // Mouse 3D tilt (ultranoir-style perspective)
+            const tiltX = mouseY * -4 * progress; // vertical mouse → rotateX
+            const tiltY = mouseX * 5 * progress;  // horizontal mouse → rotateY
+            const mxOff = mouseX * -8 * progress;
+            const myOff = mouseY * -5 * progress;
+            card.style.transform = `perspective(1200px) translate3d(${tx + mxOff}px,${ty + myOff}px,0) rotateX(${tiltX}deg) rotateY(${tiltY}deg) rotate(${rot}deg)`;
             card.style.opacity = Math.min(1, progress * 1.5).toFixed(3);
         });
 
-        // ===== 6. SECTION TAGS — dramatic slide from left =====
+        // ===== 6. SECTION TAGS — slide from left + mouse shift =====
         sectionTags.forEach(tag => {
             const rect = tag.getBoundingClientRect();
             if (rect.top > vh || rect.bottom < 0) return;
             const progress = map(rect.top, vh, vh * 0.3, 0, 1);
             const tx = (1 - progress) * -120;
-            tag.style.transform = `translate3d(${tx}px,0,0)`;
+            const mxOff = mouseX * -6 * progress;
+            tag.style.transform = `translate3d(${tx + mxOff}px,0,0)`;
             tag.style.opacity = Math.min(1, progress * 1.8).toFixed(3);
         });
 
-        // ===== 7. SECTION HEADINGS — scale up reveal =====
+        // ===== 7. SECTION HEADINGS — scale reveal + mouse depth =====
         sectionHeads.forEach(h => {
             const rect = h.getBoundingClientRect();
             if (rect.top > vh || rect.bottom < 0) return;
             const progress = map(rect.top, vh, vh * 0.35, 0, 1);
             const sc = map(progress, 0, 1, 0.88, 1);
             const ty = (1 - progress) * 30;
-            h.style.transform = `translate3d(0,${ty}px,0) scale(${sc})`;
+            const mxOff = mouseX * -10 * progress;
+            const myOff = mouseY * -5 * progress;
+            h.style.transform = `translate3d(${mxOff}px,${ty + myOff}px,0) scale(${sc})`;
             h.style.opacity = Math.min(1, progress * 1.4).toFixed(3);
         });
 
