@@ -825,6 +825,106 @@ section, footer { scroll-margin-top: 20px; }
 .btn-preview { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 600; font-size: .95rem; text-decoration: none; transition: gap .2s; }
 .btn-preview:hover { gap: 10px; }
 
+/* ========== PARALLAX SCROLLING ========== */
+
+/* GPU acceleration for parallax elements */
+.hero-text,
+.hero-visual,
+.deco-circle,
+.orb,
+.preview-card,
+.section-tag,
+.section-heading{
+  will-change:transform;
+}
+
+/* Hero parallax layers — text slower, avatar faster */
+.hero-text{
+  transition:none; /* remove any transition that fights parallax */
+}
+.hero-visual{
+  transition:none;
+}
+
+/* Section parallax cards — subtle float effect */
+.parallax-card{
+  transition:transform .1s linear;
+}
+
+/* Stagger reveal with parallax offset */
+.parallax-section{
+  opacity:0;
+  transform:translateY(60px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease);
+}
+.parallax-section.in-view{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Section separator glow — enhanced with parallax */
+.section-glow{
+  position:absolute;
+  top:-1px;left:0;right:0;
+  height:120px;
+  background:radial-gradient(ellipse 60% 100% at 50% 0%,rgba(34,211,197,.06) 0%,transparent 100%);
+  pointer-events:none;
+  z-index:0;
+  opacity:0;
+  transition:opacity .6s ease;
+}
+.parallax-section.in-view .section-glow{
+  opacity:1;
+}
+
+/* Floating elements parallax speed layers */
+.parallax-slow{--px-speed:0.03}
+.parallax-med{--px-speed:0.06}
+.parallax-fast{--px-speed:0.1}
+
+/* Section parallax in-view state */
+.section.parallax-in-view::before,
+.section-alt.parallax-in-view::before{
+  animation:glowPulse 2s ease forwards;
+}
+@keyframes glowPulse{
+  0%{opacity:.3;background:linear-gradient(90deg,transparent 0%,rgba(34,211,197,.5) 30%,rgba(129,140,248,.5) 70%,transparent 100%)}
+  100%{opacity:1;background:linear-gradient(90deg,transparent 0%,rgba(34,211,197,.35) 30%,rgba(129,140,248,.35) 70%,transparent 100%)}
+}
+
+/* Children reveal animation */
+.parallax-child-visible{
+  animation:parallaxChildIn .6s var(--ease) forwards;
+}
+@keyframes parallaxChildIn{
+  from{opacity:0;transform:translateY(18px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* Hero fade-out on scroll — smooth opacity transition */
+.hero-text,
+.hero-visual{
+  transition:opacity .05s linear;
+}
+
+/* Reduced motion — disable all parallax */
+@media(prefers-reduced-motion:reduce){
+  .hero-text,.hero-visual,.deco-circle,.orb,.preview-card,.section-tag,.section-heading{
+    will-change:auto;
+    transform:none !important;
+  }
+  .parallax-section{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+  .parallax-child-visible{
+    animation:none;
+    opacity:1;
+    transform:none;
+  }
+}
+
 /* ========== MAIN CONTENT (below header) ========== */
 .main-content{padding-top:64px;min-height:100vh}
 

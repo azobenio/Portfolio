@@ -581,13 +581,133 @@ if (nlForm) {
 // ---- Newsletter Chip Toggle ----
 // Le toggle est géré nativement par le <label> HTML — pas besoin de JS
 
-// ---- Parallax deco circles ----
-window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    document.querySelectorAll('.deco-circle').forEach((c, i) => {
-        c.style.transform = `translateY(${y * (i + 1) * 0.02}px)`;
+// ---- PARALLAX SCROLLING ENGINE ----
+// Unified parallax system: hero layers, background elements, section cards
+(function() {
+    // Skip parallax on mobile or reduced motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+    if (prefersReduced || isMobile) return;
+
+    // Cache DOM elements
+    const heroText = document.querySelector('.hero-text');
+    const heroVisual = document.querySelector('.hero-visual');
+    const heroSection = document.getElementById('hero');
+    const decoCircles = document.querySelectorAll('.deco-circle');
+    const orbs = document.querySelectorAll('.orb');
+    const previewCards = document.querySelectorAll('.preview-card');
+    const sectionTags = document.querySelectorAll('.section-tag');
+    const miniCards = document.querySelectorAll('.preview-mini-card');
+
+    // Performance: use requestAnimationFrame with throttle
+    let ticking = false;
+    let scrollY = 0;
+
+    function onScroll() {
+        scrollY = window.scrollY;
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+
+    function updateParallax() {
+        ticking = false;
+        const vh = window.innerHeight;
+
+        // ===== 1. HERO PARALLAX =====
+        // Text moves up slower, visual moves up faster — creates depth
+        if (heroSection && scrollY < vh * 1.2) {
+            const heroProgress = scrollY / vh; // 0 → 1 as hero scrolls away
+
+            if (heroText) {
+                const textY = scrollY * 0.25;        // moves at 25% scroll speed (slower)
+                const textOpacity = 1 - heroProgress * 0.8;
+                heroText.style.transform = `translate3d(0, ${textY}px, 0)`;
+                heroText.style.opacity = Math.max(0, textOpacity);
+            }
+
+            if (heroVisual) {
+                const visualY = scrollY * 0.15;      // moves at 15% scroll speed (even slower — floats)
+                const visualScale = 1 - heroProgress * 0.08;
+                const visualOpacity = 1 - heroProgress * 0.6;
+                heroVisual.style.transform = `translate3d(0, ${visualY}px, 0) scale(${Math.max(0.85, visualScale)})`;
+                heroVisual.style.opacity = Math.max(0, visualOpacity);
+            }
+        }
+
+        // ===== 2. DECO CIRCLES — layered depth =====
+        decoCircles.forEach((c, i) => {
+            const speeds = [0.035, 0.055, 0.08]; // each circle at different speed
+            const yOffset = scrollY * speeds[i % speeds.length];
+            const xDrift = Math.sin(scrollY * 0.001 + i) * 15; // subtle horizontal sway
+            c.style.transform = `translate3d(${xDrift}px, ${yOffset}px, 0)`;
+        });
+
+        // ===== 3. GRADIENT ORBS — slow drift parallax =====
+        orbs.forEach((orb, i) => {
+            const speeds = [0.02, 0.04, 0.03];
+            const yOffset = scrollY * speeds[i % speeds.length];
+            // Combine with existing CSS animation by only adjusting translateY
+            orb.style.marginTop = `${yOffset}px`;
+        });
+
+        // ===== 4. PREVIEW CARDS — float up slightly as you scroll =====
+        previewCards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.top + rect.height / 2;
+            const screenCenter = vh / 2;
+            const offset = (cardCenter - screenCenter) / vh; // -0.5 to 0.5
+            const translateY = offset * -20; // subtle: max ±20px
+            card.style.transform = `translate3d(0, ${translateY}px, 0)`;
+        });
+
+        // ===== 5. SECTION TAGS — slide in from left with parallax =====
+        sectionTags.forEach(tag => {
+            const rect = tag.getBoundingClientRect();
+            if (rect.top < vh && rect.bottom > 0) {
+                const progress = 1 - (rect.top / vh); // 0 → 1
+                const translateX = Math.max(0, (1 - progress * 1.5) * 30);
+                tag.style.transform = `translate3d(${translateX}px, 0, 0)`;
+            }
+        });
+
+        // ===== 6. MINI CARDS — staggered float =====
+        miniCards.forEach((card, i) => {
+            const rect = card.getBoundingClientRect();
+            if (rect.top < vh && rect.bottom > 0) {
+                const progress = 1 - (rect.top / vh);
+                const floatY = Math.sin(progress * Math.PI + i * 0.3) * 6;
+                card.style.transform = `translate3d(0, ${floatY}px, 0)`;
+            }
+        });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Initial call
+    onScroll();
+
+    // ===== SECTION REVEAL with parallax =====
+    // Enhanced IntersectionObserver for sections — adds parallax class
+    const parallaxSections = document.querySelectorAll('.section, .section-alt');
+    const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('parallax-in-view');
+                // Stagger children reveal
+                const children = entry.target.querySelectorAll('.preview-card, .preview-mini-card, .preview-blog-item, .section-tag');
+                children.forEach((child, i) => {
+                    child.style.transitionDelay = `${i * 0.07}s`;
+                    child.classList.add('parallax-child-visible');
+                });
+            }
+        });
+    }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -50px 0px'
     });
-});
+    parallaxSections.forEach(s => sectionObserver.observe(s));
+})();
 
 // ---- Blog Search & Filter ----
 (function() {
