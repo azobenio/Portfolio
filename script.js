@@ -586,8 +586,11 @@ if (nlForm) {
 (function() {
     // Skip parallax on mobile or reduced motion
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 480;
     if (prefersReduced || isMobile) return;
+
+    // Signal to CSS that parallax is active (prevents transition conflicts with anim-scroll)
+    document.body.classList.add('parallax-active');
 
     // Cache DOM elements
     const heroText = document.querySelector('.hero-text');
@@ -658,7 +661,7 @@ if (nlForm) {
             const cardCenter = rect.top + rect.height / 2;
             const screenCenter = vh / 2;
             const offset = (cardCenter - screenCenter) / vh; // -0.5 to 0.5
-            const translateY = offset * -20; // subtle: max ±20px
+            const translateY = offset * -30; // max ±30px parallax float
             card.style.transform = `translate3d(0, ${translateY}px, 0)`;
         });
 
@@ -667,7 +670,7 @@ if (nlForm) {
             const rect = tag.getBoundingClientRect();
             if (rect.top < vh && rect.bottom > 0) {
                 const progress = 1 - (rect.top / vh); // 0 → 1
-                const translateX = Math.max(0, (1 - progress * 1.5) * 30);
+                const translateX = Math.max(0, (1 - progress * 1.5) * 40);
                 tag.style.transform = `translate3d(${translateX}px, 0, 0)`;
             }
         });
@@ -677,7 +680,7 @@ if (nlForm) {
             const rect = card.getBoundingClientRect();
             if (rect.top < vh && rect.bottom > 0) {
                 const progress = 1 - (rect.top / vh);
-                const floatY = Math.sin(progress * Math.PI + i * 0.3) * 6;
+                const floatY = Math.sin(progress * Math.PI + i * 0.3) * 10;
                 card.style.transform = `translate3d(0, ${floatY}px, 0)`;
             }
         });
@@ -687,19 +690,12 @@ if (nlForm) {
     // Initial call
     onScroll();
 
-    // ===== SECTION REVEAL with parallax =====
-    // Enhanced IntersectionObserver for sections — adds parallax class
+    // ===== SECTION GLOW on reveal =====
     const parallaxSections = document.querySelectorAll('.section, .section-alt');
     const sectionObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('parallax-in-view');
-                // Stagger children reveal
-                const children = entry.target.querySelectorAll('.preview-card, .preview-mini-card, .preview-blog-item, .section-tag');
-                children.forEach((child, i) => {
-                    child.style.transitionDelay = `${i * 0.07}s`;
-                    child.classList.add('parallax-child-visible');
-                });
             }
         });
     }, {

@@ -925,6 +925,15 @@ section, footer { scroll-margin-top: 20px; }
   }
 }
 
+/* Parallax-active: JS handles transforms on anim-scroll elements (no transition conflict) */
+.parallax-active .anim-scroll{
+  transform:none;
+  transition:opacity .65s var(--ease);
+}
+.parallax-active .anim-scroll.visible{
+  opacity:1;
+}
+
 /* ========== MAIN CONTENT (below header) ========== */
 .main-content{padding-top:64px;min-height:100vh}
 
